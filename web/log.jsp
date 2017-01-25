@@ -80,7 +80,7 @@
                     <td id = "colchones" colspan="8"><b>Usuarios registrados</b></td> 
                 </tr>
                 <tr valign=" middle" align="center" id="cabecera">
-                    <td>Nombre</td><td>ContraseÃ±a</td><td>Observaciones</td><td>Seleccionar</td>
+                    <td>Nombre</td><td>Contraseña</td><td>Observaciones</td><td>Seleccionar</td>
                 </tr>
 
                 <%  for (Iterator iter = usuarios.iterator(); iter.hasNext();) {
