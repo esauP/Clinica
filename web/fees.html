@@ -20,15 +20,7 @@
 
 </head>
 <body>
-
-  <%
-            String userForm = (String) session.getAttribute("session.user");
-            if (userForm == null) {
-                response.sendRedirect("error.html");
-            }
-        %>
 <div id="wrapper">
-
 	<!-- start header -->
 		<header>
         <div class="navbar navbar-default navbar-static-top">
@@ -39,15 +31,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                  <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo"/></a>
+                    <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo"/></a>
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li> 
-						<li class="active"><a href="about.html">About Us</a></li>
+						<li><a href="about.html">About Us</a></li>
 						<li><a href="events.html">Events </a></li>
                         <li><a href="portfolio.html">Gallery</a></li>
-                        <li><a href="Fees.html">Fees</a></li>
+                        <li class="active"><a href="pricing.html">Fees</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -58,45 +50,102 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="pageTitle">About Us</h2>
-                 <b> <h1>Usuario</h1> <h1> <%=session.getAttribute("observaciones")%> </h1></b>
+				<h2 class="pageTitle">Pricing</h2>
+			</div>
+		</div>
+	</div>
+	<section id="content">
+	<div class="container">	 
+		<!-- end divider -->
+		<div class="row"> 
+			<div class="row">
+        <div class="col-md-4">  
+          <table class="table">
+      <tbody> 
+        <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+		  </div>
+		    <div class="col-md-4">  
+          <table class="table">
+      <tbody> 
+        <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+		  </div>
+		    <div class="col-md-4">  
+          <table class="table">
+      <tbody> 
+        <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+		 <tr>
+          <td><h5>Lorem ipsum dolor consectetur</h5></td>
+          <td class="type-info">$ 15.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+		  </div>
+    </div>
+			 
 			</div>
 		</div>
 	</div>
 	</section>
-	
-     <div id="content">
-            <table summary ="Listado de Profesores"  cellSpacing="1" cellPadding="8" width="770" align="center" border="0">
-                <tr valign ="middle" align="center">
-                  
-                    <%
-                        DetalleUsuario det = new DetalleUsuario();
-                        List<Usuario> usuarios = det.AllUsuarios();
-                    %>
-                    <td id = "colchones" colspan="8"><b>Usuarios registrados</b></td> 
-                </tr>
-                <tr valign=" middle" align="center" id="cabecera">
-                    <td>Nombre</td><td>Contraseña</td><td>Observaciones</td><td>Seleccionar</td>
-                </tr>
-
-                <%  for (Iterator iter = usuarios.iterator(); iter.hasNext();) {
-                    Usuario u = (Usuario) iter.next();
-                %>
-                <tr align="center" id="Usuarios"> 
-                    <td><%=u.getUsuario()%></td>
-                    <td> <%=u.getPass()%> </td>
-                    <td> <%=u.getObservaciones()%> </td>
-                    <td> <a href="FrontController?res=tutorias.jsp?pid=<%=u.getUsuario()%>&name=<%=u.getPass()%>"><img src='img/seleccionar.gif'> </a></td>		 				
-                </tr>
-                <%
-                        }
-                    
-                %>
-
-            </table>
-
-        </div>
-        
 	<footer>
 	<div class="container">
 		<div class="row">

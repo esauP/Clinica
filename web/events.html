@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="" />
 <meta name="author" content="http://webthemez.com" />
-<!-- css -->
+ 
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
 <link href="css/jcarousel.css" rel="stylesheet" />
@@ -20,13 +20,6 @@
 
 </head>
 <body>
-
-  <%
-            String userForm = (String) session.getAttribute("session.user");
-            if (userForm == null) {
-                response.sendRedirect("error.html");
-            }
-        %>
 <div id="wrapper">
 
 	<!-- start header -->
@@ -39,13 +32,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                  <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo"/></a>
+                    <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo"/></a>
                 </div>
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
                         <li><a href="index.html">Home</a></li> 
-						<li class="active"><a href="about.html">About Us</a></li>
-						<li><a href="events.html">Events </a></li>
+						<li><a href="about.html">About Us</a></li>
+						<li class="active"><a href="events.html">Events </a></li>
                         <li><a href="portfolio.html">Gallery</a></li>
                         <li><a href="Fees.html">Fees</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -58,45 +51,109 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="pageTitle">About Us</h2>
-                 <b> <h1>Usuario</h1> <h1> <%=session.getAttribute("observaciones")%> </h1></b>
+				<h2 class="pageTitle">Events</h2>
 			</div>
 		</div>
 	</div>
 	</section>
+	 
+	<section id="content">
+		<div class="container content">		
+        <!-- Service Blcoks -->
+		<div class="row">
 	
-     <div id="content">
-            <table summary ="Listado de Profesores"  cellSpacing="1" cellPadding="8" width="770" align="center" border="0">
-                <tr valign ="middle" align="center">
-                  
-                    <%
-                        DetalleUsuario det = new DetalleUsuario();
-                        List<Usuario> usuarios = det.AllUsuarios();
-                    %>
-                    <td id = "colchones" colspan="8"><b>Usuarios registrados</b></td> 
-                </tr>
-                <tr valign=" middle" align="center" id="cabecera">
-                    <td>Nombre</td><td>Contraseña</td><td>Observaciones</td><td>Seleccionar</td>
-                </tr>
+	<div class="col-md-12">
+			<article class="item column-1"> 
+<!--  title/author -->
+<header class="item_header">
+	<h3>We Care For YOU</h3></header>
+<!-- Introtext -->
+<div>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimusLorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
 
-                <%  for (Iterator iter = usuarios.iterator(); iter.hasNext();) {
-                    Usuario u = (Usuario) iter.next();
-                %>
-                <tr align="center" id="Usuarios"> 
-                    <td><%=u.getUsuario()%></td>
-                    <td> <%=u.getPass()%> </td>
-                    <td> <%=u.getObservaciones()%> </td>
-                    <td> <a href="FrontController?res=tutorias.jsp?pid=<%=u.getUsuario()%>&name=<%=u.getPass()%>"><img src='img/seleccionar.gif'> </a></td>		 				
-                </tr>
-                <%
-                        }
-                    
-                %>
-
-            </table>
-
+</div>
+<!-- info BOTTOM -->
+			</article><!-- end item -->
+					</div>
+					</div>
+					
+        <div class="row service-v1 margin-bottom-40">
+            <div class="col-md-4 md-margin-bottom-40">
+               <img class="img-responsive" src="img/service1.jpg" alt="">   
+                <h3>Children Care</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>        
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive" src="img/service2.jpg" alt="">            
+                <h3>Women Care</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>        
+            </div>
+            <div class="col-md-4 md-margin-bottom-40">
+              <img class="img-responsive" src="img/service3.jpg" alt="">  
+                <h3>Emergency Care</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>        
+            </div>
         </div>
+        <!-- End Service Blcoks -->
+
+        <hr class="margin-bottom-50">
+
+        <!-- Info Blcoks -->
+        <div class="row">
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-bell-o"></i>
+                <div class="info-blocks-in">
+                    <h3>Awesome Design</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-hdd-o"></i>
+                <div class="info-blocks-in">
+                    <h3>FontAwesome</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-lightbulb-o"></i>
+                <div class="info-blocks-in">
+                    <h3>Bootstrap</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+        </div>
+        <!-- End Info Blcoks -->
+
+       
+        <!-- Info Blcoks -->
+        <div class="row">
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-code"></i>
+                <div class="info-blocks-in">
+                    <h3>SEO Ready</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-compress"></i>
+                <div class="info-blocks-in">
+                    <h3>Fully Responsive</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+            <div class="col-sm-4 info-blocks">
+                <i class="icon-info-blocks fa fa-html5"></i>
+                <div class="info-blocks-in">
+                    <h3>CSS3 + HTML5</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt</p>
+                </div>
+            </div>
+        </div>
+        <!-- End Info Blcoks -->
+
         
+    </div>
+    </section>
 	<footer>
 	<div class="container">
 		<div class="row">
