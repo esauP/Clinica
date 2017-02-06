@@ -53,7 +53,7 @@ public class DetalleUsuario extends ConexionDB implements IUsuario {
         ConexionDB d = new ConexionDB();
         String registros = "no exito";
         try {
-            PreparedStatement pstm = d.getConexion().prepareStatement("SELECT observaciones as result FROM usuario WHERE user='" + usuario
+            PreparedStatement pstm = d.getConexion().prepareStatement("SELECT role as result FROM person WHERE idperson='" + usuario
                     + "' AND password='" + password + "'");
             ResultSet res = pstm.executeQuery();
             res.next();

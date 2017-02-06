@@ -9,7 +9,7 @@ package pojo;
 public class BilllLines  implements java.io.Serializable {
 
 
-     private BilllLinesId id;
+     private int id;
      private Bill bill;
      private Pets pets;
      private Products products;
@@ -23,12 +23,12 @@ public class BilllLines  implements java.io.Serializable {
     }
 
 	
-    public BilllLines(BilllLinesId id, Bill bill, Products products) {
+    public BilllLines(int id, Bill bill, Products products) {
         this.id = id;
         this.bill = bill;
         this.products = products;
     }
-    public BilllLines(BilllLinesId id, Bill bill, Pets pets, Products products, Integer quantity, Double price, Integer taxes, Integer discount, String observations) {
+    public BilllLines(int id, Bill bill, Pets pets, Products products, Integer quantity, Double price, Integer taxes, Integer discount, String observations) {
        this.id = id;
        this.bill = bill;
        this.pets = pets;
@@ -40,11 +40,11 @@ public class BilllLines  implements java.io.Serializable {
        this.observations = observations;
     }
    
-    public BilllLinesId getId() {
+    public int getId() {
         return this.id;
     }
     
-    public void setId(BilllLinesId id) {
+    public void setId(int id) {
         this.id = id;
     }
     public Bill getBill() {

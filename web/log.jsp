@@ -1,6 +1,7 @@
 <%@page import="pojo.*;"%>
 <%@page import="data.*;"%>
 <%@page import="java.util.*;"%>
+<%@page import="logicadao.*"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,8 +75,8 @@
                 <tr valign ="middle" align="center">
                   
                     <%
-                        DetalleUsuario det = new DetalleUsuario();
-                        List<Usuario> usuarios = det.AllUsuarios();
+                       Ldate ld = new Ldate();
+                        ArrayList<Dates> arraydate= ld.getDates();
                     %>
                     <td id = "colchones" colspan="8"><b>Usuarios registrados</b></td> 
                 </tr>
@@ -83,14 +84,15 @@
                     <td>Nombre</td><td>Contraseña</td><td>Observaciones</td><td>Seleccionar</td>
                 </tr>
 
-                <%  for (Iterator iter = usuarios.iterator(); iter.hasNext();) {
-                    Usuario u = (Usuario) iter.next();
+                <%  for (Iterator iter = arraydate.iterator(); iter.hasNext();) {
+                    Dates dd = (Dates) iter.next();
                 %>
                 <tr align="center" id="Usuarios"> 
-                    <td><%=u.getUsuario()%></td>
-                    <td> <%=u.getPass()%> </td>
-                    <td> <%=u.getObservaciones()%> </td>
-                    <td> <a href="FrontController?res=tutorias.jsp?pid=<%=u.getUsuario()%>&name=<%=u.getPass()%>"><img src='img/seleccionar.gif'> </a></td>		 				
+                    <td><%=dd.getDate()%></td>
+                    <td> <%=dd.getHour()%> </td>
+                    <td> <%=dd.getPerson()%> </td>
+                        <td> <%=dd.getObservations()%> </td>
+              
                 </tr>
                 <%
                         }
