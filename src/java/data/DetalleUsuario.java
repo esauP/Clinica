@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import pojo.Usuario;
 //asasd
+
 /**
  *
  * @author esaup
@@ -46,6 +47,26 @@ public class DetalleUsuario extends ConexionDB implements IUsuario {
         this.desconectar();
 
         return us;
+    }
+
+    public Boolean consulta(String usuario, String password) {
+        ConexionDB d = new ConexionDB();
+        String registros = "no exito";
+        try {
+            PreparedStatement pstm = d.getConexion().prepareStatement("SELECT observaciones as result FROM usuario WHERE user='" + usuario
+                    + "' AND password='" + password + "'");
+            ResultSet res = pstm.executeQuery();
+            res.next();
+            registros = res.getString("result");
+            res.close();
+            d.desconectar();
+
+            return true;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+
     }
 
     public List AllUsuarios() {

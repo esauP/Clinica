@@ -1,6 +1,5 @@
 package servlet;
 
-import WebServ.WS;
 import data.DetalleUsuario;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -93,7 +92,7 @@ public class FrontController extends HttpServlet {
         } else if (valido(userForm, passwdForm)) {
             logado = true;
             session.setAttribute("session.user", userForm);
-            
+
             DetalleUsuario det = new DetalleUsuario();
             Usuario us = det.getUsuario(userForm, passwdForm);
             session.setAttribute("observaciones", us.getObservaciones());
@@ -108,9 +107,9 @@ public class FrontController extends HttpServlet {
         boolean res = false;
         //res = (userForm.equals(this.user) && passwdForm.equals(this.passwd));
 
-        WS ws = new WS();
+        DetalleUsuario du = new DetalleUsuario();
 
-        res = (ws.consulta(userForm, passwdForm));
+        res = (du.consulta(userForm, passwdForm));
 
         System.out.println(res);
 //        if (us == null) {
