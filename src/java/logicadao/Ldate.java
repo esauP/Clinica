@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import data.ConexionDB;
 import java.util.ArrayList;
-import java.util.Date;
 import pojo.Dates;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -32,11 +32,17 @@ public class Ldate extends ConexionDB {
                 Dates dd = new Dates();
 
                 dd.setId(rs.getInt("iddate"));
-                dd.setDate(rs.getDate("date"));
+                String time = new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("date"));
+                dd.setDate(time);
                 dd.setHour(rs.getTime("hour"));
                 dd.setPerson(rs.getString("idperson"));
                 dd.setType(rs.getInt("type"));
-                dd.setObservations(rs.getString("observations"));
+
+                if (rs.getString("observations") == null) {
+                    dd.setObservations("");
+                } else {
+                    dd.setObservations(rs.getString("observations"));
+                }
 
                 lista.add(dd);
             }

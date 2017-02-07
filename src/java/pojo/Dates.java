@@ -9,7 +9,7 @@ import java.util.Date;
 public class Dates implements java.io.Serializable {
 
     private int id;
-    private Date date;
+    private String date;
     private String person;
     private Date hour;
     private String observations;
@@ -63,11 +63,11 @@ public class Dates implements java.io.Serializable {
         this.observations = observations;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
