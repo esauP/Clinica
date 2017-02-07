@@ -70,15 +70,15 @@
                 </div>
             </section>
 
-            <div id="content">
-                <table summary ="Listado de Citas"  cellSpacing="1" cellPadding="8" width="770" align="center" border="0">
+            <div id="content" class="container">
+                <table summary ="Listado de Citas"  cellSpacing="1" cellPadding="8" width="770" align="center" border="0" class="table table-striped">
                     <tr valign ="middle" align="center">
 
                         <%
                             Ldate ld = new Ldate();
-                            ArrayList<Dates> arraydate = ld.getDates();
+                            ArrayList<Dates> arraydate = ld.getDatesDay();
                         %>
-                        <td id = "colchones" colspan="8"><b>Citas registradas</b></td> 
+                        <td id = "colchones" colspan="8"><b>Citas registradas del día</b></td> 
                     </tr>
                     <tr valign=" middle" align="center" id="cabecera">
                         <td>Dia</td><td>Hora</td><td>Cliente</td><td>Observaciones</td>

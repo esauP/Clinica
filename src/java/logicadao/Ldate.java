@@ -52,4 +52,38 @@ public class Ldate extends ConexionDB {
         }
         return lista;
     }
+    
+    public ArrayList<Dates> getDatesDay() {
+        ArrayList<Dates> lista = new ArrayList<>();
+
+        String sql = "select * from dates d where d.date=CURDATE() order by d.hour ASC;";
+        try {
+            PreparedStatement ps = this.getConexion().prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Dates dd = new Dates();
+
+                dd.setId(rs.getInt("iddate"));
+                String time = new SimpleDateFormat("dd-MM-yyyy").format(rs.getDate("date"));
+                dd.setDate(time);
+                dd.setHour(rs.getTime("hour"));
+                dd.setPerson(rs.getString("idperson"));
+                dd.setType(rs.getInt("type"));
+
+                if (rs.getString("observations") == null) {
+                    dd.setObservations("");
+                } else {
+                    dd.setObservations(rs.getString("observations"));
+                }
+
+                lista.add(dd);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
 }
