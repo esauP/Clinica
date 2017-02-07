@@ -12,12 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import pojo.Usuario;
 
 public class FrontController extends HttpServlet {
-
-//    String user = "practica";
-//    String passwd = "practica";
+    
     @Override
     public void init() throws ServletException {
     }
@@ -93,9 +90,7 @@ public class FrontController extends HttpServlet {
             logado = true;
             session.setAttribute("session.user", userForm);
 
-            DetalleUsuario det = new DetalleUsuario();
-            Usuario us = det.getUsuario(userForm, passwdForm);
-            session.setAttribute("observaciones", us.getObservaciones());
+           
 
         } else {
             logado = false;
@@ -112,9 +107,6 @@ public class FrontController extends HttpServlet {
         res = (du.consulta(userForm, passwdForm));
 
         System.out.println(res);
-//        if (us == null) {
-//            res = false;
-//        }
         return res;
 
     }
