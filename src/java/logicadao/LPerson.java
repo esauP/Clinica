@@ -27,11 +27,11 @@ public class LPerson extends ConexionDB {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                aux.setIdperson(rs.getString("1"));
-                aux.setNamePer(rs.getString("2"));
-                aux.setAddress(rs.getString("3"));
-                aux.setPhone(rs.getString("4"));
-                aux.setEmail(rs.getString("5"));
+                aux.setIdperson(rs.getString(1));
+                aux.setNamePer(rs.getString(2));
+                aux.setAddress(rs.getString(3));
+                aux.setPhone(rs.getString(4));
+                aux.setEmail(rs.getString(5));
             }
 
         } catch (SQLException e) {

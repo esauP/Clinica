@@ -95,7 +95,8 @@
                         <td> <%=dd.getHour()%> </td>
                         <td> <%=dd.getPerson()%> </td>
                         <td> <%=dd.getObservations()%> </td>
-                        <td><a href="<% persona = lp.getPerson(dd.getPerson());  %>" <img src='img/seleccionar.gif'> </a></td>		 				
+                        <td><% persona = lp.getPerson(dd.getPerson());  %> <img src='img/seleccionar.gif'> </a></td>
+                         <td> <a href="FrontController?res=tutorias.jsp?pid=<%=p.getIdProfesor()%>&name=<%=p.getNombre()%>"><img src='img/seleccionar.gif'> </a></td>		 	
                     </tr>
                     <%
                         }
