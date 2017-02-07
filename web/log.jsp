@@ -75,13 +75,15 @@
                     <tr valign ="middle" align="center">
 
                         <%
+                            LPerson lp = new LPerson();
                             Ldate ld = new Ldate();
                             ArrayList<Dates> arraydate = ld.getDatesDay();
+                            Person persona = new Person();
                         %>
                         <td id = "colchones" colspan="8"><b>Citas registradas del día</b></td> 
                     </tr>
                     <tr valign=" middle" align="center" id="cabecera">
-                        <td>Dia</td><td>Hora</td><td>Cliente</td><td>Observaciones</td>
+                        <td>Dia</td><td>Hora</td><td>Cliente</td><td>Observaciones</td><td>Seleccionar</td>
                     </tr>
 
                     <%
@@ -93,6 +95,7 @@
                         <td> <%=dd.getHour()%> </td>
                         <td> <%=dd.getPerson()%> </td>
                         <td> <%=dd.getObservations()%> </td>
+                        <td><a href="<% persona = lp.getPerson(dd.getPerson());  %>" <img src='img/seleccionar.gif'> </a></td>		 				
                     </tr>
                     <%
                         }
@@ -100,9 +103,9 @@
                     %>
 
                 </table>
-
+                    First name: <input type="text" name="fname" value="<%=persona.getNamePer() %>">
             </div>
-
+                    
             <footer>
                 <div class="container">
                     <div class="row">
