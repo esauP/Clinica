@@ -57,7 +57,6 @@
             </div>
         </div>
 	</header>
-        <body>
 	<!-- end header -->
 	<section class="callaction">
 		<br>
@@ -116,40 +115,9 @@
 			</div>
     </div>
 	</div><!-- /.container -->
-
+       
 	</section>
-			<div id="content" class="container">
-                <table summary ="Listado de Citas"  cellSpacing="1" cellPadding="8" width="770" align="center" border="0" class="table table-striped">
-									<tr valign ="middle" align="center">
-
-                        <%
-                            Ldate ld = new Ldate();
-                            ArrayList<Dates> arraydate = ld.getDatesDay();
-                        %>
-                        <td id = "colchones" colspan="8"><b>Citas registradas del d&iacutea</b></td>
-                    </tr>
-                    <tr valign=" middle" align="center" id="cabecera">
-                        <td>Dia</td><td>Hora</td><td>Cliente</td><td>Observaciones</td>
-                    </tr>
-
-                    <%
-                        for (int i = 0; i < arraydate.size(); i++) {
-                            Dates dd = (Dates) arraydate.get(i);
-                    %>
-                    <tr align="center" id="Usuarios">
-                        <td><%=dd.getDate()%></td>
-                        <td> <%=dd.getHour()%> </td>
-                        <td> <%=dd.getPerson()%> </td>
-                        <td> <%=dd.getObservations()%> </td>
-                    </tr>
-                    <%
-                        }
-
-                    %>
-
-                </table>
-
-            </div>
+	
 
 	<section class="callaction">
 	<div class="container">
@@ -163,14 +131,7 @@
 
 	</div>
 	</section>
-	<div class="testimonial-area">
-    <div class="testimonial-solid">
-        <div class="container">
-
-
-        </div>
-    </div>
-</div>
+	
 	<footer>
 	<div class="container">
 		<div class="row">
@@ -300,7 +261,7 @@
 <!-- javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el-->
+<!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el -->
 <script>
 // Get the modal
 var modal = document.getElementById('id01');
