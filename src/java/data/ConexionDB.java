@@ -19,6 +19,8 @@ public class ConexionDB {
     private String user = "dam43";
     private String bd = user + "_clinica";
     private String pass = "salesianas";
+    //192.168.28.3
+    //79.148.236.236
     private String host = "192.168.28.3";
     private String server = "jdbc:mysql://" + host + "/" + bd;
 
