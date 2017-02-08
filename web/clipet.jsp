@@ -12,6 +12,7 @@
 <meta name="description" content="" />
 <meta name="author" content="http://webthemez.com" />
 <!-- css -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
 <link href="css/jcarousel.css" rel="stylesheet" />
@@ -68,7 +69,10 @@
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">Go!</button>
 						</span>
+                                                <br>
+
 					</div><!-- /input-group -->
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Detalles</button>
 				</div><!-- /.col-lg-6 -->
 				<div>
 				<table cellSpacing="1" cellPadding="8" width="770" align="center" border="0" class="table table-striped">
@@ -116,7 +120,7 @@
 	</section>
 			<div id="content" class="container">
                 <table summary ="Listado de Citas"  cellSpacing="1" cellPadding="8" width="770" align="center" border="0" class="table table-striped">
-                    <tr valign ="middle" align="center">
+									<tr valign ="middle" align="center">
 
                         <%
                             Ldate ld = new Ldate();
@@ -241,7 +245,56 @@
 	</div>
 
 	</footer>
-</div
+</div>
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div>
+				<table class="table table-striped">
+					<tr>
+						<td>
+							<div class="input-group">
+							  <span class="input-group-addon">id_person</span>
+							  <input type="text" class="form-control" placeholder="DNI" aria-describedby="basic-addon1">
+							</div>
+						</td>
+						<td>
+							<div class="input-group">
+							  <span class="input-group-addon">name</span>
+							  <input type="text" class="form-control" placeholder="nombre" aria-describedby="basic-addon1">
+							</div>
+						</td>
+						<td>
+							<div class="input-group">
+							  <span class="input-group-addon">adress</span>
+							  <input type="text" class="form-control" placeholder="direccion" aria-describedby="basic-addon1">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="input-group">
+							  <span class="input-group-addon">telephone </span>
+							  <input type="text" class="form-control" placeholder="telefono" aria-describedby="basic-addon1">
+							</div>
+						</td>
+						<td>
+							<div class="input-group">
+							  <span class="input-group-addon">email</span>
+							  <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon1">
+							</div>
+						</td>
+				</table>
+
+			</div>
+			<button type="button" class="btn btn-info btn-lg" >Modificar</button>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+    </div>
+  </div>
 
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 <!-- javascript
