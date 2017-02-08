@@ -49,6 +49,8 @@ h1,h2, h3, h4, h5, h6 {
 	padding:0;
 }
 
+
+
 .row,.row-fluid {
 	margin-bottom:30px;
 }
@@ -101,7 +103,7 @@ header .navbar-collapse  ul.navbar-nav {
 }
 
 header .navbar-default{
-    background-color: #DF0674;
+    background-color: #04B4AE;
 }
 
 header .nav li a:hover,
@@ -361,16 +363,13 @@ right:0px;
 margin-bottom:50px;
 }
 .c1{
-border: #ed5441 1px solid;
-background:#ed5441;
+background:#04B4AE;
 }
 .c2{
-border: #D867B2 1px solid;
-background: #D867B2;
+background: #04B4AE;
 }
 .c3{
-border: #61B331 1px solid;
-background: #4BC567;
+background: #04B4AE;
 }
 .c4{
 border: #609cec 1px solid;
@@ -1365,6 +1364,8 @@ ul.social-network li {
 }
 
 #sub-footer{
+	position: relative;
+	clear: both;
 	text-shadow:none;
 	color:#f5f5f5;
 	padding:0;

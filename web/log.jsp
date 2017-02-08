@@ -7,7 +7,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Rainbow Children Hospital html5 Bootstrap web Template</title>
+        <title>ClÃ­nica Veterinaria</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="" />
         <meta name="author" content="http://webthemez.com" />
@@ -48,7 +48,7 @@
                         </div>
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
-                                <li><a href="index.html">Home</a></li> 
+                                <li><a href="index.html">Home</a></li>
                                 <li class="active"><a href="about.html">About Us</a></li>
                                 <li><a href="events.html">Events </a></li>
                                 <li><a href="portfolio.html">Gallery</a></li>
@@ -80,7 +80,7 @@
                             ArrayList<Dates> arraydate = ld.getDatesDay();
                             Person persona = new Person();
                         %>
-                        <td id = "colchones" colspan="8"><b>Citas registradas del día</b></td> 
+                        <td id = "colchones" colspan="8"><b>Citas registradas del dï¿½a</b></td>
                     </tr>
                     <tr valign=" middle" align="center" id="cabecera">
                         <td>Dia</td><td>Hora</td><td>Cliente</td><td>Observaciones</td><td>Seleccionar</td>
@@ -90,13 +90,13 @@
                         for (int i = 0; i < arraydate.size(); i++) {
                             Dates dd = (Dates) arraydate.get(i);
                     %>
-                    <tr align="center" id="Usuarios"> 
+                    <tr align="center" id="Usuarios">
                         <td><%=dd.getDate()%></td>
                         <td> <%=dd.getHour()%> </td>
                         <td> <%=dd.getPerson()%> </td>
                         <td> <%=dd.getObservations()%> </td>
                         <td><% persona = lp.getPerson(dd.getPerson());  %> <img src='img/seleccionar.gif'> </a></td>
-                         <td> <a href="FrontController?res=tutorias.jsp?pid=<%=p.getIdProfesor()%>&name=<%=p.getNombre()%>"><img src='img/seleccionar.gif'> </a></td>		 	
+                         <td> <a href="FrontController?res=tutorias.jsp?pid=<%=p.getIdProfesor()%>&name=<%=p.getNombre()%>"><img src='img/seleccionar.gif'> </a></td>
                     </tr>
                     <%
                         }
@@ -106,7 +106,7 @@
                 </table>
                     First name: <input type="text" name="fname" value="<%=persona.getNamePer() %>">
             </div>
-                    
+
             <footer>
                 <div class="container">
                     <div class="row">
@@ -189,7 +189,7 @@
         <script src="js/jquery.easing.1.3.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.fancybox.pack.js"></script>
-        <script src="js/jquery.fancybox-media.js"></script> 
+        <script src="js/jquery.fancybox-media.js"></script>
         <script src="js/portfolio/jquery.quicksand.js"></script>
         <script src="js/portfolio/setting.js"></script>
         <script src="js/jquery.flexslider.js"></script>
