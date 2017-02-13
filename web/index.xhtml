@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="cars1" var="per" value="#{personBean.listapersonas}" editable="true" style="margin-bottom:20px">
+                <f:facet name="header">Clientes</f:facet>
+
+                <p:ajax event="rowEdit" listener="#{personBean.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{personBean.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                   
+                    <h:outputText value="#{per.idperson}"                 />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{per.namePer}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{per.namePer}" style="width:100%" label="Nombre"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Correo">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{per.email}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{per.email}" style="width:100%" label="Correo"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Telefono">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{per.phone}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{per.phone}" style="width:100%" label="Telefono"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+    </h:body>
+</html>
+

@@ -1,6 +1,6 @@
 package servlet;
 
-import data.DetalleUsuario;
+import Model.Login;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -102,9 +102,9 @@ public class FrontController extends HttpServlet {
         boolean res = false;
         //res = (userForm.equals(this.user) && passwdForm.equals(this.passwd));
 
-        DetalleUsuario du = new DetalleUsuario();
+        Login lo = new Login();
 
-        res = (du.consulta(userForm, passwdForm));
+        res = (lo.consulta(userForm, passwdForm));
 
         System.out.println(res);
         return res;

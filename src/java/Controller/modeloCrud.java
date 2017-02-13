@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logicadao;
+package Controller;
 
-import data.ConexionDB;
+import Model.ConexionDB;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.Date;
