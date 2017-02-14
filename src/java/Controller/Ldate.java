@@ -37,7 +37,8 @@ public class Ldate extends ConexionDB {
                 dd.setHour(rs.getTime("hour"));
                 dd.setPerson(rs.getString("idperson"));
                 dd.setType(rs.getInt("type"));
-
+                dd.setNameper(rs.getString("nameper"));
+                dd.setNamepet(rs.getString("namepet"));
                 if (rs.getString("observations") == null) {
                     dd.setObservations("");
                 } else {
@@ -52,13 +53,14 @@ public class Ldate extends ConexionDB {
         }
         return lista;
     }
-    
-    public ArrayList<Dates> getDatesDay() {
+
+    public static ArrayList<Dates> getDatesDay() {
         ArrayList<Dates> lista = new ArrayList<>();
+        ConexionDB conn = new ConexionDB();
 
         String sql = "select * from dates d where d.date=CURDATE() order by d.hour ASC;";
         try {
-            PreparedStatement ps = this.getConexion().prepareStatement(sql);
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
 
@@ -71,7 +73,8 @@ public class Ldate extends ConexionDB {
                 dd.setHour(rs.getTime("hour"));
                 dd.setPerson(rs.getString("idperson"));
                 dd.setType(rs.getInt("type"));
-
+                dd.setNameper(rs.getString("nameper"));
+                dd.setNamepet(rs.getString("namepet"));
                 if (rs.getString("observations") == null) {
                     dd.setObservations("");
                 } else {

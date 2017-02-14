@@ -8,48 +8,48 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form id="form">
-            <p:growl id="msgs" showDetail="true"/>
+            <h:form id="form">
+                <p:growl id="msgs" showDetail="true"/>
 
-            <p:dataTable id="cars1" var="per" value="#{personBean.listapersonas}" editable="true" style="margin-bottom:20px">
-                <f:facet name="header">Clientes</f:facet>
+                <p:dataTable id="Clientes" var="per" value="#{personBean.listapersonas}" editable="true" style="margin-bottom:20px">
+                    <f:facet name="header">Clientes</f:facet>
 
-                <p:ajax event="rowEdit" listener="#{personBean.onRowEdit}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{personBean.onRowCancel}" update=":form:msgs" />
+                    <p:ajax event="rowEdit" listener="#{personBean.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{personBean.onRowCancel}" update=":form:msgs" />
 
-                <p:column headerText="Id">
-                   
-                    <h:outputText value="#{per.idperson}"                 />
-                </p:column>
+                    <p:column headerText="Id">
 
-                <p:column headerText="Nombre">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{per.namePer}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{per.namePer}" style="width:100%" label="Nombre"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
+                        <h:outputText value="#{per.idperson}"                 />
+                    </p:column>
 
-                <p:column headerText="Correo">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{per.email}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{per.email}" style="width:100%" label="Correo"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
+                    <p:column headerText="Nombre">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{per.namePer}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{per.namePer}" style="width:100%" label="Nombre"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
 
-                <p:column headerText="Telefono">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{per.phone}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{per.phone}" style="width:100%" label="Telefono"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
+                    <p:column headerText="Correo" class="danger">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{per.email}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{per.email}" style="width:100%" label="Correo"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
 
-                <p:column style="width:32px">
-                    <p:rowEditor />
-                </p:column>
-            </p:dataTable>
+                    <p:column headerText="Telefono">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{per.phone}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{per.phone}" style="width:100%" label="Telefono"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
 
-        </h:form>
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
 
+            </h:form>
+        
     </h:body>
 </html>
 

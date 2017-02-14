@@ -10,9 +10,11 @@ public class Dates implements java.io.Serializable {
 
     private int id;
     private String date;
-    private String person;
+    private String idperson;
     private Date hour;
     private String observations;
+    private String nameper;
+    private String namepet;
     private int type;
 
     public Dates() {
@@ -20,15 +22,17 @@ public class Dates implements java.io.Serializable {
 
     public Dates(int id, String person, Date hour) {
         this.id = id;
-        this.person = person;
+        this.idperson = person;
         this.hour = hour;
     }
 
-    public Dates(int id, String person, Date hour, String observations) {
+    public Dates(int id, String person, Date hour, String observations, String nameper, String namepet) {
         this.id = id;
-        this.person = person;
+        this.idperson = person;
         this.hour = hour;
         this.observations = observations;
+        this.nameper = nameper;
+        this.namepet = namepet;
     }
 
     public int getId() {
@@ -40,11 +44,11 @@ public class Dates implements java.io.Serializable {
     }
 
     public String getPerson() {
-        return this.person;
+        return this.idperson;
     }
 
     public void setPerson(String person) {
-        this.person = person;
+        this.idperson = person;
     }
 
     public Date getHour() {
@@ -77,6 +81,22 @@ public class Dates implements java.io.Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getNameper() {
+        return nameper;
+    }
+
+    public void setNameper(String nameper) {
+        this.nameper = nameper;
+    }
+
+    public String getNamepet() {
+        return namepet;
+    }
+
+    public void setNamepet(String namepet) {
+        this.namepet = namepet;
     }
 
 }
