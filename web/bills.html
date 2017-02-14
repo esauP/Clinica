@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clínica Veterinaria</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<!-- css -->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="css/jcarousel.css" rel="stylesheet" />
+<link href="css/flexslider.css" rel="stylesheet" />
+<link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+<div id="wrapper">
+	<!-- start header -->
+	<header>
+        <div class="navbar navbar-default navbar-static-top"  >
+            <div class="container" >
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="adminHome.html"><img src="img/logo.png" alt="logo"/></a>
+                  </div>
+                  <div class="navbar-collapse collapse ">
+                      <ul class="nav navbar-nav">
+                          <li><a href="pets.html">Mascotas</a></li>
+                          <li><a href="historic.html">Consulta | Historial</a></li>
+                          <li><a href="dates.html">Citas</a></li>
+                          <li><a href="bills.html">Facturación</a></li>
+                          <li><a href="vaccines.html">Vacunas</a></li>
+                          <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
+                      </ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+	</header>
+	<!-- end header -->
+
+
+	<section id="content">
+
+	<div class="container">
+			<div class="row">
+		<div class="skill-home"> <div class="skill-home-solid clearfix">
+		<div class="col-md-9 text-left">
+		<form>
+      <p><input type="text" name="findCustomer" placeholder="Cliente"/>
+      <input type="image" class = "look" name = "findPet" SRC="img/lupa.png" style="align-right"/></p>
+      <p><input type="text" name="idCustomer" placeholder="Identificación Cliente"/>
+      <input type="text" name="findCustomer" placeholder="Cliente"/>
+      <select class="form-control">
+        <option></option>
+        <option></option>
+        <option></option>
+        <option></option>
+        <option></option>
+      </select>
+      <input type="text" name="dateBill" placeholder="Fecha"/></p>
+    </br>
+    <h3>Datos del Responsable</h3>
+      <p><input type = "text" name = "name" placeholder="Nombre" />
+        <input type = "text" name = "lastname" placeholder="Apellidos" />
+        <input type = "text" name = "id" placeholder="Dni" />
+        <input type = "text" name ="mail" placeholder ="Correo Electrónico" /></p>
+        <p> <input type = "text" size = "44 "name = "address" placeholder="Dirección" />
+          <input type = "text" name = "phone1" placeholder="Teléfono" />
+          <input type = "text" name = "phone2" placeholder="Teléfono 2" /></p></br>
+          <button type="button" class="btn btn-default">Añadir</button>
+          <button type="button" class="btn btn-default">Modificar</button>
+          <button type="button" class="btn btn-default">Eliminar</button> </br></br>
+          <div class="table-responsive">
+          <table id="tableHomeAdmin" class="table table-hover">
+            <h3>Listado de Mascotas</h3>
+        <tr>
+          <th>Mascota</th>
+          <th>Tipo Animal</th>
+          <th>Genero</th>
+          <th>Raza</th>
+          <th>Color</th>
+          <th>Fecha Nacimiento</th>
+          <th>Responsable</th>
+        </tr>
+        <tr>
+        <td>Guau</td>
+        <td>Perro</td>
+        <td>Masculino</td>
+        <td>Basset Hound</td>
+        <td>Tricolor</td>
+        <td>28-08-2014</td>
+        <td>Macarena Jiménez</td>
+      </tr>
+      </table>
+    </div>
+    </br></br>
+  </form>
+</div>
+		<div class="col-md-3 text-left">
+      <h3>Datos de la Mascota</h3>
+      <p><input type = "text" name = "namePet" placeholder="Nombre Mascota" /></p>
+      <p><label class="checkbox-inline"><input type="checkbox" value="">Perro</label></p>
+      <p><label class="checkbox-inline"><input type="checkbox" value="">Gato</label></p>
+      <p><input type = "text" name = "race" placeholder="Raza" /></p>
+      <p><input type = "text" name = "color" placeholder="Color" /></p>
+      <p><input type = "text" name = "birthDate" placeholder="Fecha de Nacimiento" /></p>
+      <p><button type="button" class="btn btn-default">Añadir</button></p>
+      <p><button type="button" class="btn btn-default">Modificar</button></p>
+      <p><button type="button" class="btn btn-default">Eliminar</button></p>
+		</div></div></div>
+
+		</div></div>
+	</section>
+
+	<div id="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<ul class="social-network">
+						<li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+<!-- javascript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el-->
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.fancybox-media.js"></script>
+<script src="js/portfolio/jquery.quicksand.js"></script>
+<script src="js/portfolio/setting.js"></script>
+<script src="js/jquery.flexslider.js"></script>
+<script src="js/animate.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/owl-carousel/owl.carousel.js"></script>
+</body>
+</html>
