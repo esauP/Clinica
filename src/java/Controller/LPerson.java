@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.ConexionDB;
+import java.sql.CallableStatement;
 import pojo.Person;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,4 +91,48 @@ public class LPerson extends ConexionDB {
         }
     }
 
+    /**
+     * Método para añadir un nueva persona
+     *
+     * @param idperson id
+     * @param name nombre de la persona
+     * @param address dirección
+     * @param phone teléfono
+     * @param email email
+     * @param password contraseña
+     * @param role rol de la persona
+     * @return
+     */
+    public static boolean addPerson(String idperson, String name, String address, String phone, String email, String password, int role) throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada a la funcion
+            String sql = "{ ? = call addPerson (?,?,?,?,?,?,?) }";
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            //establezco la salida de la funcion
+            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+            //establezco los parámetros de entrada
+            cStmt.setString(2, idperson);
+            cStmt.setString(3, name);
+            cStmt.setString(4, address);
+            cStmt.setString(5, phone);
+            cStmt.setString(6, email);
+            cStmt.setString(7, password);
+            cStmt.setInt(8, role);
+            //se ejecuta la funcion
+            cStmt.execute();
+
+            if (cStmt.getInt(1) == 0) {
+                //System.out.println(cStmt.getInt(1));
+                success = true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }finally{
+            conn.desconectar();
+        }
+        return success;
+    }
 }

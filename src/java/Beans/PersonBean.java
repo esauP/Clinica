@@ -16,14 +16,16 @@ import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import pojo.Person;
 import Controller.LPerson;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author esaup
  */
 @Named(value = "personBean")
+@ManagedBean
 @RequestScoped
-public class PersonBean implements Serializable {
+public class PersonBean {
 
     private String idperson;
     private String namePer;
@@ -31,6 +33,7 @@ public class PersonBean implements Serializable {
     private String phone;
     private String email;
     private List<Person> listapersonas;
+    private Person pers = new Person();
 
     public PersonBean() throws SQLException {
         listapersonas = LPerson.getPersons();
@@ -39,7 +42,7 @@ public class PersonBean implements Serializable {
     public void onRowEdit(RowEditEvent event) {
         Person personaM = (Person) event.getObject();
         FacesMessage msg = new FacesMessage("Persona Editada", personaM.getNamePer());
-        LPerson.updateTelef(personaM.getIdperson(),personaM.getPhone());
+        LPerson.updateTelef(personaM.getIdperson(), personaM.getPhone());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -56,6 +59,10 @@ public class PersonBean implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Celda acutalizada", "Antiguo: " + oldValue + ", Nuevo:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+    }
+
+    public void AddPerson() throws SQLException {
+        LPerson.addPerson(pers.getIdperson(), pers.getNamePer(), pers.getAddress(), pers.getPhone(), pers.getEmail(), pers.getIdperson(), 4);
     }
 
     public List<Person> getListapersonas() {
@@ -106,4 +113,11 @@ public class PersonBean implements Serializable {
         this.email = email;
     }
 
+    public Person getPers() {
+        return pers;
+    }
+
+    public void setPers(Person pers) {
+        this.pers = pers;
+    }
 }
