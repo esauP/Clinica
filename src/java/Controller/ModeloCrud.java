@@ -16,77 +16,7 @@ import java.sql.SQLException;
  */
 public class ModeloCrud extends ConexionDB {
 
-    
-
-    /**
-     * Método para modificar una persona
-     *
-     * @param idperson
-     * @param name
-     * @param address
-     * @param phone
-     * @param email
-     * @param password
-     * @param role
-     * @return
-     */
-    public boolean updatePerson(String idperson, String name, String address, String phone, String email, String password, int role) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call updatePerson (?,?,?,?,?,?,?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setString(2, idperson);
-            cStmt.setString(3, name);
-            cStmt.setString(4, address);
-            cStmt.setString(5, phone);
-            cStmt.setString(6, email);
-            cStmt.setString(7, password);
-            cStmt.setInt(8, role);
-            //se ejecuta la funcion
-            cStmt.execute();
-
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
-
-    /**
-     * Método para eliminar una persona de la base de datos
-     *
-     * @param idperson
-     * @return
-     */
-    public boolean deletePerson(String idperson) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call deletePerson (?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setString(2, idperson);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
-
-    /**
+     /**
      *
      * @param name_pt
      * @param animal_pt

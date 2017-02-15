@@ -20,32 +20,9 @@ import java.util.logging.Logger;
  *
  * @author esaup
  */
-public class LPerson extends ConexionDB {
+public class LPerson {
 
-    public Person getPerson(String dni) {
-        Person aux = new Person();
-
-        try {
-            String sql = "Select idperson, name_per, address, phone, email from person where idperson = '" + dni + "'";
-            PreparedStatement ps = this.getConexion().prepareStatement(sql);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                aux.setIdperson(rs.getString(1));
-                aux.setNamePer(rs.getString(2));
-                aux.setAddress(rs.getString(3));
-                aux.setPhone(rs.getString(4));
-                aux.setEmail(rs.getString(5));
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return aux;
-    }
-
-    public static List<Person> getPersons() throws SQLException {
+    public static List<Person> getPeople() throws SQLException {
         List<Person> listapersona = new ArrayList<Person>();
         ConexionDB conn = new ConexionDB();
 
@@ -71,24 +48,6 @@ public class LPerson extends ConexionDB {
             conn.desconectar();
         }
         return listapersona;
-    }
-
-    public static void updateTelef(String dni, String telef) {
-        String sql = "UPDATE person SET phone = '" + telef + "' WHERE idperson = '" + dni + "'";
-        ConexionDB conn = new ConexionDB();
-        try {
-            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
-            ps.execute();
-            conn.desconectar();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                conn.desconectar();
-            } catch (SQLException ex) {
-                Logger.getLogger(LPerson.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
     /**
@@ -130,7 +89,82 @@ public class LPerson extends ConexionDB {
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }finally{
+        } finally {
+            conn.desconectar();
+        }
+        return success;
+    }
+
+    /**
+     * Método para modificar una persona
+     *
+     * @param idperson
+     * @param name
+     * @param address
+     * @param phone
+     * @param email
+     * @param password
+     * @param role
+     * @return
+     * @throws java.sql.SQLException
+     */
+    public static boolean updatePerson(String idperson, String name, String address, String phone, String email, String password, int role) throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada a la funcion
+            String sql = "{ ? = call updatePerson (?,?,?,?,?,?,?) }";
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            //establezco la salida de la funcion
+            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+            //establezco los parámetros de entrada
+            cStmt.setString(2, idperson);
+            cStmt.setString(3, name);
+            cStmt.setString(4, address);
+            cStmt.setString(5, phone);
+            cStmt.setString(6, email);
+            cStmt.setString(7, password);
+            cStmt.setInt(8, role);
+            //se ejecuta la funcion
+            cStmt.execute();
+
+            if (cStmt.getInt(1) == 0) {
+                success = true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return success;
+    }
+
+    /**
+     * Método para eliminar una persona de la base de datos
+     *
+     * @param idperson
+     * @return
+     */
+    public static boolean deletePerson(String idperson) throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada a la funcion
+            String sql = "{ ? = call deletePerson (?) }";
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            //establezco la salida de la funcion
+            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+            //establezco los parámetros de entrada
+            cStmt.setString(2, idperson);
+            //se ejecuta la funcion
+            cStmt.execute();
+            if (cStmt.getInt(1) == 0) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
             conn.desconectar();
         }
         return success;

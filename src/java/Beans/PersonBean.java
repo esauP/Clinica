@@ -27,7 +27,7 @@ import javax.faces.bean.ManagedBean;
 @Named(value = "personBean")
 @ManagedBean
 @RequestScoped
-public class PersonBean {
+public class PersonBean implements Serializable {
 
     private String idperson;
     private String namePer;
@@ -38,17 +38,46 @@ public class PersonBean {
     private Person pers = new Person();
 
     public PersonBean() throws SQLException {
-        listapersonas = LPerson.getPersons();
+        listapersonas = LPerson.getPeople();
     }
 
+    /**
+     * Metodo para insertar un nuevo usuario
+     *
+     * @throws SQLException
+     */
     public void AddPerson() throws SQLException {
         LPerson.addPerson(pers.getIdperson(), pers.getNamePer(), pers.getAddress(), pers.getPhone(), pers.getEmail(), pers.getIdperson(), 4);
+        FacesMessage msg = new FacesMessage("Persona Insertada", pers.getNamePer());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void onRowEdit(RowEditEvent event) {
+    /**
+     * Metodo para actualizar usuario
+     *
+     * @throws SQLException
+     */
+    public void UpdatePerson() throws SQLException {
+        LPerson.updatePerson(pers.getIdperson(), pers.getNamePer(), pers.getAddress(), pers.getPhone(), pers.getEmail(), pers.getPassword(), 4);
+        FacesMessage msg = new FacesMessage("Persona Actualizada", pers.getNamePer());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    /**
+     * Metodo para eliminar usuario
+     *
+     * @throws SQLException
+     */
+    public void DeletePerson() throws SQLException {
+        LPerson.deletePerson(pers.getIdperson());
+        FacesMessage msg = new FacesMessage("Persona Eliminada", pers.getNamePer());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowEdit(RowEditEvent event) throws SQLException {
         Person personaM = (Person) event.getObject();
         FacesMessage msg = new FacesMessage("Persona Editada", personaM.getNamePer());
-        LPerson.updateTelef(personaM.getIdperson(), personaM.getPhone());
+        LPerson.updatePerson(personaM.getIdperson(), personaM.getNamePer(), personaM.getAddress(), personaM.getPhone(), personaM.getEmail(), personaM.getPassword(), 4);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
