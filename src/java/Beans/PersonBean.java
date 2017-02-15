@@ -17,6 +17,7 @@ import org.primefaces.event.RowEditEvent;
 import pojo.Person;
 import Controller.LPerson;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -39,12 +40,10 @@ public class PersonBean {
     public PersonBean() throws SQLException {
         listapersonas = LPerson.getPersons();
     }
-    
-     public void AddPerson() throws SQLException {
+
+    public void AddPerson() throws SQLException {
         LPerson.addPerson(pers.getIdperson(), pers.getNamePer(), pers.getAddress(), pers.getPhone(), pers.getEmail(), pers.getIdperson(), 4);
     }
-     
-     
 
     public void onRowEdit(RowEditEvent event) {
         Person personaM = (Person) event.getObject();
@@ -67,6 +66,7 @@ public class PersonBean {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
+
     public List<Person> Autocompletar(String text) {
         // Assumed search using the startsWith
         List<Person> queried = new ArrayList<>();
@@ -79,6 +79,25 @@ public class PersonBean {
         return queried;
     }
 
+    public boolean filterByName(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim();
+        if (filterText == null || filterText.equals("")) {
+            return true;
+        }
+
+        if (value == null) {
+            return false;
+        }
+
+        String namePer = value.toString().toUpperCase();
+        filterText = filterText.toUpperCase();
+
+        if (namePer.contains(filterText)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public List<Person> getListapersonas() {
         return listapersonas;

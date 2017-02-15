@@ -43,8 +43,10 @@
 
                         <h:outputText value="#{per.idperson}"                 />
                     </p:column>
-                    //filterBy="#{per.namePer}" footerText="contains" filterMatchMode="contains"
-                    <p:column  headerText="Nombre">
+                    
+                    <p:column filterBy="#{per.namePer}" footerText="contains" filterMatchMode="contains"
+                              filterFunction="#{personBean.filterByName}"
+                              headerText="Nombre">
                         <p:cellEditor>
                             
                                             <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
