@@ -2,7 +2,6 @@ package pojo;
 // Generated 06-feb-2017 10:24:18 by Hibernate Tools 4.3.1
 
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +13,8 @@ public class Consultation  implements java.io.Serializable {
 
      private Integer idcons;
      private Pets pets;
-     private Date date;
+     private String idpets;
+     private String date;
      private String reason;
      private String diagnosis;
      private String treatment;
@@ -25,13 +25,13 @@ public class Consultation  implements java.io.Serializable {
     }
 
 	
-    public Consultation(Pets pets, Date date, String reason, String diagnosis) {
+    public Consultation(Pets pets, String date, String reason, String diagnosis) {
         this.pets = pets;
         this.date = date;
         this.reason = reason;
         this.diagnosis = diagnosis;
     }
-    public Consultation(Pets pets, Date date, String reason, String diagnosis, String treatment, String observation, Set docs) {
+    public Consultation(Pets pets, String date, String reason, String diagnosis, String treatment, String observation, Set docs) {
        this.pets = pets;
        this.date = date;
        this.reason = reason;
@@ -55,11 +55,11 @@ public class Consultation  implements java.io.Serializable {
     public void setPets(Pets pets) {
         this.pets = pets;
     }
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
     
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
     public String getReason() {
@@ -96,6 +96,14 @@ public class Consultation  implements java.io.Serializable {
     
     public void setDocs(Set docs) {
         this.docs = docs;
+    }
+
+    public String getIdpets() {
+        return idpets;
+    }
+
+    public void setIdpets(String idpets) {
+        this.idpets = idpets;
     }
 
 

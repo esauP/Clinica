@@ -38,6 +38,12 @@ public class PersonBean {
     public PersonBean() throws SQLException {
         listapersonas = LPerson.getPersons();
     }
+    
+     public void AddPerson() throws SQLException {
+        LPerson.addPerson(pers.getIdperson(), pers.getNamePer(), pers.getAddress(), pers.getPhone(), pers.getEmail(), pers.getIdperson(), 4);
+    }
+     
+     
 
     public void onRowEdit(RowEditEvent event) {
         Person personaM = (Person) event.getObject();
@@ -61,9 +67,6 @@ public class PersonBean {
         }
     }
 
-    public void AddPerson() throws SQLException {
-        LPerson.addPerson(pers.getIdperson(), pers.getNamePer(), pers.getAddress(), pers.getPhone(), pers.getEmail(), pers.getIdperson(), 4);
-    }
 
     public List<Person> getListapersonas() {
         return listapersonas;

@@ -255,79 +255,79 @@ public class ModeloCrud extends ConexionDB {
     }
 
     //  ---------------------------------------  CRUD CONSULTATION
-    public boolean addConsultation(int idpet, String date, String reason, String diagnosis, String treatment, String observation) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call addConsultation (?,?,?,?,?,?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setInt(2, idpet);
-            cStmt.setString(3, date);
-            cStmt.setString(4, reason);
-            cStmt.setString(5, diagnosis);
-            cStmt.setString(6, treatment);
-            cStmt.setString(7, observation);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
-
-    public boolean updateConsultation(int idcons, int idpet, String date, String reason, String diagnosis, String treatment, String observation) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call updateConsultation (?,?,?,?,?,?,?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setInt(2, idcons);
-            cStmt.setInt(3, idpet);
-            cStmt.setString(4, date);
-            cStmt.setString(5, reason);
-            cStmt.setString(6, diagnosis);
-            cStmt.setString(7, treatment);
-            cStmt.setString(8, observation);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
-
-    public boolean deleteConsultation(int idcons) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call deleteConsultation (?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setInt(2, idcons);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
+//    public boolean addConsultation(int idpet, String date, String reason, String diagnosis, String treatment, String observation) {
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call addConsultation (?,?,?,?,?,?) }";
+//            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, idpet);
+//            cStmt.setString(3, date);
+//            cStmt.setString(4, reason);
+//            cStmt.setString(5, diagnosis);
+//            cStmt.setString(6, treatment);
+//            cStmt.setString(7, observation);
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return success;
+//    }
+//
+//    public boolean updateConsultation(int idcons, int idpet, String date, String reason, String diagnosis, String treatment, String observation) {
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call updateConsultation (?,?,?,?,?,?,?) }";
+//            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, idcons);
+//            cStmt.setInt(3, idpet);
+//            cStmt.setString(4, date);
+//            cStmt.setString(5, reason);
+//            cStmt.setString(6, diagnosis);
+//            cStmt.setString(7, treatment);
+//            cStmt.setString(8, observation);
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return success;
+//    }
+//
+//    public boolean deleteConsultation(int idcons) {
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call deleteConsultation (?) }";
+//            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, idcons);
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return success;
+//    }
     //  ---------------------------------------  CRUD DOCUMENTO  (NO COMPROBADO ADD NI UPDATE)
 
     public boolean addDoc(int idcon, String date_doc, String description, String fileattached) {
