@@ -31,6 +31,13 @@ public class PetsBean implements Serializable{
     private String race;
     private String colour;
     private Date birthDate;
+    private String idperson;
+    private String namePer;
+    private String address;
+    private String phone;
+    private String email;
+    private String password;
+    private Integer role;
     private List<Pets> listamascotas;
 
     /**
@@ -112,4 +119,59 @@ public class PetsBean implements Serializable{
         this.listamascotas = listamascotas;
     }
     
+    public String getIdPerson(){
+        return person.getIdperson();
+    }
+    
+    public void setIdPerson(String idperson){
+        this.person.setIdperson(idperson);
+    }
+    
+    public String getNamePer(){
+        return person.getNamePer();
+    }
+    
+    public void setNamePerson(String namePer){
+        this.person.setNamePer(namePer);
+    }
+    
+    public String getAddress(){
+        return person.getAddress();
+    }
+    
+    public void setAddress(String address){
+        this.person.setAddress(address);
+    }
+    
+    public String getPhone(){
+        return person.getPhone();
+    }
+    
+    public void setPhone(String phone){
+        this.person.setPhone(phone);
+    }
+
+    public String getEmail(){
+        return person.getEmail();
+    }
+    
+    public void setEmail(String email){
+        this.person.setEmail(email);
+    }
+    
+    public String getPassword(){
+        return person.getPassword();
+    }
+    
+    public void setPassword(String password){
+        this.person.setPassword(password);
+    }
+    
+    public Integer getRole(){
+        return person.getRole();
+    }
+    
+    public void setRole(int role){
+        this.person.setRole(role);
+    }
 }
