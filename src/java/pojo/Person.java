@@ -116,6 +116,11 @@ public class Person  implements java.io.Serializable {
         this.dateses = dateses;
     }
 
+    @Override
+    public String toString() {
+        return this.namePer; //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 
 

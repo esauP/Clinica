@@ -16,6 +16,7 @@ import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import pojo.Person;
 import Controller.LPerson;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 
 /**
@@ -65,6 +66,17 @@ public class PersonBean {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Celda acutalizada", "Antiguo: " + oldValue + ", Nuevo:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+    }
+    public List<Person> Autocompletar(String text) {
+        // Assumed search using the startsWith
+        List<Person> queried = new ArrayList<>();
+        for (Person person : this.listapersonas) {
+            String name = person.getNamePer();
+            if (name.toLowerCase().startsWith(text)) {
+                queried.add(person);
+            }
+        }
+        return queried;
     }
 
 
