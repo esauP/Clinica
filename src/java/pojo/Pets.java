@@ -16,10 +16,10 @@ public class Pets  implements java.io.Serializable {
      private Person person;
      private String name;
      private String animal;
-     private Boolean gender;
+     private int gender;
      private String race;
      private String colour;
-     private Date birthDate;
+     private String birthDate;
      private Set billlLineses = new HashSet(0);
      private Set consultations = new HashSet(0);
      private Set vaccineses = new HashSet(0);
@@ -33,7 +33,7 @@ public class Pets  implements java.io.Serializable {
         this.name = name;
         this.animal = animal;
     }
-    public Pets(Person person, String name, String animal, Boolean gender, String race, String colour, Date birthDate, Set billlLineses, Set consultations, Set vaccineses) {
+    public Pets(Person person, String name, String animal, int gender, String race, String colour, String birthDate, Set billlLineses, Set consultations, Set vaccineses) {
        this.person = person;
        this.name = name;
        this.animal = animal;
@@ -74,11 +74,11 @@ public class Pets  implements java.io.Serializable {
     public void setAnimal(String animal) {
         this.animal = animal;
     }
-    public Boolean getGender() {
+    public int getGender() {
         return this.gender;
     }
     
-    public void setGender(Boolean gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
     public String getRace() {
@@ -95,11 +95,11 @@ public class Pets  implements java.io.Serializable {
     public void setColour(String colour) {
         this.colour = colour;
     }
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return this.birthDate;
     }
     
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
     public Set getBilllLineses() {

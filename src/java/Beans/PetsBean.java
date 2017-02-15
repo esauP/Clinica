@@ -25,12 +25,13 @@ public class PetsBean implements Serializable{
     
     private Integer idpets;
     private Person person;
+    private Pets pet;
     private String name;
     private String animal;
-    private Boolean gender;
+    private int gender;
     private String race;
     private String colour;
-    private Date birthDate;
+    private String birthDate;
     private String idperson;
     private String namePer;
     private String address;
@@ -79,11 +80,11 @@ public class PetsBean implements Serializable{
         this.animal = animal;
     }
 
-    public Boolean getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -103,11 +104,11 @@ public class PetsBean implements Serializable{
         this.colour = colour;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -118,60 +119,73 @@ public class PetsBean implements Serializable{
     public void setListamascotas(List<Pets> listamascotas) {
         this.listamascotas = listamascotas;
     }
-    
-    public String getIdPerson(){
+
+    public String getIdperson() {
         return person.getIdperson();
     }
-    
-    public void setIdPerson(String idperson){
-        this.person.setIdperson(idperson);
+
+    public void setIdperson(String idperson) {
+        this.person.setIdperson(idperson); 
     }
-    
-    public String getNamePer(){
+
+    public String getNamePer() {
         return person.getNamePer();
     }
-    
-    public void setNamePerson(String namePer){
-        this.person.setNamePer(namePer);
+
+    public void setNamePer(String namePer) {
+        this.person.setNamePer(namePer); 
     }
-    
-    public String getAddress(){
+
+    public String getAddress() {
         return person.getAddress();
     }
-    
-    public void setAddress(String address){
+
+    public void setAddress(String address) {
         this.person.setAddress(address);
     }
-    
-    public String getPhone(){
+
+    public String getPhone() {
         return person.getPhone();
     }
-    
-    public void setPhone(String phone){
+
+    public void setPhone(String phone) {
         this.person.setPhone(phone);
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return person.getEmail();
     }
-    
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.person.setEmail(email);
     }
-    
-    public String getPassword(){
+
+    public String getPassword() {
         return person.getPassword();
     }
-    
-    public void setPassword(String password){
+
+    public void setPassword(String password) {
         this.person.setPassword(password);
     }
-    
-    public Integer getRole(){
+
+    public Integer getRole() {
         return person.getRole();
     }
-    
-    public void setRole(int role){
+
+    public void setRole(Integer role) {
         this.person.setRole(role);
     }
+
+    public Pets getPet() {
+        return pet;
+    }
+
+    public void setPet(Pets pet) {
+        this.pet = pet;
+    }
+    
+    public void addPet() throws SQLException {
+        LPets.addPet(pet.getName(), pet.getAnimal(), pet.getGender(), pet.getRace(), pet.getColour(), pet.getBirthDate(), person.getNamePer());
+    }
+    
 }

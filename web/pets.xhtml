@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+<meta charset="utf-8"/>
+<title>Clínica Veterinaria</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<!-- css -->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/fancybox/jquery.fancybox.css" rel="stylesheet"/>
+<link href="css/jcarousel.css" rel="stylesheet" />
+<link href="css/flexslider.css" rel="stylesheet" />
+<link href="js/owl-carousel/owl.carousel.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+<div id="wrapper">
+	<!-- start header -->
+	<header>
+		<div class="navbar navbar-default navbar-static-top"  >
+			<div class="container" >
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="adminHome.html"><img src="img/logo.png" alt="logo"/></a>
+				</div>
+				<div class="navbar-collapse collapse ">
+					<ul class="nav navbar-nav">
+						<li><a href="pets.html">Mascotas</a></li>
+						<li><a href="historic.html">Consulta | Historial</a></li>
+						<li><a href="dates.html">Citas</a></li>
+						<li><a href="bills.html">Facturación</a></li>
+						<li><a href="vaccines.html">Vacunas</a></li>
+						<li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+</div>
+<!-- end header -->
+
+
+<section id="content">
+	<div class="container">
+		<div class="row">
+			<div class="skill-home">
+				<div class="skill-home-solid clearfix">
+
+					<div class="col-md-9 text-left">
+						<h:form id = "formPerson">
+						<p><p:inputText id="findPet" value="" placeholder = "Mascota" />
+							<input type="image" class = "look" name = "findPet" SRC="img/lupa.png" style="align-right"/></p>
+							<h3>Datos del Responsable</h3>
+							<p><p:inputText id = "txtnombre" value = "#{personBean.pers.namePer}" required ="true" placeholder = "* Nombre Apellidos" />
+									<p:spacer width="20"  height="0"/>
+								<p:inputText id = "id" value = "#{personBean.pers.idperson}" required ="true" placeholder = "* DNI" />
+									<p:spacer width="20"  height="0"/>
+								<p:inputText id = "mail" value = "#{personBean.pers.email}"  placeholder = "* Correo Electrónico" /></p>
+							<p><p:inputText id = "addres" value = "#{personBean.pers.address}" required ="true" placeholder = "* Dirección" size = "48" />
+								 <p:spacer width="20"  height="0"/>
+								<p:inputText id = "text" value = "#{personBean.pers.phone}"  required = "true" placeholder = "* Teléfono" /></p>
+								<div><p:commandButton value="Registrar" actionListener="#{personBean.AddPerson()}"/>
+								<p:commandButton value="Modificar" actionListener="#{personBean.updatePerson()}"/>
+								<p:commandButton value="Eliminar" actionListener="#{personBean.deletePerson()}"/></div>
+
+										<p:growl id = "msgs" showDetail = "true"/>
+										<br/>
+										<p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{petsBean.listamascotas}" rows = "5" paginator = "true"
+										paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate = "5,10,15,20,25">
+										<f:facet name = "header">Listado de Mascotas</f:facet>
+											<p:column headerText = "Mascota">
+												<h:outputText value = "#{pet.name}"/>
+											</p:column>
+											<p:column headerText = "Tipo Animal">
+												<h:outputText value = "#{pet.animal}"/>
+											</p:column>
+											<p:column headerText = "Género">
+												<h:outputText value = "#{pet.gender}"/>
+											</p:column>
+											<p:column headerText = "Raza">
+												<h:outputText value = "#{pet.race}"/>
+											</p:column>
+											<p:column headerText = "Color">
+												<h:outputText value = "#{pet.colour}"/>
+											</p:column>
+											<p:column headerText = "Fecha Nacimiento">
+												<h:outputText value = "#{pet.birthDate}"/>
+											</p:column>
+											<p:column headerText = "Responsable">
+												<h:outputText value = "#{pet.nombrePers}"/>
+											</p:column>
+										</p:dataTable>
+
+	<div><br/><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Histórico Servicios</button></div>
+</h:form>
+								</div>
+
+								<div class="col-md-3 text-left">
+									<h:form id = "formPet">
+									<h3>Datos de la Mascota</h3>
+									<p><p:inputText id = "namePet" value = "#{petsBean.pet.name}" required ="true" placeholder = "* Nombre Mascota" /></p>
+									<p><p:selectOneRadio id="animalRadio" value="#{petsBean.animal}" layout="custom">
+										<f:selectItem itemLabel="animal 1" itemValue="1" />
+										<f:selectItem itemLabel="animal 2" itemValue="2" />
+										</p:selectOneRadio></p>
+										<h:panelGrid columns="5">
+											<p:radioButton id="ani1" for="animalRadio" itemIndex="0"/>
+											<h:outputLabel for="ani1" value="Perro" />
+											<p:radioButton id="ani2" for="animalRadio" itemIndex="1"/>
+											<h:outputLabel for="ani2" value="Gato" />
+										</h:panelGrid><br/>
+									<p><p:inputText id = "race" value = "#{petsBean.pet.race}" required = "true" placeholder = "* Raza"/></p>
+									<p><p:inputText id = "color" value = "#{petsBean.pet.color}" required = "true" placeholder = "* Color"/></p>
+									<p><p:selectOneRadio id="genderRadio" value="#{petsBean.gender}" layout="custom">
+										<f:selectItem itemLabel="Gender 1" itemValue="1" />
+										<f:selectItem itemLabel="Gender 2" itemValue="2" />
+										</p:selectOneRadio></p>
+										<h:panelGrid columns="6">
+											<p:radioButton id="gen1" for="genderRadio" itemIndex="0"/>
+											<h:outputLabel for="gen1" value="Femenino" />
+											<p:radioButton id="gen2" for="genderRadio" itemIndex="1"/>
+											<h:outputLabel for="gen2" value="Masculino" />
+										</h:panelGrid><br/>
+									<p><p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}"/></p>
+									<p><p:commandButton value="Modificar" actionListener="#{petsBean.updatePet()}"/></p>
+									<p><p:commandButton value="Eliminar" actionListener="#{petsBean.deletePet()}"/></p>
+								</h:form>
+								</div>
+							</div>
+					</div>
+			</div>
+	</div>
+
+<!-- Modal Consulta Histórico-->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"></button>
+				<h4 class="modal-title">Histórico de la Mascota</h4>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table id="tableHomeAdmin" class="table table-hover">
+						<tr>
+							<th>Mascota</th>
+							<th>Responsable</th>
+							<th>Fecha</th>
+							<th>Servicio</th>
+							<th>Observaciones</th>
+						</tr>
+						<tr>
+							<td>Guau</td>
+							<td>Macarena Jiménez</td>
+							<td>15-01-2017</td>
+							<td>Lavado</td>
+							<td>Antiparasitario</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	</section>
+
+	<div id="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<ul class="social-network">
+						<li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+	<!-- javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el-->
+	<script>
+	// Get the modal
+	var modal = document.getElementById('id01');
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	</script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.fancybox.pack.js"></script>
+	<script src="js/jquery.fancybox-media.js"></script>
+	<script src="js/portfolio/jquery.quicksand.js"></script>
+	<script src="js/portfolio/setting.js"></script>
+	<script src="js/jquery.flexslider.js"></script>
+	<script src="js/animate.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/owl-carousel/owl.carousel.js"></script>
+</h:body>
+</html>

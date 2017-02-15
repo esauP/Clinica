@@ -50,102 +50,39 @@
 	<div class="container">
 			<div class="row">
 		<div class="skill-home"> <div class="skill-home-solid clearfix">
-		<div class="col-md-9 text-left">
+		<div class="col-md-9 text-center">
+			<h1>Agenda del Día</h1>
 		<form>
-      <p><input type="text" name="findPet" placeholder="Mascota"/>
-      <input type="image" class = "look" name = "findPet" SRC="img/lupa.png" style="align-right"/></p>
-    <h3>Datos del Responsable</h3>
-      <p><input type = "text" name = "name" placeholder="Nombre" />
-        <input type = "text" name = "lastname" placeholder="Apellidos" />
-        <input type = "text" name = "id" placeholder="Dni" />
-        <input type = "text" name ="mail" placeholder ="Correo Electrónico" /></p>
-        <p> <input type = "text" size = "44 "name = "address" placeholder="Dirección" />
-          <input type = "text" name = "phone1" placeholder="Teléfono" />
-          <input type = "text" name = "phone2" placeholder="Teléfono 2" /></p></br>
-          <button type="button" class="btn btn-default">Añadir</button>
-          <button type="button" class="btn btn-default">Modificar</button>
-          <button type="button" class="btn btn-default">Eliminar</button></br></br>
-          <div class="table-responsive">
-          <table id="tableHomeAdmin" class="table table-hover">
-            <h3>Listado de Mascotas</h3>
-        <tr>
-          <th>Mascota</th>
-          <th>Tipo Animal</th>
-          <th>Genero</th>
-          <th>Raza</th>
-          <th>Color</th>
-          <th>Fecha Nacimiento</th>
-          <th>Responsable</th>
-        </tr>
-        <tr>
-        <td>Guau</td>
-        <td>Perro</td>
-        <td>Masculino</td>
-        <td>Basset Hound</td>
-        <td>Tricolor</td>
-        <td>28-08-2014</td>
-        <td>Macarena Jiménez</td>
-      </tr>
-      </table>
-    </div>
-    </br></br>
-		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Histórico Servicios</button>
-  </form>
+			<div class="table-responsive">
+      <table id="tableHomeAdmin" class="table table-hover">
+    <tr>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Cliente</th>
+      <th>Mascota</th>
+      <th>Observaciones</th>
+    </tr>
+    <tr>
+    <td>06-02-2017</td>
+    <td>17:30</td>
+    <td>Ama Rosa Amparo</td>
+    <td>Pokemos</td>
+    <td>Revisión herida pata</td>
+  </tr>
+  </table>
 </div>
-		<div class="col-md-3 text-left">
-      <h3>Datos de la Mascota</h3>
-      <p><input type = "text" name = "namePet" placeholder="Nombre Mascota" /></p>
-      <p>Tipo de Animal:  <label><input type="radio" name="optradio">Perro</label>
-      <label><input type="radio" name="optradio">Gato</label></p>
-      <p><input type = "text" name = "race" placeholder="Raza" /></p>
-      <p><input type = "text" name = "color" placeholder="Color" /></p>
-      <p>Sexo del Animal: </p><p><label><input type="radio" name="optradio2">Masculino</label></p>
-      <p><label><input type="radio" name="optradio2">Femenino</label></p>
-      <p><input type = "text" name = "birthDate" placeholder="Fecha de Nacimiento" /></p>
-      <p><button type="button" class="btn btn-default">Añadir</button></p>
-      <p><button type="button" class="btn btn-default">Modificar</button></p>
-      <p><button type="button" class="btn btn-default">Eliminar</button></p>
+  </form></div>
+		<div class="col-md-3 text-center">
+			<h3>Citas Libres</h3>
+		<div class="c2">
+		<span class="icons"><i class="fa fa-comments-o"></i></span> <div class="box-area">
+		<h3>Contacto directo</h3> <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident</p></div>
+	</div>
 		</div></div></div>
 
 		</div></div>
 
-		<!-- Modal Consulta Histórico-->
-	  <div class="modal fade" id="myModal" role="dialog">
-	    <div class="modal-dialog">
-
-	      <!-- Modal content-->
-	      <div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Histórico de la Mascota</h4>
-	        </div>
-	        <div class="modal-body">
-						<div class="table-responsive">
-						<table id="tableHomeAdmin" class="table table-hover">
-					<tr>
-						<th>Mascota</th>
-						<th>Responsable</th>
-						<th>Fecha</th>
-						<th>Servicio</th>
-						<th>Observaciones</th>
-					</tr>
-					<tr>
-					<td>Guau</td>
-					<td>Macarena Jiménez</td>
-					<td>15-01-2017</td>
-					<td>Lavado</td>
-					<td>Antiparasitario</td>
-				</tr>
-				</table>
-			</div>
-	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	        </div>
-	      </div>
-
 	</section>
-
 
 	<div id="sub-footer">
 		<div class="container">
