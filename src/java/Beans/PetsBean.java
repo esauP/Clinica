@@ -8,8 +8,10 @@ package Beans;
 import Controller.LPets;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import pojo.Person;
@@ -188,4 +190,23 @@ public class PetsBean implements Serializable{
         LPets.addPet(pet.getName(), pet.getAnimal(), pet.getGender(), pet.getRace(), pet.getColour(), pet.getBirthDate(), person.getNamePer());
     }
     
+      public boolean filterByName(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim();
+        if (filterText == null || filterText.equals("")) {
+            return true;
+        }
+
+        if (value == null) {
+            return false;
+        }
+
+        String name = value.toString().toUpperCase();
+        filterText = filterText.toUpperCase();
+
+        if (namePer.contains(filterText)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

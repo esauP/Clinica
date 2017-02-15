@@ -33,7 +33,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<div class="navbar-collapse collapse ">
 					<ul class="nav navbar-nav">
 						<li><a href="pets.html">Mascotas</a></li>
-						<li><a href="historic.html">Consulta | Historial</a></li>
+						<li><a href="consultation.xhtml">Consulta | Historial</a></li>
 						<li><a href="dates.html">Citas</a></li>
 						<li><a href="bills.html">Facturación</a></li>
 						<li><a href="vaccines.html">Vacunas</a></li>
@@ -55,8 +55,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 					<div class="col-md-9 text-left">
 						<h:form id = "formPerson">
-						<p><p:inputText id="findPet" value="" placeholder = "Mascota" />
-							<input type="image" class = "look" name = "findPet" SRC="img/lupa.png" style="align-right"/></p>
+
 							<h3>Datos del Responsable</h3>
 							<p><p:inputText id = "txtnombre" value = "#{personBean.pers.namePer}" required ="true" placeholder = "* Nombre Apellidos" />
 									<p:spacer width="20"  height="0"/>
@@ -76,7 +75,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 										paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										rowsPerPageTemplate = "5,10,15,20,25">
 										<f:facet name = "header">Listado de Mascotas</f:facet>
-											<p:column headerText = "Mascota">
+											<p:column filterBy="#{pet.name}" footerText="contains" filterMatchMode="contains"
+	                              filterFunction="#{petsBean.filterByName}" headerText = "Mascota">
 												<h:outputText value = "#{pet.name}"/>
 											</p:column>
 											<p:column headerText = "Tipo Animal">
