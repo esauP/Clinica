@@ -39,15 +39,15 @@ public class ConsultationBean {
 
     private List<Consultation> listaconsultas;
     private Consultation consult = new Consultation();
-    
-      public ConsultationBean() throws SQLException {
+
+    public ConsultationBean() throws SQLException {
         listaconsultas = LConsultation.getConsultation();
     }
 
     public void onRowEdit(RowEditEvent event) {
         Consultation consulta = (Consultation) event.getObject();
-        FacesMessage msg = new FacesMessage("Consulta Editada", String.valueOf(consulta.getIdcons()));
-        LConsultation.updateConsultation(consulta.getIdcons(), consulta.getPets().getIdpets(), consulta.getDate(), consulta.getReason(), consulta.getDiagnosis(), consulta.getTreatment(), consulta.getObservation());
+        FacesMessage msg = new FacesMessage("Consulta Editada", consulta.getIdcons().toString());
+        LConsultation.updateConsultation(consulta.getIdcons(), Integer.parseInt(consulta.getIdpets()), consulta.getDate(), consulta.getReason(), consulta.getDiagnosis(), consulta.getTreatment(), consulta.getObservation());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -65,10 +65,14 @@ public class ConsultationBean {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-    
-     public void AddConsultation() throws SQLException {
-        LConsultation.addConsultation(consult.getIdcons(), consult.getIdpets(), consult.getReason(), consult.getDiagnosis(), 
+
+    public void AddConsultation() throws SQLException {
+        LConsultation.addConsultation(consult.getIdcons(), consult.getIdpets(), consult.getReason(), consult.getDiagnosis(),
                 consult.getTreatment(), consult.getObservation());
+    }
+
+    public void EliminarConsultation() throws SQLException {
+        LConsultation.deleteConsultation(consult.getIdcons());
     }
 
     public Integer getIdcons() {
@@ -150,7 +154,5 @@ public class ConsultationBean {
     public void setConsult(Consultation consult) {
         this.consult = consult;
     }
-
-  
 
 }
