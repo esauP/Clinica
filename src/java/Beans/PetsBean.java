@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 import pojo.Person;
 import pojo.Pets;
 
@@ -41,14 +44,49 @@ public class PetsBean implements Serializable {
         listamascotas = LPets.getPets();
     }
 
+    /**
+     * Metodo para insertar mascota
+     *
+     * @throws SQLException
+     */
     public void addPet() throws SQLException {
         LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), person.getNamePer());
+        FacesMessage msg = new FacesMessage("Mascota Insertada", petM.getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void updatePet() {
+    /**
+     * Metodo para actualizar mascota
+     *
+     * @throws SQLException
+     */
+    public void updatePet() throws SQLException {
+        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), petM.getPerson().getIdperson());
+        FacesMessage msg = new FacesMessage("Mascota Actualizada", petM.getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void deletePet() {
+    /**
+     * Metodo para borrar una mascota
+     *
+     * @throws SQLException
+     */
+    public void deletePet() throws SQLException {
+        LPets.deletePet(petM.getIdpets());
+        FacesMessage msg = new FacesMessage("Mascota Eliminada", petM.getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowEdit(RowEditEvent event) throws SQLException {
+        Pets petMo = (Pets) event.getObject();
+        FacesMessage msg = new FacesMessage("Persona Editada", petMo.getName());
+        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), petM.getPerson().getIdperson());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edicion Cancellada", ((Pets) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     /**

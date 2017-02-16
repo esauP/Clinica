@@ -32,6 +32,9 @@
             <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
         </div>
         <div>
+                                        <p:calendar id="birth" value="#{petsBean.birthDate}" pattern="dd-MM-yyyy" mask="true" />                      
+        </div>
+        <div>
             <h:form id="tabla">
                 <p:dataTable id="Clientes" var="per" value="#{personBean.listapersonas}" editable="true" style="margin-bottom:20px">
                     <f:facet name="header">Clientes</f:facet>

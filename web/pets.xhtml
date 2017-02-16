@@ -76,34 +76,56 @@
                                         <p:commandButton value="Eliminar" actionListener="#{personBean.DeletePerson()}" update=":regis"/>
                                     </div>
                                 </h:form>
-                                <p:growl id = "msgs" showDetail = "true"/>
                                 <br/>
                                 <h:form id="tablepets">
                                     <p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{petsBean.listamascotas}" rows = "5" paginator = "true"
                                                  paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                                  rowsPerPageTemplate = "5,10,15,20,25">
                                         <f:facet name = "header">Listado de Mascotas</f:facet>
+
+                                        <p:ajax event="rowEdit" listener="#{petsBean.onRowEdit}"  />
+                                        <p:ajax event="rowEditCancel" listener="#{petsBean.onRowCancel}" />
+
                                         <p:column filterBy="#{pet.name}" filterMatchMode="contains"
                                                   filterFunction="#{petsBean.filterByName}" headerText = "Mascota">
                                             <h:outputText value = "#{pet.name}"/>
                                         </p:column>
                                         <p:column headerText = "Tipo Animal">
-                                            <h:outputText value = "#{pet.animal}"/>
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.animal}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.animal}" style="width:100%" label="Especie"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
                                         <p:column headerText = "Género">
                                             <h:outputText value = "#{pet.gender}"/>
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.gender}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.gender}" style="width:100%" label="Genero"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
                                         <p:column headerText = "Raza">
-                                            <h:outputText value = "#{pet.race}"/>
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.race}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.race}" style="width:100%" label="Raza"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
                                         <p:column headerText = "Color">
-                                            <h:outputText value = "#{pet.colour}"/>
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.colour}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.colour}" style="width:100%" label="Color"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
                                         <p:column headerText = "Fecha Nacimiento">
-                                            <h:outputText value = "#{pet.birthDate}"/>
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.birthDate}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Fecha Nac"/></f:facet>
+                                            </p:cellEditor>                                        
                                         </p:column>
                                         <p:column headerText = "Responsable">
                                             <h:outputText value = "#{pet.person.namePer}"/>
+                                        </p:column>
+                                        <p:column style="width:32px">
+                                            <p:rowEditor />
                                         </p:column>
                                     </p:dataTable>
 
@@ -112,19 +134,15 @@
                             </div>
 
                             <div class="col-md-3 text-left">
+                                <p:growl id = "msgs" showDetail = "true"/>
                                 <h:form id = "formPet">
                                     <h3>Datos de la Mascota</h3>
                                     <p>
                                         <p:inputText id = "namePet" value = "#{petsBean.petM.name}" required ="true" placeholder = "* Nombre Mascota" />
                                     </p>
-
-
-                                        <p:selectOneRadio id="animalRadio" value="#{petsBean.petM.race}">
-                                            <f:selectItem itemLabel="Perro" itemValue="0" />
-                                            <f:selectItem itemLabel="Gato" itemValue="1" />
-                                            </p:selectOneRadio>
-
-                                    <br/>
+                                    <p>
+                                        <p:inputText id = "especie" value = "#{petsBean.petM.animal}" required = "true" placeholder = "* Especie"/>
+                                    </p>
                                     <p>
                                         <p:inputText id = "race" value = "#{petsBean.petM.race}" required = "true" placeholder = "* Raza"/>
                                     </p>
@@ -132,23 +150,25 @@
                                         <p:inputText id = "color" value = "#{petsBean.petM.colour}" required = "true" placeholder = "* Color"/>
                                     </p>
                                     <p>
-
-                                            <p:selectOneRadio id="genderRadio" value="#{petsBean.petM.gender}">
-                                                <f:selectItem itemLabel="Femenino" itemValue="0" />
-                                                <f:selectItem itemLabel="Masculino" itemValue="1" />
-                                                </p:selectOneRadio>
-
+                                        <p:inputMask id="birth" value="#{petsBean.petM.birthDate}" required="true" placeholder="* Fecha Nac" mask="9999-99-99"/>
+                                    </p>
+                                    <p>
+                                        <p:selectOneRadio id="genderRadio" value="#{petsBean.petM.gender}" required="true">
+                                            <f:selectItem itemLabel="Femenino" itemValue="0" />
+                                            <f:selectItem itemLabel="Masculino" itemValue="1" />
+                                        </p:selectOneRadio>
                                     </p>
                                     <br/>
                                     <p>
-                                        <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" />
+                                        <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" update=":msgs" />
                                     </p>
                                     <p>
-                                        <p:commandButton value="Modificar" actionListener="#{petsBean.updatePet()}"/>
+                                        <p:commandButton value="Modificar" actionListener="#{petsBean.updatePet()}" update=":regis"/>
                                     </p>
                                     <p>
-                                        <p:commandButton value="Eliminar" actionListener="#{petsBean.deletePet()}" />
+                                        <p:commandButton value="Eliminar" actionListener="#{petsBean.deletePet()}" update=":regis"/>
                                     </p>
+
                                 </h:form>
                             </div>
                         </div>
