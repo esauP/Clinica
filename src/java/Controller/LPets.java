@@ -19,8 +19,8 @@ import pojo.Pets;
  *
  * @author macarena jbenitez
  */
-public class LPets extends ConexionDB{
-    
+public class LPets extends ConexionDB {
+
     public static List<Pets> getPets() throws SQLException {
         List<Pets> listamascotas = new ArrayList<Pets>();
         ConexionDB conn = new ConexionDB();
@@ -31,8 +31,9 @@ public class LPets extends ConexionDB{
 
             ResultSet rs = ps.executeQuery();
 
-                while (rs.next()) {
+            while (rs.next()) {
                 Pets aux = new Pets();
+                Person auxPer = new Person();
                 aux.setIdpets(rs.getInt(1));
                 aux.setName(rs.getString(2));
                 aux.setAnimal(rs.getString(3));
@@ -40,28 +41,28 @@ public class LPets extends ConexionDB{
                 aux.setRace(rs.getString(5));
                 aux.setColour(rs.getString(6));
                 aux.setBirthDate(rs.getString(7));
-                Person auxPer = new Person();
                     auxPer.setIdperson(rs.getString(8));
-                    auxPer.setNamePer(rs.getString(9));
-                    auxPer.setAddress(rs.getString(10));
-                    auxPer.setPhone(rs.getString(11));
-                    auxPer.setEmail(rs.getString(12));
-                    auxPer.setPassword(rs.getString(13));
-                    auxPer.setRole(rs.getInt(14));
+                    auxPer.setNamePer(rs.getString(10));
+                    auxPer.setAddress(rs.getString(11));
+                    auxPer.setPhone(rs.getString(12));
+                    auxPer.setEmail(rs.getString(13));
+                    auxPer.setPassword(rs.getString(14));
+                    auxPer.setRole(rs.getInt(15));
                 aux.setPerson(auxPer);
                 listamascotas.add(aux);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.out.println(e.getCause());
+            System.out.println(e.getSQLState());
+            e.printStackTrace();
 
         } finally {
             conn.desconectar();
         }
         return listamascotas;
     }
-    
-    
-   
+
     public static boolean addPet(String name_pt, String animal_pt, int gender_pt, String race_pt, String colour_pt, String birth_pt, String idper_pt) throws SQLException {
         boolean success = false;
         ConexionDB conn = new ConexionDB();
@@ -88,7 +89,7 @@ public class LPets extends ConexionDB{
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }finally{
+        } finally {
             conn.desconectar();
         }
         return success;
@@ -121,7 +122,7 @@ public class LPets extends ConexionDB{
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }finally{
+        } finally {
             conn.desconectar();
         }
         return success;
@@ -145,10 +146,10 @@ public class LPets extends ConexionDB{
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }finally{
+        } finally {
             conn.desconectar();
         }
         return success;
     }
-    
+
 }
