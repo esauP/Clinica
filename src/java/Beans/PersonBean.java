@@ -118,10 +118,10 @@ public class PersonBean implements Serializable {
             return false;
         }
 
-        String namePer = value.toString().toUpperCase();
+        String namePerC = value.toString().toUpperCase();
         filterText = filterText.toUpperCase();
 
-        if (namePer.contains(filterText)) {
+        if (namePerC.contains(filterText)) {
             return true;
         } else {
             return false;

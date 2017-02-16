@@ -8,8 +8,6 @@ package Beans;
 import Controller.LPets;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Named;
@@ -23,31 +21,63 @@ import pojo.Pets;
  */
 @Named(value = "petsBean")
 @RequestScoped
-public class PetsBean implements Serializable{
-    
+public class PetsBean implements Serializable {
+
     private Integer idpets;
     private Person person;
-    private Pets pet;
+    private Pets petM;
     private String name;
     private String animal;
     private int gender;
     private String race;
     private String colour;
     private String birthDate;
-    private String idperson;
-    private String namePer;
-    private String address;
-    private String phone;
-    private String email;
-    private String password;
-    private Integer role;
     private List<Pets> listamascotas;
 
     /**
      * Creates a new instance of PetsBean
      */
-    public PetsBean() throws SQLException{
+    public PetsBean() throws SQLException {
         listamascotas = LPets.getPets();
+    }
+
+    public void addPet() throws SQLException {
+        LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), person.getNamePer());
+    }
+
+    public void updatePet() {
+    }
+
+    public void deletePet() {
+    }
+
+    /**
+     * Metodo obtenido de internet para hacer que el filtrado no distinga entre
+     * mayusculas o minusculas
+     *
+     * @param value
+     * @param filter
+     * @param locale
+     * @return
+     */
+    public boolean filterByName(Object value, Object filter, Locale locale) {
+        String filterText = (filter == null) ? null : filter.toString().trim();
+        if (filterText == null || filterText.equals("")) {
+            return true;
+        }
+
+        if (value == null) {
+            return false;
+        }
+
+        String namePetC = value.toString().toUpperCase();
+        filterText = filterText.toUpperCase();
+
+        if (namePetC.contains(filterText)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Integer getIdpets() {
@@ -127,7 +157,7 @@ public class PetsBean implements Serializable{
     }
 
     public void setIdperson(String idperson) {
-        this.person.setIdperson(idperson); 
+        this.person.setIdperson(idperson);
     }
 
     public String getNamePer() {
@@ -135,7 +165,7 @@ public class PetsBean implements Serializable{
     }
 
     public void setNamePer(String namePer) {
-        this.person.setNamePer(namePer); 
+        this.person.setNamePer(namePer);
     }
 
     public String getAddress() {
@@ -178,35 +208,12 @@ public class PetsBean implements Serializable{
         this.person.setRole(role);
     }
 
-    public Pets getPet() {
-        return pet;
+    public Pets getPetM() {
+        return petM;
     }
 
-    public void setPet(Pets pet) {
-        this.pet = pet;
+    public void setPetM(Pets pet) {
+        this.petM = pet;
     }
-    
-    public void addPet() throws SQLException {
-        LPets.addPet(pet.getName(), pet.getAnimal(), pet.getGender(), pet.getRace(), pet.getColour(), pet.getBirthDate(), person.getNamePer());
-    }
-    
-      public boolean filterByName(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
 
-        if (value == null) {
-            return false;
-        }
-
-        String name = value.toString().toUpperCase();
-        filterText = filterText.toUpperCase();
-
-        if (namePer.contains(filterText)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
