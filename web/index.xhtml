@@ -13,7 +13,7 @@
             <h:form>
                 <div>
                     <p:outputLabel for="txtnombre" value="Nombre" />
-                    <p:inputText id="txtnombre" value="#{personBean.pers.namePer}" required="true" />
+                    <p:autoComplete id="txtnombre" value="#{personBean.pers.namePer}" completeMethod="#{personBean.Autocompletar}" placeholder="* Nombre Apellidos" required="true"  />
                     <p:outputLabel for="txtdni" value="Dni" />
                     <p:inputText id="txtdni" value="#{personBean.pers.idperson}" required="true" placeholder="DNI" /> 
                 </div>
@@ -32,7 +32,7 @@
             <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
         </div>
         <div>
-                                        <p:calendar id="birth" value="#{petsBean.birthDate}" pattern="dd-MM-yyyy" mask="true" />                      
+            <p:calendar id="birth" value="#{petsBean.birthDate}" pattern="dd-MM-yyyy" mask="true" />                      
         </div>
         <div>
             <h:form id="tabla">
@@ -46,17 +46,17 @@
 
                         <h:outputText value="#{per.idperson}"                 />
                     </p:column>
-                    
+
                     <p:column filterBy="#{per.namePer}" footerText="contains" filterMatchMode="contains"
                               filterFunction="#{personBean.filterByName}"
                               headerText="Nombre">
                         <p:cellEditor>
-                            
-                                            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
 
-                                <f:facet name="output"><h:outputText value="#{per.namePer}" /></f:facet>
-                                <f:facet name="input"><p:inputText value="#{per.namePer}" style="width:100%" label="Nombre"/></f:facet>
-                            
+                            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
+
+                            <f:facet name="output"><h:outputText value="#{per.namePer}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{per.namePer}" style="width:100%" label="Nombre"/></f:facet>
+
                         </p:cellEditor>
                     </p:column>
 

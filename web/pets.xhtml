@@ -59,9 +59,9 @@
 
                                     <h3>Datos del Responsable</h3>
                                     <p>
-                                        <p:autoComplete id="txtnombre" value="#{personBean.pers.namePer}" completeMethod="#{personBean.Autocompletar}" placeholder="* Nombre Apellidos" required="true"/>
+                                        <p:inputText id="nombreperson" value="#{personBean.pers.namePer}" placeholder="* Nombre y Apellidos" required="true"/>
                                         <p:spacer width="20"  height="0"/>
-                                        <p:inputText id = "id" value = "#{personBean.pers.idperson}" required ="true" placeholder = "* DNI" />
+                                        <p:inputText id = "dni" value = "#{personBean.pers.idperson}" required ="true" placeholder = "* DNI" />
                                         <p:spacer width="20"  height="0"/>
                                         <p:inputText id = "mail" value = "#{personBean.pers.email}"  placeholder = "* Correo Electrónico" />
                                     </p>
@@ -158,6 +158,9 @@
                                             <f:selectItem itemLabel="Masculino" itemValue="1" />
                                         </p:selectOneRadio>
                                     </p>
+                                    <p>
+                                        <p:inputText id="txtnombre" value="#{petsBean.petM.person.idperson}" placeholder="* Dni Responsable" required="true" />
+                                    </p>
                                     <br/>
                                     <p>
                                         <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" update=":msgs" />
@@ -239,10 +242,10 @@
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
-                if (event.target == modal) {
+                if (event.target === modal) {
                     modal.style.display = "none";
                 }
-            }
+            };
         </script>
         <script src="js/jquery.js"></script>
         <script src="js/jquery.easing.1.3.js"></script>
