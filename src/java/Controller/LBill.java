@@ -87,4 +87,34 @@ public class LBill {
     }
 
     
+     /**
+     * Método para eliminar una factura de la base de datos
+     *
+     * @param idBill
+     * @return
+     */
+    public static boolean deleteBill(int idBill) throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada a la funcion
+            String sql = "{ ? = call deleteBill (?) }";
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            //establezco la salida de la funcion
+            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+            //establezco los parámetros de entrada
+            cStmt.setInt(2, idBill);
+            //se ejecuta la funcion
+            cStmt.execute();
+            if (cStmt.getInt(1) == 0) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return success;
+    }
+    
 }

@@ -45,6 +45,16 @@ public class BillBean implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
+     /**
+     * Metodo para eliminar una factura
+     *
+     * @throws SQLException
+     */
+    public void DeleteBill() throws SQLException {
+        LBill.deleteBill(fac.getIdbill());
+        FacesMessage msg = new FacesMessage("Factura Eliminada", fac.getIdbill().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
     public BillBean() throws SQLException{
         listafacturas = LBill.getList();
     }

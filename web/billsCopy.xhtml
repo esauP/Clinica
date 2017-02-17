@@ -57,7 +57,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
           <div class="col-md-9 text-left">
             <div class="billInfo">
               <h:form id="insertBill">
-              <p:autoComplete id = "txtnombre" value = "#{billBean.nombrep}" completeMethod = "#{personBean.AutocompletarNombre}"
+              <p:autoComplete id = "txtnombre" value = "#{personBean.namePer}" completeMethod = "#{personBean.AutocompletarNombre}"
               placeholder="* Nombre Apellidos" required="true"/>
               <p:spacer width="20"  height="0"/>
               <!-- combobox de mascotas no está implementado -->
@@ -81,7 +81,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         <f:convertDateTime pattern="MM/dd/yyyy" type="date" />
       </h:outputText>
       <!-- fin de la fecha -->
-      <h:outputText id = "description" value = "#{billBean.observation}" />
+      <h:outputText id = "description" value = "#{billBean.observations}" />
     </h:form>
   </div>
 
@@ -144,7 +144,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
     <p:commandButton value="Guardar" actionListener="#{billBean.AddBill()}" />
     <p:commandButton value="Imprimir Factura"  />
     <p:commandButton value="Salir" />
-  
+
 </div>
 </div></div></div>
 </div>
