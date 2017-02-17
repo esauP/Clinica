@@ -17,6 +17,7 @@ import pojo.Pets;
 import pojo.Products;
 
 /**
+ * 
  * @author macarena jbenitez
  */
 public class LBillLine {
