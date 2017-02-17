@@ -18,54 +18,53 @@ import pojo.*;
  *
  * @author neuhaus
  */
-public class LConsultation {
+public class ConsultasDAO extends ConexionDB {
 
-    public List<Consultation> getConsultation() throws SQLException {
-        List<Consultation> listaconsultas = new ArrayList<Consultation>();
+    public List<Consultation> listar() throws Exception {
+        List<Consultation> lista = null;
         ConexionDB conn = new ConexionDB();
 
         try {
-            String sql = "Select idcons, idpet, date_consultation, reason, diagnosis, treatment, observation from consultation";
+            String sql = "Select idcons, idpet, date_consultation, reason, diagnosis, treatment, observation FROM consultation";
             PreparedStatement ps = conn.getConexion().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
-
+            lista = new ArrayList();
             while (rs.next()) {
                 Consultation aux = new Consultation();
-                aux.setIdcons(rs.getInt(1));
-                aux.setIdpets(rs.getInt(2));
-                aux.setDate(rs.getString(3));
-                aux.setReason(rs.getString(4));
-                aux.setDiagnosis(rs.getString(5));
-                aux.setTreatment(rs.getString(6));
-                aux.setObservation(rs.getString(7));
-                listaconsultas.add(aux);
+                aux.setIdcons(rs.getInt("idcons"));
+                aux.setIdpets(rs.getInt("idpet"));
+                aux.setDate(rs.getString("date_consultation"));
+                aux.setReason(rs.getString("reason"));
+                aux.setDiagnosis(rs.getString("diagnosis"));
+                aux.setTreatment(rs.getString("treatment"));
+                aux.setObservation(rs.getString("observation"));
+                lista.add(aux);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-
         } finally {
             conn.desconectar();
         }
-        return listaconsultas;
+        return lista;
     }
 
-    public boolean addConsultation(int idpet, String date, String reason, String diagnosis, String treatment, String observation) {
+    public boolean addConsultation(Consultation cons) throws SQLException {
+        //int idpet, String date, String reason, String diagnosis, String treatment, String observation
         ConexionDB conn = new ConexionDB();
         boolean success = false;
         try {
             //Llamada a la funcion
             String sql = "{ ? = call addConsultation (?,?,?,?,?,?) }";
-            java.sql.CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
-            cStmt.setInt(2, idpet);
-            cStmt.setString(3, date);
-            cStmt.setString(4, reason);
-            cStmt.setString(5, diagnosis);
-            cStmt.setString(6, treatment);
-            cStmt.setString(7, observation);
+            cStmt.setInt(2, cons.getIdpets());
+            cStmt.setString(3, cons.getDate());
+            cStmt.setString(4, cons.getReason());
+            cStmt.setString(5, cons.getDiagnosis());
+            cStmt.setString(6, cons.getTreatment());
+            cStmt.setString(7, cons.getObservation());
             //se ejecuta la funcion
             cStmt.execute();
             if (cStmt.getInt(1) == 0) {
@@ -73,11 +72,14 @@ public class LConsultation {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
         }
         return success;
     }
 
-    public boolean updateConsultation(int idcons, int idpet, String date, String reason, String diagnosis, String treatment, String observation) {
+    public boolean updateConsultation(Consultation cons) throws SQLException {
+        //int idcons, int idpet, String date, String reason, String diagnosis, String treatment, String observation
         boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
@@ -87,13 +89,13 @@ public class LConsultation {
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
-            cStmt.setInt(2, idcons);
-            cStmt.setInt(3, idpet);
-            cStmt.setString(4, date);
-            cStmt.setString(5, reason);
-            cStmt.setString(6, diagnosis);
-            cStmt.setString(7, treatment);
-            cStmt.setString(8, observation);
+            cStmt.setInt(2, cons.getIdcons());
+            cStmt.setInt(3, cons.getIdpets());
+            cStmt.setString(4, cons.getDate());
+            cStmt.setString(5, cons.getReason());
+            cStmt.setString(6, cons.getDiagnosis());
+            cStmt.setString(7, cons.getTreatment());
+            cStmt.setString(8, cons.getObservation());
             //se ejecuta la funcion
             cStmt.execute();
             if (cStmt.getInt(1) == 0) {
@@ -101,11 +103,13 @@ public class LConsultation {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
         }
         return success;
     }
 
-    public static void deleteConsultation(int idcons) {
+    public boolean deleteConsultation(Consultation cons) throws SQLException {
         boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
@@ -115,7 +119,7 @@ public class LConsultation {
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
-            cStmt.setInt(2, idcons);
+            cStmt.setInt(2, cons.getIdcons());
             //se ejecuta la funcion
             cStmt.execute();
             if (cStmt.getInt(1) == 0) {
@@ -123,7 +127,23 @@ public class LConsultation {
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
         }
+        return success;
+    }
+
+    public static void main(String[] args) throws SQLException {
+        ConsultasDAO d = new ConsultasDAO();
+        Consultation cons = new Consultation();
+        cons.setIdpets(0);
+        cons.setDate("2018-12-12");
+        cons.setReason("hola");
+        cons.setDiagnosis("diagnosis");
+        cons.setObservation("observaciones");
+        cons.setTreatment("tratamietno");
+        System.out.println(cons.toString());
+        d.addConsultation(cons);
     }
 
 }

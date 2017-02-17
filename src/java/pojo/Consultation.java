@@ -13,7 +13,7 @@ public class Consultation  implements java.io.Serializable {
 
      private Integer idcons;
      private Pets pets;
-     private String idpets;
+     private int idpets;
      private String date;
      private String reason;
      private String diagnosis;
@@ -98,16 +98,18 @@ public class Consultation  implements java.io.Serializable {
         this.docs = docs;
     }
 
-    public String getIdpets() {
+    public int getIdpets() {
         return idpets;
     }
 
-    public void setIdpets(String idpets) {
+    public void setIdpets(int idpets) {
         this.idpets = idpets;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Consultation{" + "idcons=" + idcons + ", pets=" + pets + ", idpets=" + idpets + ", date=" + date + ", reason=" + reason + ", diagnosis=" + diagnosis + ", treatment=" + treatment + ", observation=" + observation + ", docs=" + docs + '}';
+    }
 
 }
 

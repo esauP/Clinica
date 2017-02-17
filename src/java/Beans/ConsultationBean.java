@@ -6,18 +6,17 @@
 package Beans;
 
 import Controller.LConsultation;
-import Controller.LPerson;
+import Model.ConexionDB;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import javafx.scene.control.TableColumn;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
-import pojo.*;
+import pojo.Consultation;
 
 /**
  *
@@ -28,10 +27,9 @@ import pojo.*;
 @RequestScoped
 public class ConsultationBean {
 
-    private Integer idcons;
-    private Pets pets;
-    private String idpets;
-    private Date date;
+    private int idcons;
+    private int idpet;
+    private String date_consultation;
     private String reason;
     private String diagnosis;
     private String treatment;
@@ -41,13 +39,15 @@ public class ConsultationBean {
     private Consultation consult = new Consultation();
 
     public ConsultationBean() throws SQLException {
-        listaconsultas = LConsultation.getConsultation();
+        LConsultation dao = new LConsultation();
+        listaconsultas = dao.getConsultation();
     }
 
     public void onRowEdit(RowEditEvent event) {
+        LConsultation dao = new LConsultation();
         Consultation consulta = (Consultation) event.getObject();
         FacesMessage msg = new FacesMessage("Consulta Editada", consulta.getIdcons().toString());
-        LConsultation.updateConsultation(consulta.getIdcons(), Integer.parseInt(consulta.getIdpets()), consulta.getDate(), consulta.getReason(), consulta.getDiagnosis(), consulta.getTreatment(), consulta.getObservation());
+        dao.updateConsultation(consulta.getIdcons(), consulta.getIdpets(), consulta.getDate(), consulta.getReason(), consulta.getDiagnosis(), consulta.getTreatment(), consulta.getObservation());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -67,36 +67,75 @@ public class ConsultationBean {
     }
 
     public void AddConsultation() throws SQLException {
-        LConsultation.addConsultation(consult.getIdcons(), consult.getIdpets(), consult.getReason(), consult.getDiagnosis(),
+        LConsultation dao = new LConsultation();
+        dao.addConsultation(consult.getIdpets(), consult.getDate(), consult.getReason(), consult.getDiagnosis(),
                 consult.getTreatment(), consult.getObservation());
     }
 
-    public void EliminarConsultation() throws SQLException {
-        LConsultation.deleteConsultation(consult.getIdcons());
+    public void eliminarConsultation(int getIdcons) throws SQLException {
+        System.out.println("Id de la consulta: " + getIdcons);
+        LConsultation.deleteConsultation(getIdcons);
     }
 
-    public Integer getIdcons() {
+    public void eliminarConsultation2(int getIdcons) throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada a la funcion
+            String sql = "{ ? = call deleteConsultation (?) }";
+            java.sql.CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            //establezco la salida de la funcion
+            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+            //establezco los parámetros de entrada
+            cStmt.setInt(2, getIdcons);
+            //se ejecuta la funcion
+            cStmt.execute();
+            if (cStmt.getInt(1) == 0) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public List<Consultation> getListaconsultas() {
+        return listaconsultas;
+    }
+
+    public void setListaconsultas(List<Consultation> listaconsultas) {
+        this.listaconsultas = listaconsultas;
+    }
+
+    public Consultation getConsult() {
+        return consult;
+    }
+
+    public void setConsult(Consultation consult) {
+        this.consult = consult;
+    }
+
+    public int getIdcons() {
         return idcons;
     }
 
-    public void setIdcons(Integer idcons) {
+    public void setIdcons(int idcons) {
         this.idcons = idcons;
     }
 
-    public Pets getPets() {
-        return pets;
+    public int getIdpet() {
+        return idpet;
     }
 
-    public void setPets(Pets pets) {
-        this.pets = pets;
+    public void setIdpet(int idpet) {
+        this.idpet = idpet;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate_consultation() {
+        return date_consultation;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate_consultation(String date_consultation) {
+        this.date_consultation = date_consultation;
     }
 
     public String getReason() {
@@ -131,28 +170,29 @@ public class ConsultationBean {
         this.observation = observation;
     }
 
-    public List<Consultation> getListaconsultas() {
-        return listaconsultas;
-    }
-
-    public void setListaconsultas(List<Consultation> listaconsultas) {
-        this.listaconsultas = listaconsultas;
-    }
-
-    public String getIdpets() {
-        return idpets;
-    }
-
-    public void setIdpets(String idpets) {
-        this.idpets = idpets;
-    }
-
-    public Consultation getConsult() {
-        return consult;
-    }
-
-    public void setConsult(Consultation consult) {
-        this.consult = consult;
-    }
-
+//          public void AddConsultation2() throws SQLException {
+//        ConexionDB conn = new ConexionDB();
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call addConsultation (?,?,?,?,?,?) }";
+//            java.sql.CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, consult.getIdpets());
+//            cStmt.setString(3, consult.getDate());
+//            cStmt.setString(4, consult.getReason());
+//            cStmt.setString(5, consult.getDiagnosis());
+//            cStmt.setString(6, consult.getTreatment());
+//            cStmt.setString(7, consult.getObservation());
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//    }
 }

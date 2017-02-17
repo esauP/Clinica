@@ -10,7 +10,7 @@
         <meta name="description" content="" />
         <!-- css -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-
+        <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet"/>
         <link href="css/flexslider.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet" />
     </h:head>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
-                                <li><a href="pets.xhtml">Mascotas</a></li>
+                                <li><a href="pets.html">Mascotas</a></li>
                                 <li><a href="consultation.xhtml">Consulta | Historial</a></li>
                                 <li><a href="dates.html">Citas</a></li>
                                 <li><a href="bills.html">Facturación</a></li>
@@ -49,37 +49,33 @@
                 <div class="skill-home">
                     <div class="skill-home-solid clearfix">
 
-                        <p:growl id="regisC" showDetail="true" />
-                        <h:form id="formularioC">
-
+                        <!--  Visualizar mensajes -->
+                        <p:growl id="msj" showDetail="true" />
+                        <h:form id="formulario">
                             <p:outputLabel for="txtidpet" value="IdPet" />
-                            <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
+                            <p:inputText id="txtidpet" value="#{consultaBean.consultation.idpets}" required="true" />
 
                             <p:outputLabel for="txtfecha" value="Fecha" />
-                            <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
+                            <p:inputText id="txtfecha" value="#{consultaBean.consultation.date}" required="true" />
 
                             <p:outputLabel for="txtreason" value="Motivo" />
-                            <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
+                            <p:inputText id="txtreason" value="#{consultaBean.consultation.reason}" required="true" />
 
                             <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
-                            <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
+                            <p:inputText id="txtdiagnosis" value="#{consultaBean.consultation.diagnosis}" required="true" />
 
                             <p:outputLabel for="txttreatment" value="Tratamiento" />
-                            <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
+                            <p:inputText id="txttreatment" value="#{consultaBean.consultation.treatment}" required="false" />
 
                             <p:outputLabel for="txtobservation" value="Observaciones" />
-                            <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
+                            <p:inputText id="txtobservation" value="#{consultaBean.consultation.observation}" required="false" />
 
-                            <p:commandButton value="RegistrarC" actionListener="#{consultationBean.AddConsultation()}" update=":regisC"/>
-                        </h:form>
+                            <p:commandButton value="Registrar" actionListener="#{consultaBean.registrar()}"/>
+                            <p:commandButton value="Listar" actionListener="#{consultaBean.listar()}" update="data"/>
 
 
-                        <h:form id="tablaC">
-                            <p:dataTable id="Consultas" var="conslt" value="#{consultationBean.listaconsultas}" editable="true" style="margin-bottom:20px">
+                            <p:dataTable id="data" var="conslt" value="#{consultaBean.listar()}" editable="true" style="margin-bottom:20px">
                                 <f:facet name="header">Historial Clínico</f:facet>
-
-                                <p:ajax event="rowEdit" listener="#{consultationBean.onRowEdit}"  />
-                                <p:ajax event="rowEditCancel" listener="#{consultationBean.onRowCancel}" />
 
                                 <p:column headerText="IdConsulta">
                                     <h:outputText value="#{conslt.idcons}" />
@@ -133,7 +129,7 @@
                                 </p:column>
 
                                 <p:column headerText="Eliminar">
-                                    <p:commandLink value="Eliminar" actionListener="#{consultationBean.eliminarConsultation(conslt.idcons)}" update=":tablaC"/>
+                                    <p:commandLink value="Eliminar" actionListener="#{consultationBean.eliminarConsultation()}" />
                                 </p:column>
 
                             </p:dataTable>

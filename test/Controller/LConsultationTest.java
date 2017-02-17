@@ -31,58 +31,52 @@ public class LConsultationTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-//
-//    /**
-//     * Test of addConsultation method, of class LConsultation.
-//     */
+
+    /**
+     * Test of addConsultation method, of class LConsultation.
+     */
 //    @Test
 //    public void testAddConsultation() {
 //        System.out.println("addConsultation");
-//        int idpet = 0;
-//        String date = "";
-//        String reason = "";
-//        String diagnosis = "";
-//        String treatment = "";
-//        String observation = "";
+//        int idpet = 1;
+//        String date = "2017-01-01";
+//        String reason = "prueba";
+//        String diagnosis = "prueba";
+//        String treatment = "prueba";
+//        String observation = "prueba";
 //        boolean expResult = false;
 //        boolean result = LConsultation.addConsultation(idpet, date, reason, diagnosis, treatment, observation);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        assertNotNull(result);
 //    }
 
     /**
      * Test of updateConsultation method, of class LConsultation.
      */
-    @Test
-    public void testUpdateConsultation() {
-        System.out.println("updateConsultation");
-        int idcons = 3;
-        int idpet = 1;
-        String date = "2017-02-20";
-        String reason = "convulsiones";
-        String diagnosis = "epilepsia";
-        String treatment = "acariciar con estaca";
-        String observation = "vender estaca 20x20";
-        boolean expResult = false;
-        boolean result = LConsultation.updateConsultation(idcons, idpet, date, reason, diagnosis, treatment, observation);
-        assertNotNull(result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testUpdateConsultation() {
+//        System.out.println("updateConsultation");
+//        int idcons = 13;
+//        int idpet = 2;
+//        String date = "2017-01-01";
+//        String reason = "update";
+//        String diagnosis = "update";
+//        String treatment = "update";
+//        String observation = "update";
+//        boolean expResult = false;
+//        boolean result = LConsultation.updateConsultation(idcons, idpet, date, reason, diagnosis, treatment, observation);
+//        assertNotNull(result);
+//    }
 
-//    /**
-//     * Test of deleteConsultation method, of class LConsultation.
-//     */
+    /**
+     * Test of deleteConsultation method, of class LConsultation.
+     */
 //    @Test
 //    public void testDeleteConsultation() {
 //        System.out.println("deleteConsultation");
 //        int idcons = 0;
 //        boolean expResult = false;
 //        boolean result = LConsultation.deleteConsultation(idcons);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        assertNotNull(result);
 //    }
-    
+//    
 }
