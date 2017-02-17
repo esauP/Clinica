@@ -10,10 +10,8 @@
         <meta name="description" content="" />
         <!-- css -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet"/>
-        <link href="css/jcarousel.css" rel="stylesheet" />
+
         <link href="css/flexslider.css" rel="stylesheet" />
-        <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet"/>
         <link href="css/style.css" rel="stylesheet" />
     </h:head>
     <h:body>
@@ -50,92 +48,97 @@
             <div class="row">
                 <div class="skill-home">
                     <div class="skill-home-solid clearfix">
-                        <div class="container-fluid">
-                            <h:form id="formulario">
-                                <p:outputLabel for="txtidpet" value="IdPet" />
-                                <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
 
-                                <p:outputLabel for="txtreason" value="Motivo" />
-                                <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
+                        <p:growl id="regisC" showDetail="true" />
+                        <h:form id="formularioC">
 
-                                <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
-                                <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
+                            <p:outputLabel for="txtidpet" value="IdPet" />
+                            <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
 
-                                <p:outputLabel for="txttreatment" value="Tratamiento" />
-                                <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
+                            <p:outputLabel for="txtfecha" value="Fecha" />
+                            <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
 
-                                <p:outputLabel for="txtobservation" value="Observaciones" />
-                                <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
+                            <p:outputLabel for="txtreason" value="Motivo" />
+                            <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
 
-                                <p:commandButton value="Registrar" actionListener="#{consultationBean.addConsultation()}"/>
-                            </h:form>
-                        </div>
-                        <div class="col-md-9 text-left">
-                            <h:form id="tabla">
-                                <p:dataTable id="Consultas" var="conslt" value="#{consultationBean.listaconsultas}" editable="true" style="margin-bottom:20px">
-                                    <f:facet name="header">Historial Clínico</f:facet>
+                            <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
+                            <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
 
-                                    <p:ajax event="rowEdit" listener="#{consultationBean.onRowEdit}"  />
-                                    <p:ajax event="rowEditCancel" listener="#{consultationBean.onRowCancel}" />
+                            <p:outputLabel for="txttreatment" value="Tratamiento" />
+                            <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
 
-                                    <p:column headerText="IdConsulta">
-                                        <h:outputText value="#{conslt.idcons}" />
-                                    </p:column>
+                            <p:outputLabel for="txtobservation" value="Observaciones" />
+                            <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
 
-                                    <p:column headerText="idMascota">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{conslt.idpets}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.idpets}" style="width:100%" label="idPet"/></f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
-
-                                    <p:column headerText="Fecha_Consulta">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{conslt.date}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.date}" style="width:100%" label="dateConsultation"/></f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
-
-                                    <p:column headerText="Motivo">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{conslt.reason}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.reason}" style="width:100%" label="reason"/></f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
-
-                                    <p:column headerText="Diagnóstico">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{conslt.diagnosis}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.diagnosis}" style="width:100%" label="diagnosis"/></f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
-
-                                    <p:column headerText="Tratamiento">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{conslt.treatment}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.treatment}" style="width:100%" label="treatment"/></f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
-
-                                    <p:column headerText="Observaciones">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{conslt.observation}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.observation}" style="width:100%" label="observation"/></f:facet>
-                                        </p:cellEditor>
-                                    </p:column>
+                            <p:commandButton value="RegistrarC" actionListener="#{consultationBean.AddConsultation()}" update=":regisC"/>
+                        </h:form>
 
 
-                                    <p:column style="width:32px">
-                                        <p:rowEditor />
-                                    </p:column>
-                                    
-                                    <p:column headerText="Eliminar">
-                                        <p:commandLink value="Eliminar" actionListener="#{consultationBean.eliminarConsultation()}" />
-                                    </p:column>
-                                    
-                                </p:dataTable>
-                            </h:form>
-                        </div>
+                        <h:form id="tablaC">
+                            <p:dataTable id="Consultas" var="conslt" value="#{consultationBean.listaconsultas}" editable="true" style="margin-bottom:20px">
+                                <f:facet name="header">Historial Clínico</f:facet>
+
+                                <p:ajax event="rowEdit" listener="#{consultationBean.onRowEdit}"  />
+                                <p:ajax event="rowEditCancel" listener="#{consultationBean.onRowCancel}" />
+
+                                <p:column headerText="IdConsulta">
+                                    <h:outputText value="#{conslt.idcons}" />
+                                </p:column>
+
+                                <p:column headerText="idMascota">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{conslt.idpets}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{conslt.idpets}" style="width:100%" label="idPet"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Fecha_Consulta">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{conslt.date}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{conslt.date}" style="width:100%" label="dateConsultation"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Motivo">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{conslt.reason}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{conslt.reason}" style="width:100%" label="reason"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Diagnóstico">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{conslt.diagnosis}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{conslt.diagnosis}" style="width:100%" label="diagnosis"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Tratamiento">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{conslt.treatment}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{conslt.treatment}" style="width:100%" label="treatment"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+                                <p:column headerText="Observaciones">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{conslt.observation}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="#{conslt.observation}" style="width:100%" label="observation"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+
+
+                                <p:column style="width:32px">
+                                    <p:rowEditor />
+                                </p:column>
+
+                                <p:column headerText="Eliminar">
+                                    <p:commandLink value="Eliminar" actionListener="#{consultationBean.eliminarConsultation(conslt.idcons)}" update=":tablaC"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+
                     </div>
                 </div>
             </div>
