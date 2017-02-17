@@ -8,12 +8,11 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-
         <div>
             <h:form>
                 <div>
                     <p:outputLabel for="txtnombre" value="Nombre" />
-                    <p:autoComplete id="txtnombre" value="#{personBean.pers.namePer}" completeMethod="#{personBean.Autocompletar}" placeholder="* Nombre Apellidos" required="true"  />
+                    <p:autoComplete id="txtnombre" value="#{personBean.pers.namePer}" completeMethod="#{personBean.AutocompletarNombre}" placeholder="* Nombre Apellidos" required="true"  />
                     <p:outputLabel for="txtdni" value="Dni" />
                     <p:inputText id="txtdni" value="#{personBean.pers.idperson}" required="true" placeholder="DNI" /> 
                 </div>
@@ -29,7 +28,7 @@
             </h:form>
         </div>
         <div>
-            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.AutocompletarNombre}"/>
+            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.AutocompletarID}"/>
         </div>
         <div>
             <p:autoComplete value="#{petsBean.idPerson}" completeMethod="#{petsBean.AutocompletarID}"/>
@@ -43,20 +42,15 @@
                     <p:ajax event="rowEditCancel" listener="#{personBean.onRowCancel}" />
 
                     <p:column headerText="Id">
-
                         <h:outputText value="#{per.idperson}"                 />
                     </p:column>
-
                     <p:column filterBy="#{per.namePer}" footerText="contains" filterMatchMode="contains"
                               filterFunction="#{personBean.filterByName}"
                               headerText="Nombre">
                         <p:cellEditor>
-
-                            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
-
+                            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.AutocompletarNombre}"/>
                             <f:facet name="output"><h:outputText value="#{per.namePer}" /></f:facet>
                             <f:facet name="input"><p:inputText value="#{per.namePer}" style="width:100%" label="Nombre"/></f:facet>
-
                         </p:cellEditor>
                     </p:column>
 
