@@ -48,8 +48,41 @@
             <div class="row">
                 <div class="skill-home">
                     <div class="skill-home-solid clearfix">
+                        <p:growl autoUpdate="true" id="regisC" showDetail="true" />
+                        <h:form>
+                            <p:commandButton value="Añadir"  icon="ui-icon-plus" onclick="PF('wdlgDatos').show();" />
+                        </h:form>
+                        <h:form>
+                            <p:commandButton value="Listar" actionListener="#{consultationBean.listar()}"  update=":tablaC"/>
+                        </h:form>
 
-                        <p:growl id="regisC" showDetail="true" />
+                        <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
+                            <h:form id="formularioA">
+
+                                <p:outputLabel for="txtidpet" value="IdPet" />
+                                <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
+
+                                <p:outputLabel for="txtfecha" value="Fecha" />
+                                <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
+
+                                <p:outputLabel for="txtreason" value="Motivo" />
+                                <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
+
+                                <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
+                                <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
+
+                                <p:outputLabel for="txttreatment" value="Tratamiento" />
+                                <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
+
+                                <p:outputLabel for="txtobservation" value="Observaciones" />
+                                <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
+
+                                <p:commandButton value="Añadir nueva consulta" actionListener="#{consultationBean.AddConsultation()}" onclick="#{consultationBean.listar()}" update=":tablaC:Consultas" />
+                                <p:commandButton value="Cerrar Ventan" actionListener="#{consultationBean.listar()}" oncomplete="PF('wdlgDatos').hide()" update=":tablaC"/>
+                            </h:form>
+                        </p:dialog>
+
+                        <!--
                         <h:form id="formularioC">
 
                             <p:outputLabel for="txtidpet" value="IdPet" />
@@ -70,8 +103,8 @@
                             <p:outputLabel for="txtobservation" value="Observaciones" />
                             <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
 
-                            <p:commandButton value="RegistrarC" actionListener="#{consultationBean.AddConsultation()}" update=":regisC"/>
-                        </h:form>
+                            <p:commandButton value="RegistrarC" actionListener="#{consultationBean.AddConsultation()}" update=":tablaC:Consultas"/>
+                        </h:form> -->
 
 
                         <h:form id="tablaC">
@@ -133,7 +166,7 @@
                                 </p:column>
 
                                 <p:column headerText="Eliminar">
-                                    <p:commandLink value="Eliminar" actionListener="#{consultationBean.eliminarConsultation(conslt.idcons)}" update=":tablaC"/>
+                                    <p:commandLink value="Eliminar"  actionListener="#{consultationBean.eliminarConsultation(conslt.idcons)}" update=":tablaC:Consultas"/>
                                 </p:column>
 
                             </p:dataTable>

@@ -97,6 +97,11 @@ public class ConsultationBean {
             System.out.println(e.getMessage());
         }
     }
+    
+    public List listar() throws SQLException{
+        LConsultation dao = new LConsultation();
+        return dao.getConsultation();
+    }
 
     public List<Consultation> getListaconsultas() {
         return listaconsultas;
