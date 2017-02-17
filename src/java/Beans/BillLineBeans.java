@@ -24,9 +24,9 @@ import Controller.LBillLine;
 public class BillLineBeans {
 
     private int id;
-    private Bill bill;
-    private Pets pets;
-    private Products products;
+    private Bill bill = new Bill();
+    private Pets pets = new Pets();
+    private Products products = new Products();
     private Integer quantity;
     private Double price;
     private Integer taxes;
