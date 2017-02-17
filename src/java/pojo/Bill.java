@@ -12,18 +12,18 @@ public class Bill  implements java.io.Serializable {
 
      private Integer idbill;
      private String idper;
-     private Date date;
+     private String date;
      private String observations;
 
     public Bill() {
     }
 
 	
-    public Bill(String idper, Date date) {
+    public Bill(String idper, String date) {
         this.idper = idper;
         this.date = date;
     }
-    public Bill(String idper, Date date, String observations) {
+    public Bill(String idper, String date, String observations) {
        this.idper = idper;
        this.date = date;
        this.observations = observations;
@@ -43,11 +43,11 @@ public class Bill  implements java.io.Serializable {
     public void setIdper(String idper) {
         this.idper = idper;
     }
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
     
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
     public String getObservations() {
