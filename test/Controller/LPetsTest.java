@@ -39,13 +39,13 @@ public class LPetsTest {
     @Test
     public void testAddPet() throws Exception {
         System.out.println("addPet");
-        String name_pt = "1";
+        String name_pt = "prueba";
         String animal_pt = "prueba";
         int gender_pt = 0;
         String race_pt = "prueba";
         String colour_pt = "prueba";
-        String birth_pt = "2000/05/12";
-        String idper_pt = "87654321B";
+        String birth_pt = "2000-05-12";
+        String idper_pt = "01234567A";
         boolean expResult = false;
         boolean result = LPets.addPet(name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt, idper_pt);
         //assertEquals(expResult, result);

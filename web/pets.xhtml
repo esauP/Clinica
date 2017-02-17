@@ -32,7 +32,7 @@
                         </div>
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
-                                <li><a href="pets.html">Mascotas</a></li>
+                                <li><a href="pets.xhtml">Mascotas</a></li>
                                 <li><a href="consultation.xhtml">Consulta | Historial</a></li>
                                 <li><a href="dates.html">Citas</a></li>
                                 <li><a href="bills.html">Facturación</a></li>
@@ -138,16 +138,16 @@
                                 <h:form id = "formPet">
                                     <h3>Datos de la Mascota</h3>
                                     <p>
-                                        <p:inputText id = "namePet" value = "#{petsBean.petM.name}" required ="true" placeholder = "* Nombre Mascota" />
+                                        <p:inputText id="namePet" value="#{petsBean.petM.name}" required="true" placeholder="* Nombre Mascota" />
                                     </p>
                                     <p>
-                                        <p:inputText id = "especie" value = "#{petsBean.petM.animal}" required = "true" placeholder = "* Especie"/>
+                                        <p:inputText id="especie" value="#{petsBean.petM.animal}" required="true" placeholder="* Especie"/>
                                     </p>
                                     <p>
-                                        <p:inputText id = "race" value = "#{petsBean.petM.race}" required = "true" placeholder = "* Raza"/>
+                                        <p:inputText id="race" value="#{petsBean.petM.race}" required="true" placeholder="* Raza"/>
                                     </p>
                                     <p>
-                                        <p:inputText id = "color" value = "#{petsBean.petM.colour}" required = "true" placeholder = "* Color"/>
+                                        <p:inputText id="color" value="#{petsBean.petM.colour}" required="true" placeholder="* Color"/>
                                     </p>
                                     <p>
                                         <p:inputMask id="birth" value="#{petsBean.petM.birthDate}" required="true" placeholder="* Fecha Nac" mask="9999-99-99"/>
@@ -163,7 +163,7 @@
                                     </p>
                                     <br/>
                                     <p>
-                                        <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" update=":msgs" />
+                                        <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" update=":regis" />
                                     </p>
                                     <p>
                                         <p:commandButton value="Modificar" actionListener="#{petsBean.updatePet()}" update=":regis"/>

@@ -27,8 +27,16 @@ import pojo.Pets;
 public class PetsBean implements Serializable {
 
     private Person person;
-    private Pets petM;
+    private Pets petM = new Pets();
     private final List<Pets> listamascotas;
+
+    private Integer idpets;
+    private String name;
+    private String animal;
+    private int gender;
+    private String race;
+    private String colour;
+    private String birthDate;
 
     /**
      * Creates a new instance of PetsBean
@@ -45,8 +53,7 @@ public class PetsBean implements Serializable {
      * @throws SQLException
      */
     public void addPet() throws SQLException {
-        System.out.println("Añadir mascota");
-        LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), person.getNamePer());
+        LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), petM.getPerson().getIdperson());
         FacesMessage msg = new FacesMessage("Mascota Insertada", petM.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -114,7 +121,7 @@ public class PetsBean implements Serializable {
         }
     }
 
-    public Person getPerson() {
+    public Person getPerson(String dni) {
         return person;
     }
 
@@ -132,6 +139,63 @@ public class PetsBean implements Serializable {
 
     public List<Pets> getListamascotas() {
         return listamascotas;
+    }
+
+    /*----------------------------------------------------------------------------*/
+    public Integer getIdpets() {
+        return idpets;
+    }
+
+    public void setIdpets(Integer idpets) {
+        this.idpets = idpets;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
 }
