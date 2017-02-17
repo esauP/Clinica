@@ -14,6 +14,9 @@ import pojo.Pets;
 import pojo.Products;
 import pojo.BillLines;
 import Controller.LBillLine;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -34,6 +37,18 @@ public class BillLineBeans {
     private String observations;
     private List<BillLines> listalineasfac;
     private BillLines blines = new BillLines();
+    
+    public void onRowEdit(RowEditEvent event) throws SQLException {
+        BillLines billli = (BillLines) event.getObject();
+        FacesMessage msg = new FacesMessage("Precio Editado", billli.getPrice().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada", ((Products) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
     
     public BillLineBeans() throws SQLException{
         listalineasfac = LBillLine.getList();

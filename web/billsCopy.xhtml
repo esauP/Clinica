@@ -52,12 +52,12 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         <div class="skill-home"> <div class="skill-home-solid clearfix">
           <div class="col-md-3 text-left">
             <h3>Lista de productos y servicios</h3>
-            <button type="button" class="btn btn-default">Añadir a Factura</button>
+            <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
           </div>
           <div class="col-md-9 text-left">
             <div class="billInfo">
               <h:form id="insertBill">
-              <p:autoComplete id = "txtnombre" value = "#{personBean.pers.namePer}" completeMethod = "#{personBean.Autocompletar}"
+              <p:autoComplete id = "txtnombre" value = "#{billBean.nombrep}" completeMethod = "#{personBean.AutocompletarNombre}"
               placeholder="* Nombre Apellidos" required="true"/>
               <p:spacer width="20"  height="0"/>
               <!-- combobox de mascotas no está implementado -->
@@ -73,61 +73,65 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         </p:panel>
         <p:separator />
         <p:commandButton value="Buscar" update="msgs"  icon="ui-icon-check" />
-
         <!-- fin del combobox de mascotas-->
-        <h:outputText id = "idBill" value = "#{billBean.bill.idBill}"  />
+
+        <h:outputText id = "idBill" value = "#{billBean.idbill}"  />
         <!-- fecha del día para la factura -->
         <h:outputText value="#{now}">
         <f:convertDateTime pattern="MM/dd/yyyy" type="date" />
       </h:outputText>
       <!-- fin de la fecha -->
-      <p:inputText id = "description" value = "#{billBean.bill.observation}" placeholder = "Descripcióm" />
+      <h:outputText id = "description" value = "#{billBean.observation}" />
     </h:form>
   </div>
+
   <!-- tabla con las líneas de factura -->
   <div class="table-responsive">
     <h:form id="tablebills">
-    <p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{petsBean.listamascotas}" rows = "5" paginator = "true"
+    <p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{billLineBean.listalineasfac}" rows = "5" paginator = "true"
     paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
     rowsPerPageTemplate = "5,10,15,20,25">
-        <f:facet name = "header">Listado de Mascotas</f:facet>
+        <f:facet name = "header">Factura</f:facet>
 
-    <p:ajax event="rowEdit" listener="#{petsBean.onRowEdit}"  />
-    <p:ajax event="rowEditCancel" listener="#{petsBean.onRowCancel}" />
+    <p:ajax event="rowEdit" listener="#{billBean.onRowEdit}"  />
+    <p:ajax event="rowEditCancel" listener="#{billBean.onRowCancel}" />
 
-    <p:column filterBy="#{pet.name}" filterMatchMode="contains"
-    filterFunction="#{petsBean.filterByName}" headerText = "Fecha">
-        <h:outputText value = "#{pet.name}"/>
-    </p:column>
     <p:column headerText = "Cliente">
     <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{pet.animal}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.animal}" style="width:100%" label="Especie"/></f:facet>
+        <f:facet name="output"><h:outputText value="#{billBean.nombreP}" /></f:facet>
+        <f:facet name="input"><p:inputText value="#{billBean.nombreP}" style="width:100%" label="Cliente"/></f:facet>
     </p:cellEditor>
     </p:column>
     <p:column headerText = "Producto">
         <h:outputText value = "#{pet.gender}"/>
     <p:cellEditor>
         <f:facet name="output"><h:outputText value="#{pet.gender}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.gender}" style="width:100%" label="Genero"/></f:facet>
+        <f:facet name="input"><p:inputText value="#{pet.gender}" style="width:100%" label="Producto"/></f:facet>
     </p:cellEditor>
     </p:column>
     <p:column headerText = "Cantidad">
     <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{pet.race}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.race}" style="width:100%" label="Raza"/></f:facet>
+        <f:facet name="output"><h:outputText value="#{billLineBean.quantity}" /></f:facet>
+        <f:facet name="input"><p:inputText value="#{billLineBean.quantity}" style="width:100%" label="Cantidad"/></f:facet>
+    </p:cellEditor>
+    </p:column>
+    <p:column headerText = "Precio">
+    <p:cellEditor>
+        <f:facet name="output"><h:outputText value="#{billLineBean.price}" /></f:facet>
+        <f:facet name="input"><p:inputText value="#{billLineBean.price}" style="width:100%" label="Precio"/></f:facet>
     </p:cellEditor>
     </p:column>
     <p:column headerText = "Descuento">
     <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{pet.colour}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.colour}" style="width:100%" label="Color"/></f:facet>
+        <f:facet name="output"><h:outputText value="#{billLineBean.discount}" /></f:facet>
+        <f:facet name="input"><p:inputText value="#{billLineBean.discount}" style="width:100%" label="Descuento"/></f:facet>
     </p:cellEditor>
     </p:column>
     <p:column headerText = "Total">
+    <!-- introducir fórmula para calcular el total (precio - descuento) * cantidad -->
     <p:cellEditor>
         <f:facet name="output"><h:outputText value="#{pet.birthDate}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Fecha Nac"/></f:facet>
+        <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Total"/></f:facet>
     </p:cellEditor>
     </p:column>
     <p:column style="width:32px">
@@ -137,10 +141,10 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
     </h:form>
 <!-- fin de la tabla -->
   </div>
-  </br></br>
-    <button type="button" class="btn btn-default">Guardar Factura</button>
-    <button type="button" class="btn btn-default">Imprimir Factura</button>
-    <button type="button" class="btn btn-default">Salir sin guardar</button> </br></br>
+    <p:commandButton value="Guardar" actionListener="#{billBean.AddBill()}" />
+    <p:commandButton value="Imprimir Factura"  />
+    <p:commandButton value="Salir" />
+  
 </div>
 </div></div></div>
 </div>

@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import pojo.Bill;
 
 /**
@@ -31,6 +33,18 @@ public class BillBean implements Serializable{
     private List<Bill> listafacturas;
     private Bill fac = new Bill();
 
+    
+    /**
+     * Metodo para insertar una nueva factura
+     *
+     * @throws SQLException
+     */
+    public void AddBill() throws SQLException {
+        LBill.addBill(fac.getIdbill(), fac.getIdper(), fac.getDate(), fac.getObservations());
+        FacesMessage msg = new FacesMessage("Factura Insertada", fac.getIdbill().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
     public BillBean() throws SQLException{
         listafacturas = LBill.getList();
     }
