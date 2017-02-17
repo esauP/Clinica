@@ -5,9 +5,11 @@
  */
 package Beans;
 
+import Controller.LPerson;
 import Controller.LPets;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.inject.Named;
@@ -28,15 +30,9 @@ public class PetsBean implements Serializable {
 
     private Person person;
     private Pets petM = new Pets();
+    private String IdPerson;
     private final List<Pets> listamascotas;
-
-    private Integer idpets;
-    private String name;
-    private String animal;
-    private int gender;
-    private String race;
-    private String colour;
-    private String birthDate;
+    private List<Person> listapersonas;
 
     /**
      * Creates a new instance of PetsBean
@@ -45,6 +41,7 @@ public class PetsBean implements Serializable {
      */
     public PetsBean() throws SQLException {
         listamascotas = LPets.getPets();
+        listapersonas = LPerson.getPeople();
     }
 
     /**
@@ -53,7 +50,7 @@ public class PetsBean implements Serializable {
      * @throws SQLException
      */
     public void addPet() throws SQLException {
-        LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), petM.getPerson().getIdperson());
+        LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), IdPerson);
         FacesMessage msg = new FacesMessage("Mascota Insertada", petM.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -101,7 +98,7 @@ public class PetsBean implements Serializable {
      * @param locale
      * @return
      */
-    public boolean filterByName(Object value, Object filter, Locale locale) {
+    public boolean filterCase(Object value, Object filter, Locale locale) {
         String filterText = (filter == null) ? null : filter.toString().trim();
         if (filterText == null || filterText.equals("")) {
             return true;
@@ -119,6 +116,24 @@ public class PetsBean implements Serializable {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Metodo para autocompletar los id de las personas
+     *
+     * @param text
+     * @return List String
+     */
+    public List<String> AutocompletarID(String text) {
+        // Assumed search using the startsWith
+        List<String> queried = new ArrayList<>();
+        for (Person person : this.listapersonas) {
+            String namePer = person.getNamePer();
+            if (namePer.toLowerCase().startsWith(text) || namePer.startsWith(text)) {
+                queried.add(person.getIdperson());
+            }
+        }
+        return queried;
     }
 
     public Person getPerson(String dni) {
@@ -141,61 +156,12 @@ public class PetsBean implements Serializable {
         return listamascotas;
     }
 
-    /*----------------------------------------------------------------------------*/
-    public Integer getIdpets() {
-        return idpets;
+    public String getIdPerson() {
+        return IdPerson;
     }
 
-    public void setIdpets(Integer idpets) {
-        this.idpets = idpets;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(String animal) {
-        this.animal = animal;
-    }
-
-    public int getGender() {
-        return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setIdPerson(String IdPerson) {
+        this.IdPerson = IdPerson;
     }
 
 }

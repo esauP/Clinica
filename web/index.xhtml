@@ -29,10 +29,10 @@
             </h:form>
         </div>
         <div>
-            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.Autocompletar}"/>
+            <p:autoComplete value="#{personBean.namePer}" completeMethod="#{personBean.AutocompletarNombre}"/>
         </div>
         <div>
-            <p:calendar id="birth" value="#{petsBean.birthDate}" pattern="dd-MM-yyyy" mask="true" />                      
+            <p:autoComplete value="#{petsBean.idPerson}" completeMethod="#{petsBean.AutocompletarID}"/>
         </div>
         <div>
             <h:form id="tabla">

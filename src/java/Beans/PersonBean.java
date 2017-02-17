@@ -96,13 +96,37 @@ public class PersonBean implements Serializable {
         }
     }
 
-    public List<Person> Autocompletar(String text) {
+    /**
+     * Metodo para autocompletar los nombres
+     *
+     * @param text
+     * @return list String
+     */
+    public List<Person> AutocompletarNombre(String text) {
         // Assumed search using the startsWith
         List<Person> queried = new ArrayList<>();
         for (Person person : this.listapersonas) {
             String name = person.getNamePer();
-            if (name.toLowerCase().startsWith(text)) {
+            if (name.toLowerCase().startsWith(text) || name.startsWith(text)) {
                 queried.add(person);
+            }
+        }
+        return queried;
+    }
+
+    /**
+     * Metodo para autocompletar los id de las personas
+     *
+     * @param text
+     * @return List String
+     */
+    public List<String> AutocompletarID(String text) {
+        // Assumed search using the startsWith
+        List<String> queried = new ArrayList<>();
+        for (Person person : this.listapersonas) {
+            String namePer = person.getNamePer();
+            if (namePer.toLowerCase().startsWith(text) || namePer.startsWith(text)) {
+                queried.add(person.getIdperson());
             }
         }
         return queried;
