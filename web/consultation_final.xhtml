@@ -163,7 +163,7 @@
                                 <p:commandButton value="Añadir"  icon="ui-icon-plus" onclick="PF('wdlgDatosd').show();" />
                             </h:form>
                             <h:form>
-                                <p:commandButton value="Listar" actionListener="#{docBean.listar}"  update=":tablaD"/>
+                                <p:commandButton value="Listar" actionListener="#{docBean.listar}" update=":ConsultasD" />
                             </h:form>
 
                             <p:dialog header="Datos" widgetVar="wdlgDatosd" id="dlgDatosd">
@@ -182,15 +182,15 @@
                                     <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
                                     <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
 
-                                    <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}" update=":tablaD:ConsultasD" />
-                                    <p:commandButton value="Cerrar Ventana" actionListener="#{docBean.listar}" oncomplete="PF('wdlgDatosd').hide()" update=":tablaD:ConsultasD"/>
+                                    <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}"  />
+                                    <p:commandButton value="Cerrar Ventana" actionListener="#{docBean.listar}" oncomplete="PF('wdlgDatosd').hide()" update=":ConsultasD"/>
                                 </h:form>
                             </p:dialog>
                         </div>
                         <div class="col-md-10 text-center">
-                            <<h:form id="tablaD">
+                            
                                 <p:dataTable id="ConsultasD" var="docs" value="#{docBean.listadoc}" editable="true" style="margin-bottom:20px">
-                                    <f:facet name="header">Documentación asociada</f:facet>
+                                    <f:facet name="header">Documentacion asociada</f:facet>
 
                                     <p:ajax event="rowEdit" listener="#{docBean.onRowEdit}"  />
                                     <p:ajax event="rowEditCancel" listener="#{docBean.onRowCancel}" />
@@ -220,7 +220,7 @@
                                         </p:cellEditor>
                                     </p:column>
 
-                                    <p:column headerText="Doc_adjunto">
+                                    <p:column headerText="DocAdjunto">
                                         <p:cellEditor>
                                             <f:facet name="output"><h:outputText value="#{docs.fileattached}" /></f:facet>
                                             <f:facet name="input"><p:inputText value="#{docs.fileattached}" style="width:100%" label="Doc_adjunto"/></f:facet>
@@ -231,11 +231,11 @@
                                     </p:column>
 
                                     <p:column headerText="Eliminar">
-                                        <p:commandLink value="Eliminar"  actionListener="#{docBean.deleteDoc(docs.iddoc)}" update=":tablaD:ConsultasD"/>
+                                        <p:commandLink value="Eliminar"  actionListener="#{docBean.deleteDoc(docs.iddoc)}" update=":ConsultasD"/>
                                     </p:column>
 
                                 </p:dataTable>
-                            </h:form>
+                            
                         </div>
                     </div>
                 </div>

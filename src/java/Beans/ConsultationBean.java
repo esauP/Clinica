@@ -52,7 +52,7 @@ public class ConsultationBean {
     }
 
     public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edicion Cancellada", String.valueOf(((Consultation) event.getObject()).getIdcons())); //Se ha casteado el id que estaba en integer
+        FacesMessage msg = new FacesMessage("Edicion Cancelada", String.valueOf(((Consultation) event.getObject()).getIdcons())); //Se ha casteado el id que estaba en integer
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
