@@ -77,35 +77,10 @@
                                 <p:outputLabel for="txtobservation" value="Observaciones" />
                                 <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
 
-                                <p:commandButton value="Añadir nueva consulta" actionListener="#{consultationBean.AddConsultation()}" onclick="#{consultationBean.listar()}" update=":tablaC:Consultas" />
+                                <p:commandButton value="Añadir nueva consulta" actionListener="#{consultationBean.AddConsultation()}" update=":tablaC:Consultas" />
                                 <p:commandButton value="Cerrar Ventan" actionListener="#{consultationBean.listar()}" oncomplete="PF('wdlgDatos').hide()" update=":tablaC"/>
                             </h:form>
                         </p:dialog>
-
-                        <!--
-                        <h:form id="formularioC">
-
-                            <p:outputLabel for="txtidpet" value="IdPet" />
-                            <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
-
-                            <p:outputLabel for="txtfecha" value="Fecha" />
-                            <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
-
-                            <p:outputLabel for="txtreason" value="Motivo" />
-                            <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
-
-                            <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
-                            <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
-
-                            <p:outputLabel for="txttreatment" value="Tratamiento" />
-                            <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
-
-                            <p:outputLabel for="txtobservation" value="Observaciones" />
-                            <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
-
-                            <p:commandButton value="RegistrarC" actionListener="#{consultationBean.AddConsultation()}" update=":tablaC:Consultas"/>
-                        </h:form> -->
-
 
                         <h:form id="tablaC">
                             <p:dataTable id="Consultas" var="conslt" value="#{consultationBean.listaconsultas}" editable="true" style="margin-bottom:20px">

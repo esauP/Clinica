@@ -10,57 +10,74 @@ import java.util.Date;
 public class Doc  implements java.io.Serializable {
 
 
-     private Integer iddoc;
-     private Consultation consultation;
-     private Date date;
+     private int iddoc;
+     private int idcons;
+     private String date_doc;
      private String description;
-     private byte[] file;
+     private byte[] fileattached;
+     private Consultation consultation;
 
     public Doc() {
     }
 
-    public Doc(Consultation consultation, Date date, String description, byte[] file) {
-       this.consultation = consultation;
-       this.date = date;
-       this.description = description;
-       this.file = file;
-    }
-   
-    public Integer getIddoc() {
-        return this.iddoc;
-    }
-    
-    public void setIddoc(Integer iddoc) {
+    public Doc(int iddoc, int idcons, String date_doc, String description, byte[] fileattached, Consultation consultation) {
         this.iddoc = iddoc;
-    }
-    public Consultation getConsultation() {
-        return this.consultation;
-    }
-    
-    public void setConsultation(Consultation consultation) {
+        this.idcons = idcons;
+        this.date_doc = date_doc;
+        this.description = description;
+        this.fileattached = fileattached;
         this.consultation = consultation;
     }
-    public Date getDate() {
-        return this.date;
+
+    public int getIddoc() {
+        return iddoc;
     }
-    
-    public void setDate(Date date) {
-        this.date = date;
+
+    public void setIddoc(int iddoc) {
+        this.iddoc = iddoc;
     }
+
+    public int getIdcons() {
+        return idcons;
+    }
+
+    public void setIdcons(int idcons) {
+        this.idcons = idcons;
+    }
+
+    public String getDate_doc() {
+        return date_doc;
+    }
+
+    public void setDate_doc(String date_doc) {
+        this.date_doc = date_doc;
+    }
+
     public String getDescription() {
-        return this.description;
+        return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public byte[] getFile() {
-        return this.file;
+
+    public byte[] getFileattached() {
+        return fileattached;
     }
+
+    public void setFileattached(byte[] fileattached) {
+        this.fileattached = fileattached;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
+    }
+
     
-    public void setFile(byte[] file) {
-        this.file = file;
-    }
 
 
 

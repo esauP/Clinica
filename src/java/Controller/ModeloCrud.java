@@ -260,75 +260,75 @@ public class ModeloCrud extends ConexionDB {
 //    }
     //  ---------------------------------------  CRUD DOCUMENTO  (NO COMPROBADO ADD NI UPDATE)
 
-    public boolean addDoc(int idcon, String date_doc, String description, String fileattached) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call addDoc (?,?,?,?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setInt(2, idcon);
-            cStmt.setString(3, date_doc);
-            cStmt.setString(4, description);
-            cStmt.setString(5, fileattached);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
-
-    public boolean updateDoc(int iddoc, int idcon, String date_doc, String description, String fileattached) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call updateDoc (?,?,?,?,?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setInt(2, iddoc);
-            cStmt.setInt(3, idcon);
-            cStmt.setString(4, date_doc);
-            cStmt.setString(5, description);
-            cStmt.setString(6, fileattached);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
-
-    public boolean deleteDoc(int iddoc) {
-        boolean success = false;
-        try {
-            //Llamada a la funcion
-            String sql = "{ ? = call deleteDoc (?) }";
-            CallableStatement cStmt = this.getConexion().prepareCall(sql);
-            //establezco la salida de la funcion
-            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            //establezco los parámetros de entrada
-            cStmt.setInt(2, iddoc);
-            //se ejecuta la funcion
-            cStmt.execute();
-            if (cStmt.getInt(1) == 0) {
-                success = true;
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return success;
-    }
+//    public boolean addDoc(int idcon, String date_doc, String description, String fileattached) {
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call addDoc (?,?,?,?) }";
+//            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, idcon);
+//            cStmt.setString(3, date_doc);
+//            cStmt.setString(4, description);
+//            cStmt.setString(5, fileattached);
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return success;
+//    }
+//
+//    public boolean updateDoc(int iddoc, int idcon, String date_doc, String description, String fileattached) {
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call updateDoc (?,?,?,?,?) }";
+//            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, iddoc);
+//            cStmt.setInt(3, idcon);
+//            cStmt.setString(4, date_doc);
+//            cStmt.setString(5, description);
+//            cStmt.setString(6, fileattached);
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return success;
+//    }
+//
+//    public boolean deleteDoc(int iddoc) {
+//        boolean success = false;
+//        try {
+//            //Llamada a la funcion
+//            String sql = "{ ? = call deleteDoc (?) }";
+//            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+//            //establezco la salida de la funcion
+//            cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
+//            //establezco los parámetros de entrada
+//            cStmt.setInt(2, iddoc);
+//            //se ejecuta la funcion
+//            cStmt.execute();
+//            if (cStmt.getInt(1) == 0) {
+//                success = true;
+//            }
+//        } catch (SQLException e) {
+//            System.err.println(e.getMessage());
+//        }
+//        return success;
+//    }
     //  ---------------------------------------  CRUD PRODUCTOS  (SIN PROBAR)
 
     public boolean addProducts(String name_pr, double price_pr, int taxes_pr) {
