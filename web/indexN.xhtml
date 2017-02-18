@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" >
+    <h:head>
         <meta charset="utf-8"/>
         <title>Clínica Veterinaria</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,28 +16,27 @@
         <link href="css/style.css" rel="stylesheet" />
 
 
-    </head>
-    <body>
+    </h:head>
+    <h:body>
         <div id="wrapper">
             <!-- start header -->
             <header>
                 <div class="navbar navbar-default navbar-static-top"  >
                     <div class="container" >
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-
                             <div>
-                                <form action="FrontController?res=faces/adminHome.xhtml" method="post">
-                                    <div class = "login" >
-                                        <p><input type="text" name="user" placeholder="Usuario"/>
-                                            <input type="password" name="passwd" placeholder="Contraseña"></p>
-                                        <span class="login-btn"><input type="image" name = "buttonLogin" SRC="img/entrar.png" /></span>
+                                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                                <h:form id="loginform">
+                                    <div  >
+                                        <p>
+                                            <p:inputText value="#{loginBean.username}" placeholder="Usuario" />
+                                            <p:inputText value="#{loginBean.password}" placeholder="Contraseña" />
+                                        </p>
+                                        <span class="login-btn">
+                                            <p:commandButton actionListener="#{loginBean.logear(event)}" value="Iniciar Sesion"  update=":growl" oncomplete="handleLoginRequest(xhr, status, args)"/>
+                                        </span>
                                     </div>
-                                </form>
+                                </h:form>
                             </div>
                         </div>
 
@@ -120,7 +121,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="widget">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.658994145787!2d-5.992664785057338!3d37.397895979829826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126c069313b807%3A0x973a78afbfbfd82a!2sCalle+Pedro+Miguel%2C+35%2C+41003+Sevilla!5e0!3m2!1ses!2ses!4v1486471261526" width="300" height="200" frameborder="0" style="border:0">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3169.658994145787!2d-5.992664785057338!3d37.397895979829826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126c069313b807%3A0x973a78afbfbfd82a!2sCalle+Pedro+Miguel%2C+35%2C+41003+Sevilla!5e0!3m2!1ses!2ses!4v1486471261526" width="300" height="200" frameborder="0" style="border:0" allowfullscreen="true">
                                 </iframe>	
                             </div>
                         </div>
@@ -170,5 +171,5 @@
         <script src="js/animate.js"></script>
         <script src="js/custom.js"></script>
         <script src="js/owl-carousel/owl.carousel.js"></script>
-    </body>
+    </h:body>
 </html>

@@ -29,13 +29,7 @@
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.htm</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-        <welcome-file>default.html</welcome-file>
-        <welcome-file>default.htm</welcome-file>
-        <welcome-file>default.jsp</welcome-file>
+        <welcome-file>faces/indexN.xhtml</welcome-file>
     </welcome-file-list>
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
