@@ -5,7 +5,6 @@
  */
 package Beans;
 
-import Controller.LConsultation;
 import Controller.LDocument;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +15,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
 import pojo.*;
 
 /**
@@ -29,29 +29,36 @@ public class DocBean {
 
     private List<Doc> listadoc;
     private Doc docu = new Doc();
+    private UploadedFile file;
 
     public DocBean() throws SQLException {
         LDocument ld = new LDocument();
         listadoc = ld.getDocuments();
     }
 
+    public void upload() {
+        if (file != null) {
+            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+
     public void addDoc() throws SQLException {
         LDocument ld = new LDocument();
         ld.addDoc(docu.getIdcons(), docu.getDate_doc(), docu.getDescription(), docu.getFileattached());
     }
-    
+
     public void deleteDoc(int Iddoc) throws SQLException {
         LDocument ld = new LDocument();
         ld.deleteDoc(Iddoc);
     }
-    
-    public List listar() throws SQLException{
+
+    public List listar() throws SQLException {
         LDocument ld = new LDocument();
         return ld.getDocuments();
     }
-    
-    //methods of buttons into the table
 
+    //methods of buttons into the table
     public void onRowEdit(RowEditEvent event) throws SQLException {
         LDocument ld = new LDocument();
         Doc docum = (Doc) event.getObject();
@@ -61,7 +68,7 @@ public class DocBean {
     }
 
     public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edición Cancelada", String.valueOf(((Doc) event.getObject()).getIddoc() )); //Se ha casteado el id que estaba en integer
+        FacesMessage msg = new FacesMessage("Edición Cancelada", String.valueOf(((Doc) event.getObject()).getIddoc())); //Se ha casteado el id que estaba en integer
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -74,9 +81,8 @@ public class DocBean {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-    
-    //getters and setters
 
+    //getters and setters
     public List<Doc> getListadoc() {
         return listadoc;
     }
@@ -91,7 +97,14 @@ public class DocBean {
 
     public void setDocu(Doc docu) {
         this.docu = docu;
+    } //nobody expect
+
+    public UploadedFile getFile() {
+        return file;
     }
 
-    
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
 }

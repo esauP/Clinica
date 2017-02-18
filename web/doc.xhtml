@@ -10,9 +10,9 @@
         <meta name="description" content="" />
         <!-- css -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-
         <link href="css/flexslider.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet" />
+
     </h:head>
     <h:body>
         <div id="wrapper">
@@ -69,9 +69,9 @@
                                 <p:inputText id="descripd" value="#{docBean.docu.description}" required="false" />
 
                                 <p:outputLabel for="filed" value="Fichero adjunto" />
-                                <p:fileUpload id="filed" value="#{fileUploadView.file}" mode="simple"/>
+                                <p:fileUpload id="filed" value="#{docBean.docu.fileattached}" mode="simple" required="true"/>
+                                <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
                                 
-
                                 <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}" update=":tablaD:ConsultasD" />
                                 <p:commandButton value="Cerrar Ventana" actionListener="#{docBean.listar}" oncomplete="PF('wdlgDatosd').hide()" update=":tablaD"/>
                             </h:form>
@@ -117,7 +117,7 @@
                                 </p:column>
 
 
-                                <p:column style="width:32px">
+                                <p:column style="width:50px">
                                     <p:rowEditor />
                                 </p:column>
 
