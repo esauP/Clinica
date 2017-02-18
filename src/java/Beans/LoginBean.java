@@ -61,11 +61,34 @@ public class LoginBean implements Serializable {
         context.addCallbackParam("Logeado", loggedIn);
     }
 
-    public void validarSesionAdmin() {
+    public void validarSesionAdminHome() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
 
+            if (pers == null) {
+                context.getExternalContext().redirect("error.html");
+            }
+            if (pers.getRole() != 1) {
+                if (pers.getRole() == 2) {
+                    context.getExternalContext().redirect("error.html");
+                }
+                if (pers.getRole() == 3) {
+                    context.getExternalContext().redirect("error.hmtl");
+                }
+                if (pers.getRole() == 4) {
+                    context.getExternalContext().redirect("error.html");
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void validarSesionBills() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
             if (pers == null) {
                 context.getExternalContext().redirect("error.html");
             }
@@ -77,11 +100,80 @@ public class LoginBean implements Serializable {
                     context.getExternalContext().redirect("");
                 }
                 if (pers.getRole() == 4) {
-                    context.getExternalContext().redirect("");
+                    context.getExternalContext().redirect("error.html");
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void validarSesionPets() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
+            if (pers == null) {
+                context.getExternalContext().redirect("error.html");
+            }
+            if (pers.getRole() != 1) {
+                if (pers.getRole() == 2) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 3) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 4) {
+                    context.getExternalContext().redirect("error.html");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void validarSesionConsultation() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
+            if (pers == null) {
+                context.getExternalContext().redirect("error.html");
+            }
+            if (pers.getRole() != 1) {
+                if (pers.getRole() == 2) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 3) {
+                    context.getExternalContext().redirect("error.html");
+                }
+                if (pers.getRole() == 4) {
+                    context.getExternalContext().redirect("error.html");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void validarSesionDates(){
+         try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
+            if (pers == null) {
+                context.getExternalContext().redirect("error.html");
+            }
+            if (pers.getRole() != 1) {
+                if (pers.getRole() == 2) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 3) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 4) {
+                    context.getExternalContext().redirect("error.html");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
