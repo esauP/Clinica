@@ -18,7 +18,7 @@ import pojo.*;
  *
  * @author neuhaus
  */
-public class LDocument {
+public class LDocument extends ConexionDB {
 
     public List<Doc> getDocuments() throws SQLException {
         List<Doc> listadoc = new ArrayList<Doc>();
@@ -50,7 +50,7 @@ public class LDocument {
         try {
             //Llamada a la funcion
             String sql = "{ ? = call addDoc (?,?,?,?) }";
-            CallableStatement cStmt = conn.prepareCall(sql);
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
@@ -77,7 +77,7 @@ public class LDocument {
         try {
             //Llamada a la funcion
             String sql = "{ ? = call updateDoc (?,?,?,?,?) }";
-            CallableStatement cStmt = conn.prepareCall(sql);
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
@@ -105,7 +105,7 @@ public class LDocument {
         try {
             //Llamada a la funcion
             String sql = "{ ? = call deleteDoc (?) }";
-            CallableStatement cStmt = conn.prepareCall(sql);
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada

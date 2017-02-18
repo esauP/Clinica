@@ -57,7 +57,4 @@ public class ConexionDB {
         }
     }
 
-    public CallableStatement prepareCall(String sql) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
