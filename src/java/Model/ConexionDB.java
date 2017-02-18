@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -54,5 +55,9 @@ public class ConexionDB {
         if (conexion != null) {
             conexion.close();
         }
+    }
+
+    public CallableStatement prepareCall(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
