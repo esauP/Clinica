@@ -46,7 +46,7 @@ public class VaccinesBean {
 
     public void deleteVaccine(int idvac) throws SQLException {
         LVaccines lv = new LVaccines();
-        lv.deleteVacines(vacuna.getIdvac());
+        lv.deleteVacines(idvac);
     }
 
     public void onRowEdit(RowEditEvent event) throws SQLException {

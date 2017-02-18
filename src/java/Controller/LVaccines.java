@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pojo.Vaccines;
 
 /**
@@ -119,4 +121,17 @@ public class LVaccines extends ConexionDB {
         return success;
     }
 
+    public static void main (String[] args){
+        LVaccines d = new LVaccines();
+        try {
+            if (d.addVacines(1, "2020-01-01", "21:19", "Polivalente")==true){
+                System.out.println("bien");
+            } else {
+                System.out.println("error");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+                    
+        }
+    }
 }
