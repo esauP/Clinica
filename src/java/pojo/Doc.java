@@ -14,7 +14,7 @@ public class Doc  implements java.io.Serializable {
      private int idcons;
      private String date_doc;
      private String description;
-     private byte[] fileattached;
+     public byte[] fileattached;
      private Consultation consultation;
 
     public Doc() {

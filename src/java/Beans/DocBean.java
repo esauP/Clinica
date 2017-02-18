@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.annotation.MultipartConfig;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
 import pojo.*;
@@ -25,6 +26,7 @@ import pojo.*;
 @Named(value = "docBean")
 @ManagedBean
 @RequestScoped
+@MultipartConfig(maxFileSize = 10*1024*1024,maxRequestSize = 20*1024*1024,fileSizeThreshold = 5*1024*1024)
 public class DocBean {
 
     private List<Doc> listadoc;
@@ -40,6 +42,7 @@ public class DocBean {
         if (file != null) {
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            docu.setFileattached(file.getContents());
         }
     }
 

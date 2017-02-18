@@ -57,7 +57,7 @@
                         </h:form>
 
                         <p:dialog header="Datos" widgetVar="wdlgDatosd" id="dlgDatosd">
-                            <h:form id="formularioD">
+                            <h:form id="formularioD" enctype="multipart/form-data">
 
                                 <p:outputLabel for="txtidconsd" value="IdConsulta" />
                                 <p:inputText id="txtidconsd" value="#{docBean.docu.idcons}" required="true" />
@@ -69,7 +69,7 @@
                                 <p:inputText id="descripd" value="#{docBean.docu.description}" required="false" />
 
                                 <p:outputLabel for="filed" value="Fichero adjunto" />
-                                <p:fileUpload id="filed" value="#{docBean.docu.fileattached}" mode="simple" required="true"/>
+                                <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
                                 <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
                                 
                                 <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}" update=":tablaD:ConsultasD" />
