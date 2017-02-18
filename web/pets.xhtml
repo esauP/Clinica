@@ -82,7 +82,7 @@
                                 <h:form id="tablepets">
                                     <p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{petsBean.listamascotas}" rows = "5" paginator = "true"
                                                  paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate = "5,10,15,20,25">
+                                                 rowsPerPageTemplate = "5,10,15,20,25" editable="true" >
                                         <f:facet name = "header">Listado de Mascotas</f:facet>
 
                                         <p:ajax event="rowEdit" listener="#{petsBean.onRowEdit}"  />
@@ -142,7 +142,7 @@
                                         <p:inputText id="color" value="#{petsBean.petM.colour}" required="true" placeholder="* Color"/>
                                     </p>
                                     <p>
-                                        <p:inputMask id="birth" value="#{petsBean.petM.birthDate}" required="true" placeholder="* Fecha Nac" mask="9999-99-99"/>
+                                        <p:inputMask id="birth" value="#{petsBean.petM.birthDate}" required="true" placeholder="* Fecha Nac" mask="99-99-9999"/>
                                     </p>
                                     <p>
                                         <p:selectOneRadio id="genderRadio" value="#{petsBean.petM.gender}" required="true">

@@ -30,7 +30,7 @@
                                     <div  >
                                         <p>
                                             <p:inputText value="#{loginBean.username}" placeholder="Usuario" />
-                                            <p:inputText value="#{loginBean.password}" placeholder="Contraseña" />
+                                            <p:password value="#{loginBean.password}" placeholder="Contraseña" />
                                         </p>
                                         <span class="login-btn">
                                             <p:commandButton actionListener="#{loginBean.logear(event)}" value="Iniciar Sesion"  update=":growl" oncomplete="handleLoginRequest(xhr, status, args)"/>
