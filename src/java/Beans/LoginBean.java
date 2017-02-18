@@ -34,7 +34,8 @@ public class LoginBean implements Serializable {
 
     /**
      * Metodo para acceder al servicio
-     * @param event 
+     *
+     * @param event
      */
     public void logear(ActionEvent event) {
         RequestContext context = RequestContext.getCurrentInstance();
@@ -60,13 +61,24 @@ public class LoginBean implements Serializable {
         context.addCallbackParam("Logeado", loggedIn);
     }
 
-    public void validarSesion() {
+    public void validarSesionAdmin() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
 
             if (pers == null) {
                 context.getExternalContext().redirect("error.html");
+            }
+            if (pers.getRole() != 1) {
+                if (pers.getRole() == 2) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 3) {
+                    context.getExternalContext().redirect("");
+                }
+                if (pers.getRole() == 4) {
+                    context.getExternalContext().redirect("");
+                }
             }
         } catch (Exception e) {
 

@@ -16,28 +16,6 @@ import pojo.Person;
  */
 public class Login {
 
-    public Boolean consulta(String dni, String password) {
-        ConexionDB d = new ConexionDB();
-        Person ps = new Person();
-
-        try {
-            PreparedStatement pstm = d.getConexion().prepareStatement("SELECT * FROM person WHERE idperson='" + dni
-                    + "' AND password='" + password + "'");
-            ResultSet res = pstm.executeQuery();
-            while (res.next()) {
-                ps.setIdperson(res.getString("idperson"));
-                ps.setPassword(res.getString("password"));
-                ps.setRole(res.getInt("role"));
-            }
-            d.desconectar();
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            return false;
-        }
-
-    }
-
     public static Person getConectado(String dni, String password) {
         ConexionDB d = new ConexionDB();
         Person ps = new Person();
