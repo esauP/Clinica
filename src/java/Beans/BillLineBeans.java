@@ -49,9 +49,22 @@ public class BillLineBeans {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    
     public BillLineBeans() throws SQLException{
         listalineasfac = LBillLine.getList();
+    }
+    
+     public void AddLine() throws SQLException {
+        LBillLine.addLinea(blines.getId(), bill.getIdbill(), products.getIdproducts(), 
+                blines.getQuantity(), blines.getPrice(), blines.getTaxes(), blines.getDiscount(), 
+                pets.getIdpets(), blines.getObservations());
+        FacesMessage msg = new FacesMessage("Línea Insertada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void DeleteLine() throws SQLException {
+        LBillLine.deleteBillLine(blines.getId());
+        FacesMessage msg = new FacesMessage("Línea Eliminada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public int getId() {

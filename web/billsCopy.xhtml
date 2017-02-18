@@ -28,15 +28,15 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="adminHome.html"><img src="img/logo.png" alt="logo"/></a>
+            <a class="navbar-brand" href="adminHome.xhtml"><img src="img/logo.png" alt="logo"/></a>
           </div>
           <div class="navbar-collapse collapse ">
             <ul class="nav navbar-nav">
               <li><a href="pets.xhtml">Mascotas</a></li>
               <li><a href="consultation.xhtml">Consulta | Historial</a></li>
-              <li><a href="dates.html">Citas</a></li>
+              <li><a href="dates.xhtml">Citas</a></li>
               <li><a href="bills.xhtml">Facturación</a></li>
-              <li><a href="vaccines.html">Vacunas</a></li>
+              <li><a href="vaccines.xhtml">Vacunas</a></li>
               <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
             </ul>
           </div>
@@ -52,27 +52,26 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         <div class="skill-home"> <div class="skill-home-solid clearfix">
           <div class="col-md-3 text-left">
             <h3>Lista de productos y servicios</h3>
-            <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
+            <!--aquí iría el tree-->
           </div>
           <div class="col-md-9 text-left">
             <div class="billInfo">
               <h:form id="insertBill">
-              <p:autoComplete id = "txtnombre" value = "#{personBean.namePer}" completeMethod = "#{personBean.AutocompletarNombre}"
-              placeholder="* Nombre Apellidos" required="true"/>
+              <p:autoComplete id="txtnombre" value="#{personBean.pers.namePer}" completeMethod="#{personBean.AutocompletarNombre}" placeholder="* Nombre Apellidos" required="true"  />
               <p:spacer width="20"  height="0"/>
               <!-- combobox de mascotas no está implementado -->
               <p:growl id = "msgs" showDetail = "true" />
               <p:panel style = "margin-bottom:10px;">
               <h:panelGrid columns="2" cellpadding="5">
-              <p:outputLabel for="pets" value="Nombre Mascota: " />
               <p:selectOneMenu id = "pets"  style="width:150px">
               <f:selectItem itemLabel="Selecciona Mascota" noSelectionOption="true" />
               <f:selectItems  />
             </p:selectOneMenu>
           </h:panelGrid>
         </p:panel>
-        <p:separator />
-        <p:commandButton value="Buscar" update="msgs"  icon="ui-icon-check" />
+          <p:commandButton value="Buscar" update="msgs"  icon="ui-icon-check" />
+        <p:spacer width="20"  height="0"/>
+
         <!-- fin del combobox de mascotas-->
 
         <h:outputText id = "idBill" value = "#{billBean.idbill}"  />
@@ -86,64 +85,85 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
   </div>
 
   <!-- tabla con las líneas de factura -->
-  <div class="table-responsive">
-    <h:form id="tablebills">
-    <p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{billLineBean.listalineasfac}" rows = "5" paginator = "true"
-    paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-    rowsPerPageTemplate = "5,10,15,20,25">
-        <f:facet name = "header">Factura</f:facet>
+  <div>
+  <h:form id="tablaFacturas">
+      <p:dataTable id="Facturas" var="fact" value="#{billLineBeans.listalineasfac}" editable="true" style="margin-bottom:20px">
+          <f:facet name="header">Factura</f:facet>
 
-    <p:ajax event="rowEdit" listener="#{billBean.onRowEdit}"  />
-    <p:ajax event="rowEditCancel" listener="#{billBean.onRowCancel}" />
+          <p:ajax event="rowEdit" listener="#{billLineBeans.onRowEdit}"  />
+          <p:ajax event="rowEditCancel" listener="#{billLineBeans.onRowCancel}" />
 
-    <p:column headerText = "Cliente">
-    <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{billBean.nombreP}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{billBean.nombreP}" style="width:100%" label="Cliente"/></f:facet>
-    </p:cellEditor>
-    </p:column>
-    <p:column headerText = "Producto">
-        <h:outputText value = "#{pet.gender}"/>
-    <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{pet.gender}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.gender}" style="width:100%" label="Producto"/></f:facet>
-    </p:cellEditor>
-    </p:column>
-    <p:column headerText = "Cantidad">
-    <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{billLineBean.quantity}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{billLineBean.quantity}" style="width:100%" label="Cantidad"/></f:facet>
-    </p:cellEditor>
-    </p:column>
-    <p:column headerText = "Precio">
-    <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{billLineBean.price}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{billLineBean.price}" style="width:100%" label="Precio"/></f:facet>
-    </p:cellEditor>
-    </p:column>
-    <p:column headerText = "Descuento">
-    <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{billLineBean.discount}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{billLineBean.discount}" style="width:100%" label="Descuento"/></f:facet>
-    </p:cellEditor>
-    </p:column>
-    <p:column headerText = "Total">
-    <!-- introducir fórmula para calcular el total (precio - descuento) * cantidad -->
-    <p:cellEditor>
-        <f:facet name="output"><h:outputText value="#{pet.birthDate}" /></f:facet>
-        <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Total"/></f:facet>
-    </p:cellEditor>
-    </p:column>
-    <p:column style="width:32px">
-    <p:rowEditor />
-    </p:column>
-    </p:dataTable>
-    </h:form>
+          <p:column headerText="IdLinea">
+              <h:outputText value="#{fact.idbill_lines}" />
+          </p:column>
+
+          <p:column headerText="IdFactura">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.idbill}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.idbill}" style="width:100%" label="idBill"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Producto">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.idproduct}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.idproduct}" style="width:100%" label="idProd"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Cantidad">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.quantity}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.quantity}" style="width:100%" label="quantity"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Precio">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.price}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.price}" style="width:100%" label="price"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="IVA">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.taxes}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.taxes}" style="width:100%" label="tax"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Descuento">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.discount}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.discount}" style="width:100%" label="descuento"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Mascota">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.idpet}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.idpet}" style="width:100%" label="pet"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Observaciones">
+              <p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{fact.observations}" /></f:facet>
+                  <f:facet name="input"><p:inputText value="#{fact.observations}" style="width:100%" label="obs"/></f:facet>
+              </p:cellEditor>
+          </p:column>
+
+          <p:column headerText="Eliminar">
+              <p:commandLink value="Eliminar"  actionListener="#{BillLineBeans.DeleteLine(fact.idbill_lines)}" update=":tablaFacturas:Facturas"/>
+          </p:column>
+
+      </p:dataTable>
+  </h:form>
+</div>
 <!-- fin de la tabla -->
-  </div>
-    <p:commandButton value="Guardar" actionListener="#{billBean.AddBill()}" />
-    <p:commandButton value="Imprimir Factura"  />
-    <p:commandButton value="Salir" />
+    <p:commandButton value="Guardar" actionListener="#{billBean.AddBill()}" /><p:spacer width="20"  height="0"/>
+    <p:commandButton value="Imprimir Factura"  /><p:spacer width="20"  height="0"/>
+    <p:commandButton value="Salir" /><p:spacer width="20"  height="0"/>
 
 </div>
 </div></div></div>
