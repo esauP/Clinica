@@ -61,6 +61,18 @@ public class LoginBean implements Serializable {
         context.addCallbackParam("Logeado", loggedIn);
     }
 
+    public void desloguear(ActionEvent event) {
+        FacesContext fcontext = FacesContext.getCurrentInstance();
+        Person pers = new Person();
+        try {
+            pers = null;
+            fcontext.getExternalContext().getSessionMap().put("usuario", pers);
+            fcontext.getExternalContext().redirect("faces/index.xhtml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void validarSesionAdminHome() {
         try {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -71,13 +83,13 @@ public class LoginBean implements Serializable {
             }
             if (pers.getRole() != 1) {
                 if (pers.getRole() == 2) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
                 if (pers.getRole() == 3) {
-                    context.getExternalContext().redirect("error.hmtl");
+                    context.getExternalContext().redirect("nopermission.hmtl");
                 }
                 if (pers.getRole() == 4) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
             }
         } catch (Exception e) {
@@ -100,7 +112,7 @@ public class LoginBean implements Serializable {
                     context.getExternalContext().redirect("");
                 }
                 if (pers.getRole() == 4) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
             }
         } catch (Exception e) {
@@ -123,7 +135,7 @@ public class LoginBean implements Serializable {
                     context.getExternalContext().redirect("");
                 }
                 if (pers.getRole() == 4) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
             }
         } catch (Exception e) {
@@ -143,19 +155,19 @@ public class LoginBean implements Serializable {
                     context.getExternalContext().redirect("");
                 }
                 if (pers.getRole() == 3) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
                 if (pers.getRole() == 4) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void validarSesionDates(){
-         try {
+
+    public void validarSesionDates() {
+        try {
             FacesContext context = FacesContext.getCurrentInstance();
             Person pers = (Person) context.getExternalContext().getSessionMap().get("usuario");
             if (pers == null) {
@@ -169,7 +181,7 @@ public class LoginBean implements Serializable {
                     context.getExternalContext().redirect("");
                 }
                 if (pers.getRole() == 4) {
-                    context.getExternalContext().redirect("error.html");
+                    context.getExternalContext().redirect("nopermission.html");
                 }
             }
         } catch (Exception e) {

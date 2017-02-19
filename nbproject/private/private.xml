@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Netbeans/Projects/Clinica/web/billsCopy.xhtml</file>
+            <file>file:/E:/Netbeans/Projects/Clinica/web/indexP.xhtml</file>
+            <file>file:/E:/Netbeans/Projects/Clinica/web/pets.xhtml</file>
+            <file>file:/E:/Netbeans/Projects/Clinica/src/java/Controller/LPets.java</file>
+            <file>file:/E:/Netbeans/Projects/Clinica/src/java/Beans/PetsBean.java</file>
         </group>
     </open-files>
 </project-private>
