@@ -8,7 +8,6 @@ package Beans;
 import Controller.LBill;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -16,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import pojo.Bill;
+import pojo.Pets;
 
 /**
  *
@@ -40,7 +40,7 @@ public class BillBean implements Serializable{
      * @throws SQLException
      */
     public void AddBill() throws SQLException {
-        LBill.addBill(fac.getIdbill(), fac.getIdper(), fac.getDate(), fac.getObservations());
+        LBill.addBill(fac.getIdper(), fac.getDate(), fac.getObservations());
         FacesMessage msg = new FacesMessage("Factura Insertada", fac.getIdbill().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -55,6 +55,15 @@ public class BillBean implements Serializable{
         FacesMessage msg = new FacesMessage("Factura Eliminada", fac.getIdbill().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+    
+    public void ListPets() throws SQLException{
+        LBill.listPets();
+    }
+    
+    public void ListProd() throws SQLException{
+        LBill.listProd();
+    }
+    
     public BillBean() throws SQLException{
         listafacturas = LBill.getList();
     }

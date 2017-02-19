@@ -25,7 +25,7 @@ public class LBill {
         ConexionDB conn = new ConexionDB();
 
         try {
-            String sql = "Select idbill, idpers, date, observations from bill";
+            String sql = "Select idbill, idper, date_bill, observations from bill";
             PreparedStatement ps = conn.getConexion().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
@@ -56,7 +56,7 @@ public class LBill {
      * @return
      * @throws SQLException 
      */
-    public static boolean addBill(int idBill, String idPer, String date, String obser) throws SQLException {
+    public static boolean addBill(String idPer, String date, String obser) throws SQLException {
         boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
@@ -66,10 +66,9 @@ public class LBill {
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
-            cStmt.setInt(2, idBill);
-            cStmt.setString(3, idPer);
-            cStmt.setString(4, date);
-            cStmt.setString(5, obser);
+            cStmt.setString(2, idPer);
+            cStmt.setString(3, date);
+            cStmt.setString(4, obser);
             //se ejecuta la funcion
             cStmt.execute();
 
@@ -117,4 +116,51 @@ public class LBill {
         return success;
     }
     
+    /**
+     * Lista de los nombres de las mascotas para incluir en un comboBox
+     * @return
+     * @throws SQLException 
+     */
+    public static boolean listPets() throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada al procedimiento
+            String sql = "{ ? = call listarMascotas () }";
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            cStmt.execute();
+            if (cStmt.getInt(1) == 0) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return success;
+    }
+    
+    /**
+     * Lista de los nombres de los productos para incluir en un comboBox
+     * @return
+     * @throws SQLException 
+     */
+    public static boolean listProd() throws SQLException {
+        boolean success = false;
+        ConexionDB conn = new ConexionDB();
+        try {
+            //Llamada al procedimiento
+            String sql = "{ ? = call listarProductos () }";
+            CallableStatement cStmt = conn.getConexion().prepareCall(sql);
+            cStmt.execute();
+            if (cStmt.getInt(1) == 0) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return success;
+    }
 }
