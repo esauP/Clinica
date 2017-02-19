@@ -35,7 +35,15 @@
                                 <li><a href="dates.html">Citas</a></li>
                                 <li><a href="bills.html">Facturación</a></li>
                                 <li><a href="vaccines.html">Vacunas</a></li>
-                                <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
+                                <li>
+                                    <a>
+                                        <h:form>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}">
+                                                <h:graphicImage name="img/salir.png" />
+                                            </p:commandButton>
+                                        </h:form>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
