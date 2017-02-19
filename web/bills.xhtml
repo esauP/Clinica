@@ -35,7 +35,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
           <ul class="nav navbar-nav">
             <li><a href="pets.xhtml">Mascotas</a></li>
             <li><a href="consultations.xhtml">Consulta | Historial</a></li>
-            <li><a href="dates.xhtml">Citas</a></li>
+            <li><a href="construction.html">Citas</a></li>
             <li><a href="bills.xhtml">Facturación</a></li>
             <li><a href="vaccines.xhtml">Vacunas</a></li>
             <li>
@@ -61,8 +61,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
           <h3>Lista de productos y servicios</h3>
           <!--Comienzo del list de búsqueda-->
           <h:form id="formularioV">
-          <p:selectOneMenu value="#{productBean.prod.name}">
-          <f:selectItems value="#{productBean.listamaestra}"/>
+          <p:selectOneMenu value="{#productBean.prod.getName()}">
+          <f:selectItems value="#{productBean.listproducts}"/>
         </p:selectOneMenu>
       </h:form>
       <p:spacer width="20"  height="0"/>
@@ -71,20 +71,18 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
     <div class="col-md-9 text-left">
       <div class="billInfo">
         <h:form id="insertBill">
-
-        <p:spacer width="20"  height="0"/>
         <!-- combobox de mascotas  -->
         <p:growl id = "msgs" showDetail = "true" />
-        <p:panel style = "margin-bottom:10px;">
+        <p:panel>
         <h:panelGrid columns="10" cellpadding="5">
         <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
-        <p:selectOneMenu value="#petsBean.petM.getName()}">
+        <p:selectOneMenu value="{#petsBean.petM.getName()}">
         <f:selectItems value="#{petsBean.listamascotas}"/>
       </p:selectOneMenu>
       <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
       <!-- fecha del día para la factura -->
       <h:outputText value="#{now}">
-      <f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+      <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
     </h:outputText>
     <!-- fin de la fecha -->
   </h:panelGrid>
@@ -107,20 +105,20 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
   <p:ajax event="rowEditCancel" listener="#{billLineBeans.onRowCancel}" />
 
   <p:column headerText="Linea">
-  <h:outputText value="#{fact.idbill_lines}" />
+  <h:outputText value="#{fact.id}" />
 </p:column>
 
 <p:column headerText="Factura">
 <p:cellEditor>
-<f:facet name="output"><h:outputText value="#{fact.idbill}" /></f:facet>
-<f:facet name="input"><p:inputText value="#{fact.idbill}" style="width:100%" label="idBill"/></f:facet>
+<f:facet name="output"><h:outputText value="#{fact.bill.idbill}" /></f:facet>
+<f:facet name="input"><p:inputText value="#{fact.bill.idbill}" style="width:100%" label="idBill"/></f:facet>
 </p:cellEditor>
 </p:column>
 
 <p:column headerText="Producto">
 <p:cellEditor>
-<f:facet name="output"><h:outputText value="#{fact.idproduct}" /></f:facet>
-<f:facet name="input"><p:inputText value="#{fact.idproduct}" style="width:100%" label="idProd"/></f:facet>
+<f:facet name="output"><h:outputText value="#{fact.products.name}" /></f:facet>
+<f:facet name="input"><p:inputText value="#{fact.products.name}" style="width:100%" label="idProd"/></f:facet>
 </p:cellEditor>
 </p:column>
 
@@ -154,8 +152,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <p:column headerText="Mascota">
 <p:cellEditor>
-<f:facet name="output"><h:outputText value="#{fact.idpet}" /></f:facet>
-<f:facet name="input"><p:inputText value="#{fact.idpet}" style="width:100%" label="pet"/></f:facet>
+<f:facet name="output"><h:outputText value="#{fact.pets.name}" /></f:facet>
+<f:facet name="input"><p:inputText value="#{fact.pets.name}" style="width:100%" label="pet"/></f:facet>
 </p:cellEditor>
 </p:column>
 
@@ -209,10 +207,10 @@ var modal = document.getElementById('id01');
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
+  if (event.target === modal) {
     modal.style.display = "none";
   }
-}
+};
 </script>
 <script src="js/jquery.js"></script>
 <script src="js/jquery.easing.1.3.js"></script>

@@ -68,9 +68,11 @@ public class Products  implements java.io.Serializable {
     public void setBilllLineses(Set billlLineses) {
         this.billlLineses = billlLineses;
     }
-
-
-
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
 }
 

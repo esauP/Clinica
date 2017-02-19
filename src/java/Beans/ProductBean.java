@@ -26,6 +26,10 @@ public class ProductBean {
 
     private List<Products> listproducts;
     private List<String> listamaestra;
+    private Integer idproducts;
+    private String name;
+    private double price;
+    private int taxes;
     private Products prod = new Products();
     
     
@@ -73,6 +77,40 @@ public class ProductBean {
     public void setProd(Products prod) {
         this.prod = prod;
     }
+
+    public Integer getIdproducts() {
+        return idproducts;
+    }
+
+    public void setIdproducts(Integer idproducts) {
+        this.idproducts = idproducts;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getTaxes() {
+        return taxes;
+    }
+
+    public void setTaxes(int taxes) {
+        this.taxes = taxes;
+    }
+    
+    
     
     public List<String> AutocompletarNameProd(String text) {
         // Assumed search using the startsWith
