@@ -52,7 +52,7 @@ public class DocBean {
 
     public void addDoc() throws SQLException {
         LDocument ld = new LDocument();
-        ld.addDoc(docu.getIdcons(), docu.getDate_doc(), docu.getDescription(), docu.getFileattached());
+        ld.addDoc(docu.getIdcons(), docu.getDate_doc(), docu.getDescription(), docu.getFileattached2());
     }
 
     public void deleteDoc(int Iddoc) throws SQLException {
@@ -70,7 +70,7 @@ public class DocBean {
         LDocument ld = new LDocument();
         Doc docum = (Doc) event.getObject();
         FacesMessage msg = new FacesMessage("Documento Editado", String.valueOf(docum.getIddoc()));
-        ld.updateDoc(docum.getIddoc(), docum.getIdcons(), docum.getDate_doc(), docum.getDescription(), docum.getFileattached());
+        ld.updateDoc(docum.getIddoc(), docum.getIdcons(), docum.getDate_doc(), docum.getDescription(), docum.getFileattached2());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 

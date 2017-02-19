@@ -32,10 +32,10 @@
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
                                 <li><a href="pets.xhtml">Mascotas</a></li>
-                                <li><a href="consultation.xhtml">Consulta | Historial</a></li>
-                                <li><a href="dates.html">Citas</a></li>
-                                <li><a href="bills.html">Facturación</a></li>
-                                <li><a href="vaccines.html">Vacunas</a></li>
+                                <li><a href="consultations.xhtml">Consulta | Historial</a></li>
+                                <li><a href="construction.html">Citas</a></li>
+                                <li><a href="bills.xhtml">Facturación</a></li>
+                                <li><a href="vaccines.xhtml">Vacunas</a></li>
                                 <li>
                                     <a>
                                         <h:form>
@@ -331,8 +331,8 @@
                                         </tr>
                                     </table>
 
-                                    <p:commandButton value="Añadir nueva consulta" actionListener="#{vaccinesBean.addVaccine()}" update=":tablaV:ConsultasV" />
-                                    <p:commandButton value="Cerrar Ventan" actionListener="#{vaccinesBean.listar()}" oncomplete="PF('wdlgDatosV').hide()" update=":tablaV:ConsultasV"/>
+                                    <p:commandButton value="Añadir vacuna" actionListener="#{vaccinesBean.addVaccine()}" update=":tablaV:ConsultasV" />
+                                    <p:commandButton value="Cerrar Ventana" actionListener="#{vaccinesBean.listar()}" oncomplete="PF('wdlgDatosV').hide()" update=":tablaV:ConsultasV"/>
                                 </h:form>
                             </p:dialog>
                         </div>

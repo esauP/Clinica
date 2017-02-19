@@ -17,6 +17,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import pojo.Consultation;
 import pojo.Person;
 import pojo.Pets;
 
@@ -41,6 +42,7 @@ public class PetsBean implements Serializable {
 
     private final List<Pets> listamascotas;
     private List<Person> listapersonas;
+    private List<Consultation> listconsult;
 
     /**
      * Creates a new instance of PetsBean
@@ -50,6 +52,7 @@ public class PetsBean implements Serializable {
     public PetsBean() throws SQLException {
         listamascotas = LPets.getPets();
         listapersonas = LPerson.getPeople();
+
     }
 
     /**
@@ -219,6 +222,28 @@ public class PetsBean implements Serializable {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    public List<Person> getListapersonas() {
+        return listapersonas;
+    }
+
+    public void setListapersonas(List<Person> listapersonas) {
+        this.listapersonas = listapersonas;
+    }
+
+    public List<Consultation> getListconsult() {
+        return listconsult;
+    }
+
+    public void setListconsult(List<Consultation> listconsult) {
+        this.listconsult = listconsult;
+    }
+
+    public void getconsultationidPet(Integer idpet) throws SQLException {
+        List<Consultation> aux = new ArrayList<Consultation>();
+        aux = LPets.getHistorial(idpet);
+        this.listconsult = aux;
     }
 
 }

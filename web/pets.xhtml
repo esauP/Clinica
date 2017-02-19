@@ -16,7 +16,6 @@
         <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet"/>
         <link href="css/style.css" rel="stylesheet" />
         <f:event type="preRenderView" listener="#{loginBean.validarSesionPets()}"/>
-
     </h:head>
     <h:body>
         <div id="wrapper">
@@ -34,12 +33,18 @@
                         </div>
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
-                                <li><a href="pets.xhtml">Mascotas</a></li>
-                                <li><a href="consultation.xhtml">Consulta | Historial</a></li>
-                                <li><a href="dates.html">Citas</a></li>
-                                <li><a href="bills.html">Facturación</a></li>
-                                <li><a href="vaccines.html">Vacunas</a></li>
-                                <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
+                                 <li><a href="pets.xhtml">Mascotas</a></li>
+                                <li><a href="consultations.xhtml">Consulta | Historial</a></li>
+                                <li><a href="construction.html">Citas</a></li>
+                                <li><a href="bills.xhtml">Facturación</a></li>
+                                <li><a href="vaccines.xhtml">Vacunas</a></li>
+                                <li>
+                                    <a>
+                                        <h:form>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
+                                        </h:form>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -222,7 +227,40 @@
                                         <p:column style="width:32px">
                                             <p:rowEditor />
                                         </p:column>
+
+                                        <p:column headerText="Histórico">
+                                            <p:commandLink value="Histórico"  actionListener="#{petsBean.getconsultationidPet(pet.idpets)}" onclick="PF('wdlgDatos').show();" />
+                                        </p:column>
                                     </p:dataTable>
+
+                                    <p:dialog header="DatosH" widgetVar="wdlgDatos" id="dlgDatos">
+                                        <h:form id="tablaH">
+                                            <p:dataTable id="Consultas" var="conslt" value="#{consultationBean.listaconsultas}" editable="true" style="margin-bottom:20px">
+                                                <f:facet name="header">Historial clínico de la mascota</f:facet>
+                                                <p:column headerText="IdConsulta">
+                                                    <h:outputText value="#{conslt.idcons}" />
+                                                </p:column>
+                                                <p:column headerText="idMascota">
+                                                    <f:facet name="output"><h:outputText value="#{conslt.idpets}" /></f:facet>
+                                                </p:column>
+                                                <p:column headerText="Fecha_Consulta">
+                                                    <f:facet name="output"><h:outputText value="#{conslt.date}" /></f:facet>
+                                                </p:column>
+                                                <p:column headerText="Motivo">
+                                                    <f:facet name="output"><h:outputText value="#{conslt.reason}" /></f:facet>
+                                                </p:column>
+                                                <p:column headerText="Diagnóstico">
+                                                    <f:facet name="output"><h:outputText value="#{conslt.diagnosis}" /></f:facet>
+                                                </p:column>
+                                                <p:column headerText="Tratamiento">
+                                                    <f:facet name="output"><h:outputText value="#{conslt.treatment}" /></f:facet>
+                                                </p:column>
+                                                <p:column headerText="Observaciones">
+                                                    <f:facet name="output"><h:outputText value="#{conslt.observation}" /></f:facet>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </p:dialog>
 
                                     <div><br/><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Histórico Servicios</button></div>
                                 </h:form>
@@ -244,22 +282,9 @@
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
-                                <table id="tableHomeAdmin" class="table table-hover">
-                                    <tr>
-                                        <th>Mascota</th>
-                                        <th>Responsable</th>
-                                        <th>Fecha</th>
-                                        <th>Servicio</th>
-                                        <th>Observaciones</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Guau</td>
-                                        <td>Macarena Jiménez</td>
-                                        <td>15-01-2017</td>
-                                        <td>Lavado</td>
-                                        <td>Antiparasitario</td>
-                                    </tr>
-                                </table>
+                                <!-- contenido -->
+
+                                <!-- contenido -->
                             </div>
                         </div>
                         <div class="modal-footer">

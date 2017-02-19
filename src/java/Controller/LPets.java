@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import pojo.Consultation;
 import pojo.Person;
 import pojo.Pets;
 
@@ -119,7 +120,7 @@ public class LPets extends ConexionDB {
         boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
-             String day, mon, year, birth_pet;//creamos las variables necesarias
+            String day, mon, year, birth_pet;//creamos las variables necesarias
             StringTokenizer g = new StringTokenizer(birth_pt, "-");//pasamos el stringTokenizer para separar los tres tokens 
             day = g.nextToken();
             mon = g.nextToken();
@@ -176,7 +177,7 @@ public class LPets extends ConexionDB {
         }
         return success;
     }
-    
+
     public List<String> getIdPets() throws SQLException {
         List<String> listapets = new ArrayList<String>();
         try {
@@ -194,6 +195,35 @@ public class LPets extends ConexionDB {
             this.desconectar();
         }
         return listapets;
+    }
+
+    public static List<Consultation> getHistorial(int idpet) throws SQLException {
+        List<Consultation> listPetConsult = new ArrayList<Consultation>();
+        ConexionDB conn = new ConexionDB();
+
+        try {
+            String sql = "Select date_consultation, reason, diagnosis, treatment, observation FROM consultation where idpet='" + idpet + "'";
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Consultation aux = new Consultation();
+                aux.setDate(rs.getString("date_consultation"));
+                aux.setReason(rs.getString("reason"));
+                aux.setDiagnosis(rs.getString("diagnosis"));
+                aux.setTreatment(rs.getString("treatment"));
+                aux.setObservation(rs.getString("observation"));
+                listPetConsult.add(aux);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCause());
+            System.out.println(e.getSQLState());
+            e.printStackTrace();
+
+        } finally {
+            conn.desconectar();
+        }
+        return listPetConsult;
     }
 
 }

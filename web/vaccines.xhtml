@@ -10,7 +10,6 @@
         <meta name="description" content="" />
         <!-- css -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-
         <link href="css/flexslider.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet" />
     </h:head>
@@ -31,16 +30,14 @@
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
                                 <li><a href="pets.xhtml">Mascotas</a></li>
-                                <li><a href="consultation.xhtml">Consulta | Historial</a></li>
-                                <li><a href="dates.html">Citas</a></li>
-                                <li><a href="bills.html">Facturación</a></li>
-                                <li><a href="vaccines.html">Vacunas</a></li>
+                                <li><a href="consultations.xhtml">Consulta | Historial</a></li>
+                                <li><a href="construction.html">Citas</a></li>
+                                <li><a href="bills.xhtml">Facturación</a></li>
+                                <li><a href="vaccines.xhtml">Vacunas</a></li>
                                 <li>
                                     <a>
                                         <h:form>
-                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}">
-                                                <h:graphicImage name="img/salir.png" />
-                                            </p:commandButton>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
                                         </h:form>
                                     </a>
                                 </li>
