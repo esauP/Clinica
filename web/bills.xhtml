@@ -61,23 +61,10 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         <div class="col-md-3 text-left">
           <h3>Lista de productos y servicios</h3>
           <!--Comienzo del list de búsqueda-->
-          <h:form>
-          <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
-          <p:selectOneListbox id="advanced" value="#{selectOneView.theme}"  var="t" filter="true" filterMatchMode="contains">
-          <f:selectItems value="#{selectOneView.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme}" />
-          <p:column>
-          <h:outputText styleClass="ui-theme ui-theme-#{t.name}" />
-        </p:column>
-        <p:column>
-        <h:outputText value="#{t.displayName}" />
-      </p:column>
-    </p:selectOneListbox>
-  </h:panelGrid>
-  <p:separator />
-  <p:commandButton value="Añadir Producto" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-check" />
-  <p:panelGrid columns="2" id="display" columnClasses="label,output">
-</p:panelGrid>
-</h:form>
+          <p:selectOneMenu value="#{productBean.prod.name}">
+              <f:selectItems value="#{productBean.listamaestra}"/>
+          </p:selectOneMenu>
+      <p:spacer width="20"  height="0"/>
 <!--fin del list de búsqueda -->
 </div>
 <div class="col-md-9 text-left">
@@ -91,8 +78,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:panelGrid columns="10" cellpadding="5">
     <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
     <p:selectOneMenu value="#petsBean.petM.getName()}">
-        <f:selectItems value="#{petsBean.listamascotas}"/>
-    </p:selectOneMenu>
+    <f:selectItems value="#{petsBean.listamascotas}"/>
+  </p:selectOneMenu>
   <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
   <!-- fecha del día para la factura -->
   <h:outputText value="#{now}">
