@@ -401,6 +401,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"></button>
                             <h4 class="modal-title">Registrar nueva vacuna</h4>
+
                         </div>
                         <div class="modal-body">
                             <h:form id="formularioV">
@@ -412,8 +413,8 @@
                                                 <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
                                             </td>
                                             <td>
-                                                <p:outputLabel for="txtnamevaccine" value="Nombre vacuna" />
-                                                <p:inputText id="txtnamevaccine" value="#{vaccinesBean.vacuna.name_vaccine}" required="false" />
+                                                <p:outputLabel for="txtnamevaccine" value="Nombre Vacuna" />
+                                                <p:inputText id="txtnamevaccine" value="#{vaccinesBean.vacuna.name_vaccine}" required="true" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -438,8 +439,6 @@
                     </div>
                 </div>
             </div>
-
-
         </section>
         <div id="sub-footer">
             <div class="container">
