@@ -26,7 +26,7 @@ public class LVaccinecal extends ConexionDB {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String text;
-                text = rs.getString("nombre");
+                text = rs.getString("name");
                 listamaestra.add(text);
             }
         } catch (SQLException e) {
@@ -35,6 +35,10 @@ public class LVaccinecal extends ConexionDB {
             this.desconectar();
         }
         return listamaestra;
+    }
+    
+    public static void main (String[] arg){
+        
     }
 
 }

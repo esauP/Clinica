@@ -7,6 +7,8 @@ package Beans;
 
 import Controller.LVaccinecal;
 import Controller.LVaccines;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ import javax.faces.model.SelectItemGroup;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import pojo.Person;
+import pojo.Vaccinecal;
 import pojo.Vaccines;
 
 /**
@@ -33,11 +36,12 @@ public class VaccinesBean {
     private List<Vaccines> listvaccines;
     private List<String> listamaestra;
     private Vaccines vacuna = new Vaccines();
+    private Vaccinecal calendariovacunas = new Vaccinecal();
 
     public VaccinesBean() throws SQLException {
         LVaccines lv = new LVaccines();
-        LVaccinecal lvcal = new LVaccinecal();
         listvaccines = lv.getVaccines();
+        LVaccinecal lvcal = new LVaccinecal();
         listamaestra = lvcal.getVaccines();
     }
 
@@ -88,6 +92,14 @@ public class VaccinesBean {
         this.listvaccines = listvaccines;
     }
 
+    public List<String> getListlistamaestra() {
+        return listamaestra;
+    }
+
+    public void setListlistamaestra(List<String> listamaestra) {
+        this.listamaestra = listamaestra;
+    }
+
     public Vaccines getVacuna() {
         return vacuna;
     }
@@ -95,11 +107,11 @@ public class VaccinesBean {
     public void setVacuna(Vaccines vacuna) {
         this.vacuna = vacuna;
     }
-    
-     public List<String> AutocompletarNameVaccine(String text) {
+
+    public List<String> AutocompletarNameVaccine(String text) {
         // Assumed search using the startsWith
         List<String> queried = new ArrayList<>();
-        for (int i=0; i<this.listamaestra.size(); i++){
+        for (int i = 0; i < this.listamaestra.size(); i++) {
             String nameVac = this.listamaestra.get(i);
             if (nameVac.toLowerCase().startsWith(text) || nameVac.startsWith(text)) {
                 queried.add(nameVac);
@@ -107,7 +119,5 @@ public class VaccinesBean {
         }
         return queried;
     }
-     
-    
 
 }

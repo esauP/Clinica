@@ -67,18 +67,28 @@
                         <p:dialog header="DatosV" widgetVar="wdlgDatosV" id="dlgDatosV">
                             <h:form id="formularioV">
 
+                                <!--
+                                <p:outputLabel for="car" value="Grouping: " />
+                                <p:selectOneMenu id="car" value="#{vaccinesBean.vacuna.name_vaccine}">
+                                    <f:selectItem itemLabel="Select One" itemValue="" />
+                                    <f:selectItems value="#{vaccinesBean.listlistamaestra}" />
+                                </p:selectOneMenu>
+                                -->
+
+
                                 <p:selectOneMenu value="#{vaccinesBean.vacuna.name_vaccine}">
-                                    <f:selectItems value="#{vaccinesBean.listvaccines}"/>
-                                </p:selectOneMenu> 
+                                    <f:selectItems value="#{vaccinesBean.listlistamaestra}"/>
+                                </p:selectOneMenu>
+
 
                                 <p:outputLabel for="txtidpet" value="idPet" />
                                 <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
-                                
+
                                 <!--
                                 <p:outputLabel for="txtnamevaccine" value="Nombre vacuna" />
                                 <p:inputText id="txtnamevaccine" value="#{vaccinesBean.vacuna.name_vaccine}" required="false" />
                                 -->
-                                
+
                                 <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
                                 <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
 
