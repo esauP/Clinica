@@ -115,12 +115,18 @@ public class LPets extends ConexionDB {
         return success;
     }
 
-    public static boolean updatePet(int idpets, String name_pt, String animal_pt, int gender_pt, String race_pt, String colour_pt, String birth_pt, String idper_pt) throws SQLException {
+    public static boolean updatePet(int idpets, String name_pt, String animal_pt, int gender_pt, String race_pt, String colour_pt, String birth_pt) throws SQLException {
         boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
+             String day, mon, year, birth_pet;//creamos las variables necesarias
+            StringTokenizer g = new StringTokenizer(birth_pt, "-");//pasamos el stringTokenizer para separar los tres tokens 
+            day = g.nextToken();
+            mon = g.nextToken();
+            year = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+            birth_pet = year + "-" + mon + "-" + day;//asi cambiamos el formato de fecha     
             //Llamada a la funcion
-            String sql = "{ ? = call updatePet (?,?,?,?,?,?,?,?) }";
+            String sql = "{ ? = call updatePet (?,?,?,?,?,?,?) }";
             CallableStatement cStmt = conn.getConexion().prepareCall(sql);
             //establezco la salida de la funcion
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
@@ -131,8 +137,7 @@ public class LPets extends ConexionDB {
             cStmt.setInt(5, gender_pt);
             cStmt.setString(6, race_pt);
             cStmt.setString(7, colour_pt);
-            cStmt.setString(8, birth_pt);
-            cStmt.setString(9, idper_pt);
+            cStmt.setString(8, birth_pet);
             //se ejecuta la funcion
             cStmt.execute();
 

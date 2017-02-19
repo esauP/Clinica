@@ -30,7 +30,15 @@ public class PetsBean implements Serializable {
 
     private Person person;
     private Pets petM = new Pets();
+
     private String IdPerson;
+    private String namePer;
+    private String address;
+    private String phone;
+    private String email;
+    private String password;
+    private int role;
+
     private final List<Pets> listamascotas;
     private List<Person> listapersonas;
 
@@ -61,7 +69,7 @@ public class PetsBean implements Serializable {
      * @throws SQLException
      */
     public void updatePet() throws SQLException {
-        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), petM.getPerson().getIdperson());
+        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate());
         FacesMessage msg = new FacesMessage("Mascota Actualizada", petM.getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -80,7 +88,8 @@ public class PetsBean implements Serializable {
     public void onRowEdit(RowEditEvent event) throws SQLException {
         Pets petMo = (Pets) event.getObject();
         FacesMessage msg = new FacesMessage("Persona Editada", petMo.getName());
-        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), petM.getPerson().getIdperson());
+        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate());
+        LPerson.updatePersonPets(IdPerson, namePer, address, phone, email, 4);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -162,6 +171,54 @@ public class PetsBean implements Serializable {
 
     public void setIdPerson(String IdPerson) {
         this.IdPerson = IdPerson;
+    }
+
+    public String getNamePer() {
+        return namePer;
+    }
+
+    public void setNamePer(String namePer) {
+        this.namePer = namePer;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
 }

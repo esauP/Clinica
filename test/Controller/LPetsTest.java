@@ -68,7 +68,7 @@ public class LPetsTest {
         String birth_pt = "";
         String idper_pt = "";
         boolean expResult = false;
-        boolean result = LPets.updatePet(idpets, name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt, idper_pt);
+        boolean result = LPets.updatePet(idpets, name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt);
       //  assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
