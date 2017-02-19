@@ -5,16 +5,20 @@
  */
 package Beans;
 
+import Controller.LVaccinecal;
 import Controller.LVaccines;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.TableColumn;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItemGroup;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
+import pojo.Person;
 import pojo.Vaccines;
 
 /**
@@ -27,11 +31,14 @@ import pojo.Vaccines;
 public class VaccinesBean {
 
     private List<Vaccines> listvaccines;
+    private List<String> listamaestra;
     private Vaccines vacuna = new Vaccines();
 
     public VaccinesBean() throws SQLException {
         LVaccines lv = new LVaccines();
+        LVaccinecal lvcal = new LVaccinecal();
         listvaccines = lv.getVaccines();
+        listamaestra = lvcal.getVaccines();
     }
 
     public List listar() throws SQLException {
@@ -88,5 +95,19 @@ public class VaccinesBean {
     public void setVacuna(Vaccines vacuna) {
         this.vacuna = vacuna;
     }
+    
+     public List<String> AutocompletarNameVaccine(String text) {
+        // Assumed search using the startsWith
+        List<String> queried = new ArrayList<>();
+        for (int i=0; i<this.listamaestra.size(); i++){
+            String nameVac = this.listamaestra.get(i);
+            if (nameVac.toLowerCase().startsWith(text) || nameVac.startsWith(text)) {
+                queried.add(nameVac);
+            }
+        }
+        return queried;
+    }
+     
+    
 
 }

@@ -75,4 +75,9 @@ public class Vaccines implements java.io.Serializable {
         this.pets = pets;
     }
 
+    @Override
+    public String toString() {
+        return name_vaccine;
+    }
+
 }
