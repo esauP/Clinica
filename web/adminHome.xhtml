@@ -42,9 +42,7 @@
                                 <li>
                                     <a>
                                         <h:form>
-                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}">
-                                                <h:graphicImage name="img/salir.png" />
-                                            </p:commandButton>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
                                         </h:form>
                                     </a>
                                 </li>
@@ -105,7 +103,7 @@
                 </div></div>
 
         </section>
-
+        <p:spacer height="196"/>
         <div id="sub-footer">
             <div class="container">
                 <div class="row">

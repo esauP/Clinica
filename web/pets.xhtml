@@ -55,7 +55,7 @@
                     <div class="skill-home">
                         <div class="skill-home-solid clearfix">
 
-                            <div class="col-md-9 text-left">
+                            <div class="col-md-12 text-left">
                                 <p:growl id="regis" showDetail="true" />
                                 <h:form id = "formPerson">
 
@@ -79,93 +79,152 @@
                                     </div>
                                 </h:form>
                                 <br/>
+                                <div>
+                                    <h:form id = "formPet">
+                                        <h3>Datos de la Mascota</h3>
+                                        <p>
+                                            <p:inputText id="namePet" value="#{petsBean.petM.name}" required="true" placeholder="* Nombre Mascota" />
+                                            <p:spacer width="20"  height="0"/>
+                                            <p:inputText id="especie" value="#{petsBean.petM.animal}" required="true" placeholder="* Especie"/>
+                                            <p:spacer width="20"  height="0"/>
+                                            <p:inputText id="race" value="#{petsBean.petM.race}" required="true" placeholder="* Raza"/>
+                                            <p:spacer width="20"  height="0"/>
+                                            <p:inputText id="color" value="#{petsBean.petM.colour}" required="true" placeholder="* Color"/>
+                                            <p:spacer width="20"  height="0"/>
+                                            <p:inputMask id="birth" value="#{petsBean.petM.birthDate}" required="true" placeholder="* Fecha Nac" mask="99-99-9999"/>
+                                        </p>
+                                        <p>
+                                            <p:selectOneRadio id="genderRadio" value="#{petsBean.petM.gender}" required="true">
+                                                <f:selectItem itemLabel="Femenino" itemValue="0" />
+                                                <f:selectItem itemLabel="Masculino" itemValue="1" />
+                                            </p:selectOneRadio>
+                                            <p:spacer width="20"  height="0"/>
+                                            <div>
+                                                <p:autoComplete value="#{petsBean.idPerson}" completeMethod="#{petsBean.AutocompletarID}" placeholder="* Dni Responsable" required="true" />
+                                            </div>
+                                        </p>
+                                        <br/>
+                                        <p>
+                                            <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" update=":regis" />
+                                            <p:spacer width="20"  height="0"/>
+                                            <p:commandButton value="Modificar" actionListener="#{petsBean.updatePet()}" update=":regis" />
+                                            <p:spacer width="20"  height="0"/>
+                                            <p:commandButton value="Eliminar" actionListener="#{petsBean.deletePet()}" update=":regis" />
+                                        </p>
+
+                                    </h:form>
+                                </div>
+                                <br/>
                                 <h:form id="tablepets">
                                     <p:dataTable id = "tablaHomeAdmin" var = "pet" value = "#{petsBean.listamascotas}" rows = "5" paginator = "true"
                                                  paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                 rowsPerPageTemplate = "5,10,15,20,25" editable="true" >
-                                        <f:facet name = "header">Listado de Mascotas</f:facet>
+                                                 rowsPerPageTemplate = "5,10,15,20,25" editable="true" style="width: 100%">
+                                        <f:facet name = "header">Listado de Mascotas con relacion de Responsable</f:facet>
 
-                                        <p:ajax event="rowEdit" listener="#{petsBean.onRowEdit}"  />
+                                        <p:ajax event="rowEdit" listener="#{petsBean.onRowEdit}" />
                                         <p:ajax event="rowEditCancel" listener="#{petsBean.onRowCancel}" />
 
-                                        <p:column filterBy="#{pet.name}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}" headerText = "Mascota">
-                                            <h:outputText value = "#{pet.name}"/>
+                                        <p:column filterBy="#{pet.name}"  filterMatchMode="contains"
+                                                  filterFunction="#{personBean.filterByName}"
+                                                  headerText="Nombre Mascota">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.name}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.name}" style="width:100%" label="Nombre"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
-                                        <p:column headerText = "Tipo Animal" filterBy="#{pet.animal}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}">
+                                        <p:column filterBy="#{pet.animal}"  filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Especie">
                                             <p:cellEditor>
                                                 <f:facet name="output"><h:outputText value="#{pet.animal}" /></f:facet>
                                                 <f:facet name="input"><p:inputText value="#{pet.animal}" style="width:100%" label="Especie"/></f:facet>
                                             </p:cellEditor>
-                                        </p:column>         
-                                        <p:column headerText = "Responsable"  filterBy="#{pet.person.namePer}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}">
-                                            <h:outputText value = "#{pet.person.namePer}"/>
                                         </p:column>
-                                        <p:column headerText = "Telefono"  filterBy="#{pet.person.phone}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}">
+                                        <p:column filterBy="#{pet.race}" filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Raza">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.race}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.race}" style="width:100%" label="Raza"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.colour}" filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Color">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.colour}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.colour}" style="width:100%" label="Color"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.birthDate}" filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Fecha Nacimiento">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.birthDate}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Fecha Nacimiento"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.person.idperson}" filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Dni Responsable">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.person.idperson}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{petsBean.idPerson}" style="width:100%" label="Dni Responsable"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.person.namePer}"  filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Nombre Responsable">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.person.namePer}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{petsBean.namePer}" style="width:100%" label="Nombre Responsable"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.person.address}"  filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Dirección">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.person.address}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{petsBean.address}" style="width:100%" label="Dirección"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.person.phone}"  filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Telefono">
                                             <p:cellEditor>
                                                 <f:facet name="output"><h:outputText value="#{pet.person.phone}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{pet.person.phone}" style="width:100%" label="Telefono"/></f:facet>
-                                            </p:cellEditor>                                        
+                                                <f:facet name="input"><p:inputText value="#{petsBean.phone}" style="width:100%" label="Telefono"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
-                                        <p:column headerText = "Email"  filterBy="#{pet.person.email}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}">
+                                        <p:column filterBy="#{pet.person.email}" filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Email">
                                             <p:cellEditor>
                                                 <f:facet name="output"><h:outputText value="#{pet.person.email}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{pet.person.email}" style="width:100%" label="Telefono"/></f:facet>
-                                            </p:cellEditor>                                        
+                                                <f:facet name="input"><p:inputText value="#{petsBean.email}" style="width:100%" label="Email"/></f:facet>
+                                            </p:cellEditor>
                                         </p:column>
+                                        <p:column headerText="Contraseña">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.person.password}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{petsBean.password}" style="width:100%" label="Contraseña"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column filterBy="#{pet.person.role}"  filterMatchMode="contains"
+                                                  filterFunction="#{petsBean.filterCase}"
+                                                  headerText="Rol usuario">
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{pet.person.role}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{petsBean.role}" style="width:100%" label="Nombre"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+
                                         <p:column style="width:32px">
                                             <p:rowEditor />
                                         </p:column>
                                     </p:dataTable>
 
                                     <div><br/><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Histórico Servicios</button></div>
-                                </h:form>
-                            </div>
-
-                            <div class="col-md-3 text-left">
-                                <h:form id = "formPet">
-                                    <h3>Datos de la Mascota</h3>
-                                    <p>
-                                        <p:inputText id="namePet" value="#{petsBean.petM.name}" required="true" placeholder="* Nombre Mascota" />
-                                    </p>
-                                    <p>
-                                        <p:inputText id="especie" value="#{petsBean.petM.animal}" required="true" placeholder="* Especie"/>
-                                    </p>
-                                    <p>
-                                        <p:inputText id="race" value="#{petsBean.petM.race}" required="true" placeholder="* Raza"/>
-                                    </p>
-                                    <p>
-                                        <p:inputText id="color" value="#{petsBean.petM.colour}" required="true" placeholder="* Color"/>
-                                    </p>
-                                    <p>
-                                        <p:inputMask id="birth" value="#{petsBean.petM.birthDate}" required="true" placeholder="* Fecha Nac" mask="99-99-9999"/>
-                                    </p>
-                                    <p>
-                                        <p:selectOneRadio id="genderRadio" value="#{petsBean.petM.gender}" required="true">
-                                            <f:selectItem itemLabel="Femenino" itemValue="0" />
-                                            <f:selectItem itemLabel="Masculino" itemValue="1" />
-                                        </p:selectOneRadio>
-                                    </p>
-                                    <p>
-                                        <div>
-                                            <p:autoComplete value="#{petsBean.idPerson}" completeMethod="#{petsBean.AutocompletarID}" placeholder="* Dni Responsable" required="true" />
-                                        </div>
-                                    </p>
-                                    <br/>
-                                    <p>
-                                        <p:commandButton value="Registrar" actionListener="#{petsBean.addPet()}" update=":regis" />
-                                    </p>
-                                    <p>
-                                        <p:commandButton value="Modificar" actionListener="#{petsBean.updatePet()}" update=":regis" />
-                                    </p>
-                                    <p>
-                                        <p:commandButton value="Eliminar" actionListener="#{petsBean.deletePet()}" update=":regis" />
-                                    </p>
-
                                 </h:form>
                             </div>
                         </div>
