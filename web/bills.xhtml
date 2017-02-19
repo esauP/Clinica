@@ -15,6 +15,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <link href="css/flexslider.css" rel="stylesheet" />
 <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet" />
+<f:event type="preRenderView" listener="#{loginBean.validarSesionBills()}"/>
 </h:head>
 <h:body>
 <div id="wrapper">
@@ -33,23 +34,21 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         <div class="navbar-collapse collapse ">
           <ul class="nav navbar-nav">
             <li><a href="pets.xhtml">Mascotas</a></li>
-            <li><a href="consultation.xhtml">Consulta | Historial</a></li>
+            <li><a href="consultations.xhtml">Consulta | Historial</a></li>
             <li><a href="dates.xhtml">Citas</a></li>
             <li><a href="bills.xhtml">Facturación</a></li>
             <li><a href="vaccines.xhtml">Vacunas</a></li>
             <li>
               <a>
                 <h:form>
-                <p:commandButton actionListener="#{loginBean.desloguear(event)}">
-                <h:graphicImage name="img/salir.png" />
-              </p:commandButton>
-            </h:form>
-          </a>
-        </li>
-      </ul>
+                <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
+              </h:form>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </header>
 </div>
 <!-- end header -->
@@ -61,32 +60,34 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
         <div class="col-md-3 text-left">
           <h3>Lista de productos y servicios</h3>
           <!--Comienzo del list de búsqueda-->
+          <h:form id="formularioV">
           <p:selectOneMenu value="#{productBean.prod.name}">
-              <f:selectItems value="#{productBean.listamaestra}"/>
-          </p:selectOneMenu>
+          <f:selectItems value="#{productBean.listamaestra}"/>
+        </p:selectOneMenu>
+      </h:form>
       <p:spacer width="20"  height="0"/>
-<!--fin del list de búsqueda -->
-</div>
-<div class="col-md-9 text-left">
-  <div class="billInfo">
-    <h:form id="insertBill">
+      <!--fin del list de búsqueda -->
+    </div>
+    <div class="col-md-9 text-left">
+      <div class="billInfo">
+        <h:form id="insertBill">
 
-    <p:spacer width="20"  height="0"/>
-    <!-- combobox de mascotas  -->
-    <p:growl id = "msgs" showDetail = "true" />
-    <p:panel style = "margin-bottom:10px;">
-    <h:panelGrid columns="10" cellpadding="5">
-    <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
-    <p:selectOneMenu value="#petsBean.petM.getName()}">
-    <f:selectItems value="#{petsBean.listamascotas}"/>
-  </p:selectOneMenu>
-  <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
-  <!-- fecha del día para la factura -->
-  <h:outputText value="#{now}">
-  <f:convertDateTime pattern="MM/dd/yyyy" type="date" />
-</h:outputText>
-<!-- fin de la fecha -->
-</h:panelGrid>
+        <p:spacer width="20"  height="0"/>
+        <!-- combobox de mascotas  -->
+        <p:growl id = "msgs" showDetail = "true" />
+        <p:panel style = "margin-bottom:10px;">
+        <h:panelGrid columns="10" cellpadding="5">
+        <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
+        <p:selectOneMenu value="#petsBean.petM.getName()}">
+        <f:selectItems value="#{petsBean.listamascotas}"/>
+      </p:selectOneMenu>
+      <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
+      <!-- fecha del día para la factura -->
+      <h:outputText value="#{now}">
+      <f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+    </h:outputText>
+    <!-- fin de la fecha -->
+  </h:panelGrid>
 </p:panel>
 <p:commandButton value="Buscar" update="msgs"  icon="ui-icon-check" />
 <p:spacer width="20"  height="0"/>
