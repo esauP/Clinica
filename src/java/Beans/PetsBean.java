@@ -122,7 +122,8 @@ public class PetsBean implements Serializable {
 
         String namePetC = value.toString().toUpperCase();
         filterText = filterText.toUpperCase();
-
+        
+        
         if (namePetC.contains(filterText)) {
             return true;
         } else {
