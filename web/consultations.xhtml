@@ -82,7 +82,7 @@
                                             </td>
                                             <td>
                                                 <p:outputLabel for="txtfecha" value="Fecha" />
-                                                <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
+                                                <p:inputMask id="txtfecha" value="#{consultationBean.consult.date}" required="true" mask="99-99-9999"/>
                                             </td>
                                             <td>
                                                 <p:outputLabel for="txtreason" value="Motivo" />
@@ -134,7 +134,7 @@
                                     <p:column headerText="Fecha_Consulta">
                                         <p:cellEditor>
                                             <f:facet name="output"><h:outputText value="#{conslt.date}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{conslt.date}" style="width:100%" label="dateConsultation"/></f:facet>
+                                            <f:facet name="input">  <p:inputMask id="txtfecha" value="#{consult.date}" required="true" mask="99-99-9999" style="width: 100%" label="Fecha_Consulta"/></f:facet>
                                         </p:cellEditor>
                                     </p:column>
 
@@ -212,7 +212,7 @@
                                             </td>
                                             <td>
                                                 <p:outputLabel for="datedocd" value="Fecha_documento" />
-                                                <p:inputText id="datedocd" value="#{docBean.docu.date_doc}" required="false" />
+                                                <p:inputMask id="txtfecha" value="#{docBean.docu.date_doc}" required="false" mask="99-99-9999" style="width: 100%" label="datedoc"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -254,7 +254,7 @@
                                     <p:column headerText="date_doc">
                                         <p:cellEditor>
                                             <f:facet name="output"><h:outputText value="#{docs.date_doc}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{docs.date_doc}" style="width:100%" label="doc_date"/></f:facet>
+                                            <f:facet name="input"><p:inputMask value="#{docs.date_doc}" required="true" mask="99-99-9999" style="width: 100%" label="date_doc"/></f:facet>
                                         </p:cellEditor>
                                     </p:column>
 
@@ -322,7 +322,8 @@
                                         <tr>
                                             <td>
                                                 <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
-                                                <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
+                                                <p:inputMask id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" mask="99-99-9999" style="width: 100%"/>
+
                                             </td>
                                             <td>
                                                 <p:outputLabel for="txtobserV" value="Observaciones" />
@@ -366,7 +367,7 @@
                                     <p:column headerText="Fecha Vacuna">
                                         <p:cellEditor>
                                             <f:facet name="output"><h:outputText value="#{vacc.date_vaccine}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{vacc.date_vaccine}" style="width:100%" label="dateVaccine"/></f:facet>
+                                            <f:facet name="input">  <p:inputMask id="txtfecha" value="#{vacc.date_vaccine}" mask="99-99-9999" style="width: 100%" label="dateVaccine"/></f:facet>
                                         </p:cellEditor>
                                     </p:column>
 

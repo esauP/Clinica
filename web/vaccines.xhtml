@@ -4,7 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        
+
         <meta charset="utf-8"/>
         <title>Vacunas</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -73,7 +73,7 @@
                                 <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
 
                                 <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
-                                <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
+                                <p:inputMask id="txtfecha" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" mask="99-99-9999"/>
 
                                 <p:outputLabel for="txtobserV" value="Observaciones" />
                                 <p:inputText id="txtobserV" value="#{vaccinesBean.vacuna.observaciones}" required="false" />
@@ -111,7 +111,8 @@
                                 <p:column headerText="Fecha Vacuna">
                                     <p:cellEditor>
                                         <f:facet name="output"><h:outputText value="#{vacc.date_vaccine}" /></f:facet>
-                                        <f:facet name="input"><p:inputText value="#{vacc.date_vaccine}" style="width:100%" label="dateVaccine"/></f:facet>
+                                        <f:facet name="input">  <p:inputMask value="#{vacc.date_vaccine}" required="true" mask="99-99-9999" style="width: 100%" label="dateVaccine"/></f:facet>
+
                                     </p:cellEditor>
                                 </p:column>
 

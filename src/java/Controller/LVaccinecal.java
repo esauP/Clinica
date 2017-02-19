@@ -37,8 +37,6 @@ public class LVaccinecal extends ConexionDB {
         return listamaestra;
     }
     
-    public static void main (String[] arg){
-        
-    }
+
 
 }

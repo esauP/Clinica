@@ -91,7 +91,7 @@
                               filterFunction="#{petsBean.filterCase}">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{pet.animal}" /></f:facet>
-                            <f:facet name="input"><p:inputText value="#{pet.animal}" style="width:100%" label="Especie"/></f:facet>
+                            <f:facet name="input">    <p:inputMask id="txtfecha" value="#{consultationBean.consult.date}" required="true" mask="99-99-9999"/></f:facet>
                         </p:cellEditor>
                     </p:column>         
                     <p:column headerText = "Responsable"  filterBy="#{pet.person.namePer}" filterMatchMode="contains"

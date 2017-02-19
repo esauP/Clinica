@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import pojo.*;
 
 /**
@@ -31,10 +32,20 @@ public class LConsultation {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+                
+                  String fecha = rs.getString(3);
+                String day = "", mon = "", year = "", fecha_cons = "";//creamos las variables necesarias para el conversor de fechas
+                StringTokenizer g = new StringTokenizer(fecha, "-");//pasamos el stringTokenizer para separar los tres tokens 
+
+                year = g.nextToken();
+                mon = g.nextToken();
+                day = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+                fecha_cons = day + "-" + mon + "-" + year;//asi cambiamos el formato de fecha      
+                
                 Consultation aux = new Consultation();
                 aux.setIdcons(rs.getInt(1));
                 aux.setIdpets(rs.getInt(2));
-                aux.setDate(rs.getString(3));
+                aux.setDate(fecha_cons);
                 aux.setReason(rs.getString(4));
                 aux.setDiagnosis(rs.getString(5));
                 aux.setTreatment(rs.getString(6));
@@ -54,6 +65,14 @@ public class LConsultation {
         ConexionDB conn = new ConexionDB();
         boolean success = false;
         try {
+
+            String day, mon, year, fecha_cons;//creamos las variables necesarias
+            StringTokenizer g = new StringTokenizer(date, "-");//pasamos el stringTokenizer para separar los tres tokens 
+            day = g.nextToken();
+            mon = g.nextToken();
+            year = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+            fecha_cons = year + "-" + mon + "-" + day;//asi cambiamos el formato de fecha     
+
             //Llamada a la funcion
             String sql = "{ ? = call addConsultation (?,?,?,?,?,?) }";
             java.sql.CallableStatement cStmt = conn.getConexion().prepareCall(sql);
@@ -61,7 +80,7 @@ public class LConsultation {
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
             cStmt.setInt(2, idpet);
-            cStmt.setString(3, date);
+            cStmt.setString(3, fecha_cons);
             cStmt.setString(4, reason);
             cStmt.setString(5, diagnosis);
             cStmt.setString(6, treatment);
@@ -81,6 +100,13 @@ public class LConsultation {
         boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
+            String day, mon, year, fecha_cons;//creamos las variables necesarias
+            StringTokenizer g = new StringTokenizer(date, "-");//pasamos el stringTokenizer para separar los tres tokens 
+            day = g.nextToken();
+            mon = g.nextToken();
+            year = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+            fecha_cons = year + "-" + mon + "-" + day;//asi cambiamos el formato de fecha     
+
             //Llamada a la funcion
             String sql = "{ ? = call updateConsultation (?,?,?,?,?,?,?) }";
             CallableStatement cStmt = conn.getConexion().prepareCall(sql);
@@ -89,7 +115,7 @@ public class LConsultation {
             //establezco los parámetros de entrada
             cStmt.setInt(2, idcons);
             cStmt.setInt(3, idpet);
-            cStmt.setString(4, date);
+            cStmt.setString(4, fecha_cons);
             cStmt.setString(5, reason);
             cStmt.setString(6, diagnosis);
             cStmt.setString(7, treatment);

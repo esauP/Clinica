@@ -12,8 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.StringTokenizer;
 import pojo.Vaccines;
 
 /**
@@ -29,10 +28,20 @@ public class LVaccines extends ConexionDB {
             PreparedStatement ps = this.getConexion().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+
+                String fecha = rs.getString("date_vaccine");
+                String day = "", mon = "", year = "", fecha_vaccine = "";//creamos las variables necesarias para el conversor de fechas
+                StringTokenizer g = new StringTokenizer(fecha, "-");//pasamos el stringTokenizer para separar los tres tokens 
+
+                year = g.nextToken();
+                mon = g.nextToken();
+                day = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+                fecha_vaccine = day + "-" + mon + "-" + year;//asi cambiamos el formato de fecha      
+
                 Vaccines aux = new Vaccines();
                 aux.setIdvac(rs.getInt("idvac"));
                 aux.setIdpet(rs.getInt("idpet"));
-                aux.setDate_vaccine(rs.getString("date_vaccine"));
+                aux.setDate_vaccine(fecha_vaccine);
                 aux.setObservaciones(rs.getString("observations"));
                 aux.setName_vaccine(rs.getString("name"));
                 listavacunas.add(aux);
@@ -48,6 +57,14 @@ public class LVaccines extends ConexionDB {
     public boolean addVacines(int idpet, String date, String observations, String name) throws SQLException {
         boolean success = false;
         try {
+
+            String day, mon, year, fecha_vaccine;//creamos las variables necesarias
+            StringTokenizer g = new StringTokenizer(date, "-");//pasamos el stringTokenizer para separar los tres tokens 
+            day = g.nextToken();
+            mon = g.nextToken();
+            year = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+            fecha_vaccine = year + "-" + mon + "-" + day;//asi cambiamos el formato de fecha               
+
             //Llamada a la funcion
             String sql = "{ ? = call addVacines (?,?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
@@ -55,7 +72,7 @@ public class LVaccines extends ConexionDB {
             cStmt.registerOutParameter(1, java.sql.Types.INTEGER);
             //establezco los parámetros de entrada
             cStmt.setInt(2, idpet);
-            cStmt.setString(3, date);
+            cStmt.setString(3, fecha_vaccine);
             cStmt.setString(4, observations);
             cStmt.setString(5, name);
             //se ejecuta la funcion
@@ -74,6 +91,14 @@ public class LVaccines extends ConexionDB {
     public boolean updateVacines(int idvac, int idpet, String date, String observations, String name) throws SQLException {
         boolean success = false;
         try {
+
+            String day, mon, year, fecha_vaccine;//creamos las variables necesarias
+            StringTokenizer g = new StringTokenizer(date, "-");//pasamos el stringTokenizer para separar los tres tokens 
+            day = g.nextToken();
+            mon = g.nextToken();
+            year = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+            fecha_vaccine = year + "-" + mon + "-" + day;//asi cambiamos el formato de fecha     
+
             //Llamada a la funcion
             String sql = "{ ? = call updateVacines (?,?,?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
@@ -82,7 +107,7 @@ public class LVaccines extends ConexionDB {
             //establezco los parámetros de entrada
             cStmt.setInt(2, idvac);
             cStmt.setInt(3, idpet);
-            cStmt.setString(4, date);
+            cStmt.setString(4, fecha_vaccine);
             cStmt.setString(5, observations);
             cStmt.setString(6, name);
             //se ejecuta la funcion
