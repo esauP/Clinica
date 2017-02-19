@@ -176,5 +176,24 @@ public class LPets extends ConexionDB {
         }
         return success;
     }
+    
+    public List<String> getIdPets() throws SQLException {
+        List<String> listapets = new ArrayList<String>();
+        try {
+            String sql = "SELECT idpets FROM pets ORDER BY idpets ASC";
+            PreparedStatement ps = this.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String text;
+                text = String.valueOf(rs.getInt("idpets"));
+                listapets.add(text);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            this.desconectar();
+        }
+        return listapets;
+    }
 
 }

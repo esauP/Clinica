@@ -6,6 +6,7 @@
 package Beans;
 
 import Controller.LConsultation;
+import Controller.LPets;
 import Model.ConexionDB;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,10 +38,13 @@ public class ConsultationBean {
 
     private List<Consultation> listaconsultas;
     private Consultation consult = new Consultation();
+    private List<String> listapets;
 
     public ConsultationBean() throws SQLException {
         LConsultation dao = new LConsultation();
         listaconsultas = dao.getConsultation();
+        LPets lp = new LPets();
+        listapets = lp.getIdPets();
     }
 
     public void onRowEdit(RowEditEvent event) {
@@ -97,8 +101,8 @@ public class ConsultationBean {
             System.out.println(e.getMessage());
         }
     }
-    
-    public List listar() throws SQLException{
+
+    public List listar() throws SQLException {
         LConsultation dao = new LConsultation();
         return dao.getConsultation();
     }
@@ -173,6 +177,14 @@ public class ConsultationBean {
 
     public void setObservation(String observation) {
         this.observation = observation;
+    }
+
+    public List<String> getListapets() {
+        return listapets;
+    }
+
+    public void setListapets(List<String> listapets) {
+        this.listapets = listapets;
     }
 
 //          public void AddConsultation2() throws SQLException {

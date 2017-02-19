@@ -151,9 +151,6 @@ public class LoginBean implements Serializable {
                 context.getExternalContext().redirect("error.html");
             }
             if (pers.getRole() != 1) {
-                if (pers.getRole() == 2) {
-                    context.getExternalContext().redirect("");
-                }
                 if (pers.getRole() == 3) {
                     context.getExternalContext().redirect("nopermission.html");
                 }

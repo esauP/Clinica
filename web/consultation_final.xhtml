@@ -13,6 +13,7 @@
 
         <link href="css/flexslider.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet" />
+        <f:event type="preRenderView" listener="#{loginBean.validarSesionConsultation()}"/>
     </h:head>
     <h:body>
         <div id="wrapper">
@@ -35,13 +36,10 @@
                                 <li><a href="dates.html">Citas</a></li>
                                 <li><a href="bills.html">Facturación</a></li>
                                 <li><a href="vaccines.html">Vacunas</a></li>
-                                <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
                                 <li>
                                     <a>
                                         <h:form>
-                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}">
-                                                <h:graphicImage name="img/salir.png" />
-                                            </p:commandButton>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
                                         </h:form>
                                     </a>
                                 </li>
@@ -63,32 +61,54 @@
                                 <p:commandButton value="Añadir"  icon="ui-icon-plus" onclick="PF('wdlgDatos').show();" />
                             </h:form>
                             <h:form>
-                                <p:commandButton value="Listar" icon="ui-icon-refresh" actionListener="#{consultationBean.listar()}"  update=":tablaC"/>
+                                <p:commandButton value="Listar" icon="ui-icon-refresh" actionListener="#{consultationBean.listar()}"  update=":tablaC:Consultas"/>
                             </h:form>
 
                             <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
                                 <h:form id="formularioA">
 
-                                    <p:outputLabel for="txtidpet" value="IdPet" />
-                                    <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
+                                    <table>
 
-                                    <p:outputLabel for="txtfecha" value="Fecha" />
-                                    <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
+                                        <tr>
+                                            <td>
+                                                <p:outputLabel value="Idpets" />
+                                                <p:selectOneMenu value="#{consultationBean.consult.idpets}">
+                                                    <f:selectItems value="#{consultationBean.listapets}"/>
+                                                </p:selectOneMenu>
+                                                <!--
+                                   <p:outputLabel for="txtidpet" value="IdPet" />
+                                   <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
+                                                -->
+                                            </td>
+                                            <td>
+                                                <p:outputLabel for="txtfecha" value="Fecha" />
+                                                <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
+                                            </td>
+                                            <td>
+                                                <p:outputLabel for="txtreason" value="Motivo" />
+                                                <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
+                                            </td>
+                                        </tr>
+                                        <tr>
 
-                                    <p:outputLabel for="txtreason" value="Motivo" />
-                                    <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
+                                            <td>
+                                                <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
+                                                <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
+                                            </td>
 
-                                    <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
-                                    <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
+                                            <td>
+                                                <p:outputLabel for="txttreatment" value="Tratamiento" />
+                                                <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
+                                            </td>
 
-                                    <p:outputLabel for="txttreatment" value="Tratamiento" />
-                                    <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
-
-                                    <p:outputLabel for="txtobservation" value="Observaciones" />
-                                    <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
-
+                                            <td>
+                                                <p:outputLabel for="txtobservation" value="Observaciones" />
+                                                <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
+                                            </td>
+                                        </tr>
+                                    </table>
                                     <p:commandButton value="Añadir nueva consulta" actionListener="#{consultationBean.AddConsultation()}" update=":tablaC:Consultas" />
-                                    <p:commandButton value="Cerrar Ventana" actionListener="#{consultationBean.listar()}" oncomplete="PF('wdlgDatos').hide()" update=":tablaC"/>
+                                    <p:commandButton value="Cerrar Ventana" actionListener="#{consultationBean.listar()}" oncomplete="PF('wdlgDatos').hide()" update=":tablaC:Consultas"/>
                                 </h:form>
                             </p:dialog>
                         </div>
@@ -178,19 +198,35 @@
                             <p:dialog header="Datos" widgetVar="wdlgDatosd" id="dlgDatosd">
                                 <h:form id="formularioD" enctype="multipart/form-data">
 
-                                    <p:outputLabel for="txtidconsd" value="IdConsulta" />
-                                    <p:inputText id="txtidconsd" value="#{docBean.docu.idcons}" required="true" />
-
-                                    <p:outputLabel for="datedocd" value="Fecha_documento" />
-                                    <p:inputText id="datedocd" value="#{docBean.docu.date_doc}" required="false" />
-
-                                    <p:outputLabel for="descripd" value="Descripcion" />
-                                    <p:inputText id="descripd" value="#{docBean.docu.description}" required="false" />
-
-                                    <p:outputLabel for="filed" value="Fichero adjunto" />
-                                    <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
-                                    <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
-
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <p:outputLabel value="idCons" />
+                                                <p:selectOneMenu value="#{docBean.docu.idcons}">
+                                                    <f:selectItems value="#{docBean.listaconsult}"/>
+                                                </p:selectOneMenu>
+                                                <!--
+                                  <p:outputLabel for="txtidconsd" value="IdConsulta" />
+                                  <p:inputText id="txtidconsd" value="#{docBean.docu.idcons}" required="true" />
+                                                -->
+                                            </td>
+                                            <td>
+                                                <p:outputLabel for="datedocd" value="Fecha_documento" />
+                                                <p:inputText id="datedocd" value="#{docBean.docu.date_doc}" required="false" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p:outputLabel for="descripd" value="Descripcion" />
+                                                <p:inputText id="descripd" value="#{docBean.docu.description}" required="false" />
+                                            </td>
+                                            <td>
+                                                <p:outputLabel for="filed" value="Fichero adjunto" />
+                                                <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
+                                                <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
+                                            </td>
+                                        </tr>
+                                    </table>
                                     <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}"  />
                                     <p:commandButton value="Cerrar Ventana" actionListener="#{docBean.listar}" oncomplete="PF('wdlgDatosd').hide()" update=":tablaD:ConsultasD"/>
                                 </h:form>
@@ -264,22 +300,36 @@
 
                             <p:dialog header="DatosV" widgetVar="wdlgDatosV" id="dlgDatosV">
                                 <h:form id="formularioV">
-
-                                    <p:outputLabel for="txtidpet" value="idPet" />
-                                    <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
-
-                                    
-                                    
-                                    <!--
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <p:outputLabel for="txtidpet" value="idPet" />
+                                                <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
+                                            </td>
+                                            <td>
+                                                <!--
                                     <p:outputLabel for="txtnamevaccine" value="Nombre vacuna" />
                                     <p:inputText id="txtnamevaccine" value="#{vaccinesBean.vacuna.name_vaccine}" required="false" />
-                                    -->
-                                    
-                                    <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
-                                    <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
+                                                -->
 
-                                    <p:outputLabel for="txtobserV" value="Observaciones" />
-                                    <p:inputText id="txtobserV" value="#{vaccinesBean.vacuna.observaciones}" required="false" />
+                                                <p:outputLabel value="Vacuna aplicada" />
+                                                <p:selectOneMenu value="#{vaccinesBean.vacuna.name_vaccine}">
+                                                    <f:selectItems value="#{vaccinesBean.listlistamaestra}"/>
+                                                </p:selectOneMenu>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
+                                                <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
+                                            </td>
+                                            <td>
+                                                <p:outputLabel for="txtobserV" value="Observaciones" />
+                                                <p:inputText id="txtobserV" value="#{vaccinesBean.vacuna.observaciones}" required="false" />
+                                            </td>
+                                        </tr>
+                                    </table>
 
                                     <p:commandButton value="Añadir nueva consulta" actionListener="#{vaccinesBean.addVaccine()}" update=":tablaV:ConsultasV" />
                                     <p:commandButton value="Cerrar Ventan" actionListener="#{vaccinesBean.listar()}" oncomplete="PF('wdlgDatosV').hide()" update=":tablaV:ConsultasV"/>

@@ -126,4 +126,24 @@ public class LConsultation {
         }
     }
 
+    public List<String> getidConsult() throws SQLException {
+        List<String> listconsult = new ArrayList<String>();
+        ConexionDB conn = new ConexionDB();
+        try {
+            String sql = "SELECT idcons FROM consultation ORDER BY idcons ASC";
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String text;
+                text = String.valueOf(rs.getInt("idcons"));
+                listconsult.add(text);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return listconsult;
+    }
+
 }

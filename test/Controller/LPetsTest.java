@@ -12,81 +12,92 @@ import pojo.Pets;
 
 /**
  *
- * @author esaup
+ * @author neuhaus
  */
 public class LPetsTest {
     
     public LPetsTest() {
     }
 
-    /**
-     * Test of getPets method, of class LPets.
-     */
-    @Test
-    public void testGetPets() throws Exception {
-        System.out.println("getPets");
-        List<Pets> expResult = null;
-        List<Pets> result = LPets.getPets();
-        assertNotNull(result);
-       // assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    //    fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addPet method, of class LPets.
-     */
-    @Test
-    public void testAddPet() throws Exception {
-        System.out.println("addPet");
-        String name_pt = "prueba";
-        String animal_pt = "prueba";
-        int gender_pt = 0;
-        String race_pt = "prueba";
-        String colour_pt = "prueba";
-        String birth_pt = "2000-05-12";
-        String idper_pt = "01234567A";
-        boolean expResult = false;
-        boolean result = LPets.addPet(name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt, idper_pt);
-        //assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of updatePet method, of class LPets.
-     */
-    @Test
-    public void testUpdatePet() throws Exception {
-        System.out.println("updatePet");
-        int idpets = 0;
-        String name_pt = "";
-        String animal_pt = "";
-        int gender_pt = 0;
-        String race_pt = "";
-        String colour_pt = "";
-        String birth_pt = "";
-        String idper_pt = "";
-        boolean expResult = false;
-        boolean result = LPets.updatePet(idpets, name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt);
-      //  assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+//    /**
+//     * Test of getPets method, of class LPets.
+//     */
+//    @Test
+//    public void testGetPets() throws Exception {
+//        System.out.println("getPets");
+//        List<Pets> expResult = null;
+//        List<Pets> result = LPets.getPets();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-    }
+//    }
+//
+//    /**
+//     * Test of addPet method, of class LPets.
+//     */
+//    @Test
+//    public void testAddPet() throws Exception {
+//        System.out.println("addPet");
+//        String name_pt = "";
+//        String animal_pt = "";
+//        int gender_pt = 0;
+//        String race_pt = "";
+//        String colour_pt = "";
+//        String birth_pt = "";
+//        String idper_pt = "";
+//        boolean expResult = false;
+//        boolean result = LPets.addPet(name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt, idper_pt);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of updatePet method, of class LPets.
+//     */
+//    @Test
+//    public void testUpdatePet() throws Exception {
+//        System.out.println("updatePet");
+//        int idpets = 0;
+//        String name_pt = "";
+//        String animal_pt = "";
+//        int gender_pt = 0;
+//        String race_pt = "";
+//        String colour_pt = "";
+//        String birth_pt = "";
+//        boolean expResult = false;
+//        boolean result = LPets.updatePet(idpets, name_pt, animal_pt, gender_pt, race_pt, colour_pt, birth_pt);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deletePet method, of class LPets.
+//     */
+//    @Test
+//    public void testDeletePet() throws Exception {
+//        System.out.println("deletePet");
+//        int idpets = 0;
+//        boolean expResult = false;
+//        boolean result = LPets.deletePet(idpets);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
-     * Test of deletePet method, of class LPets.
+     * Test of getIdPets method, of class LPets.
      */
     @Test
-    public void testDeletePet() throws Exception {
-        System.out.println("deletePet");
-        int idpets = 1;
-        boolean expResult = false;
-        boolean result = LPets.deletePet(idpets);
-     //   assertNotNull(result);
-       // assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+    public void testGetIdPets() throws Exception {
+        System.out.println("getIdPets");
+        LPets instance = new LPets();
+        List<String> expResult = null;
+        List<String> result = instance.getIdPets();
+        for (int i=0; i< result.size(); i++){
+            System.out.println(result.get(i));
+        }
     }
     
 }

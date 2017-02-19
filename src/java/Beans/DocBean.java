@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import Controller.LConsultation;
 import Controller.LDocument;
 import java.sql.SQLException;
 import java.util.List;
@@ -26,16 +27,19 @@ import pojo.*;
 @Named(value = "docBean")
 @ManagedBean
 @RequestScoped
-@MultipartConfig(maxFileSize = 10*1024*1024,maxRequestSize = 20*1024*1024,fileSizeThreshold = 5*1024*1024)
+@MultipartConfig(maxFileSize = 10 * 1024 * 1024, maxRequestSize = 20 * 1024 * 1024, fileSizeThreshold = 5 * 1024 * 1024)
 public class DocBean {
 
     private List<Doc> listadoc;
+    private List<String> listaconsult;
     private Doc docu = new Doc();
     private UploadedFile file;
 
     public DocBean() throws SQLException {
         LDocument ld = new LDocument();
         listadoc = ld.getDocuments();
+        LConsultation lc = new LConsultation();
+        listaconsult = lc.getidConsult();
     }
 
     public void upload() {
@@ -110,4 +114,13 @@ public class DocBean {
         this.file = file;
     }
 
+    public List<String> getListaconsult() {
+        return listaconsult;
+    }
+
+    public void setListaconsult(List<String> listaconsult) {
+        this.listaconsult = listaconsult;
+    }
+
+    
 }
