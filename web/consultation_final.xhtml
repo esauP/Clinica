@@ -10,10 +10,8 @@
         <meta name="description" content="" />
         <!-- css -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <link href="css/fancybox/jquery.fancybox.css" rel="stylesheet"/>
-        <link href="css/jcarousel.css" rel="stylesheet" />
+
         <link href="css/flexslider.css" rel="stylesheet" />
-        <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet"/>
         <link href="css/style.css" rel="stylesheet" />
     </h:head>
     <h:body>
@@ -37,6 +35,7 @@
                                 <li><a href="dates.html">Citas</a></li>
                                 <li><a href="bills.html">Facturación</a></li>
                                 <li><a href="vaccines.html">Vacunas</a></li>
+                                <li><a href="index.html"><input type="image" name = "buttonLogout" SRC="img/salir.png" /></a></li>
                                 <li>
                                     <a>
                                         <h:form>
@@ -60,20 +59,38 @@
                     <div class="skill-home-solid clearfix">
                         <div class="col-md-2 text-center">
                             <p:growl autoUpdate="true" id="regisC" showDetail="true" />
-                            <table>
-                                <tr>
-                                    <h:form>
-                                        <p:commandButton value="Listar" actionListener="#{consultationBean.listar}" update=":tablaC:Consultas" />
-                                    </h:form>
-                                </tr>
-                                <tr>
-                                    <div><br/><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">Nueva consulta</button></div>
-                                </tr>
-                            </table>
+                            <h:form>
+                                <p:commandButton value="Añadir"  icon="ui-icon-plus" onclick="PF('wdlgDatos').show();" />
+                            </h:form>
+                            <h:form>
+                                <p:commandButton value="Listar" icon="ui-icon-refresh" actionListener="#{consultationBean.listar()}"  update=":tablaC"/>
+                            </h:form>
 
+                            <p:dialog header="Datos" widgetVar="wdlgDatos" id="dlgDatos">
+                                <h:form id="formularioA">
 
+                                    <p:outputLabel for="txtidpet" value="IdPet" />
+                                    <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
 
+                                    <p:outputLabel for="txtfecha" value="Fecha" />
+                                    <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
 
+                                    <p:outputLabel for="txtreason" value="Motivo" />
+                                    <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
+
+                                    <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
+                                    <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
+
+                                    <p:outputLabel for="txttreatment" value="Tratamiento" />
+                                    <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
+
+                                    <p:outputLabel for="txtobservation" value="Observaciones" />
+                                    <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
+
+                                    <p:commandButton value="Añadir nueva consulta" actionListener="#{consultationBean.AddConsultation()}" update=":tablaC:Consultas" />
+                                    <p:commandButton value="Cerrar Ventana" actionListener="#{consultationBean.listar()}" oncomplete="PF('wdlgDatos').hide()" update=":tablaC"/>
+                                </h:form>
+                            </p:dialog>
                         </div>
                         <div class="col-md-10 text-center">
                             <h:form id="tablaC">
@@ -144,81 +161,43 @@
                     </div>
                 </div>
             </div>
-            <!-- DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS DOCUMENTOS -->
-
-            <!-- Modal Consulta Histórico-->
-            <div class="modal fade" id="myModal3" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"></button>
-                            <h4 class="modal-title">Registrar nueva consulta</h4>
-                        </div>
-                        <div class="modal-body">
-                            <h:form id="formularioA">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <p:outputLabel for="txtidpet" value="IdPet" />
-                                                <p:inputText id="txtidpet" value="#{consultationBean.consult.idpets}" required="true" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="txtfecha" value="Fecha" />
-                                                <p:inputText id="txtfecha" value="#{consultationBean.consult.date}" required="true" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="txtreason" value="Motivo" />
-                                                <p:inputText id="txtreason" value="#{consultationBean.consult.reason}" required="true" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p:outputLabel for="txtdiagnosis" value="Diagnóstico" />
-                                                <p:inputText id="txtdiagnosis" value="#{consultationBean.consult.diagnosis}" required="true" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="txttreatment" value="Tratamiento" />
-                                                <p:inputText id="txttreatment" value="#{consultationBean.consult.treatment}" required="false" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="txtobservation" value="Observaciones" />
-                                                <p:inputText id="txtobservation" value="#{consultationBean.consult.observation}" required="false" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <p:commandButton value="Añadir nueva consulta" actionListener="#{consultationBean.AddConsultation()}" update=":tablaC:Consultas" />
-                            </h:form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- DOCUMENTOS -->
 
             <div class="row">
                 <div class="skill-home">
                     <div class="skill-home-solid clearfix">
                         <div class="col-md-2 text-center">
-
                             <p:growl autoUpdate="true" id="regisD" showDetail="true" />
-                            <table>
-                                <tr>
-                                    <h:form>
-                                        <p:commandButton value="Listar" actionListener="#{docBean.listar}" update=":tablaD:ConsultasD" />
-                                    </h:form>
-                                </tr>
-                                <tr>
-                                    <div><br/><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal2">Añadir nuevo documento</button></div>
-                                </tr>
-                            </table>
+                            <h:form>
+                                <p:commandButton value="Añadir"  icon="ui-icon-plus" onclick="PF('wdlgDatosd').show();" />
+                            </h:form>
+                            <h:form>
+                                <p:commandButton value="Listar" actionListener="#{docBean.listar}" update=":tablaD:ConsultasD" />
+                            </h:form>
+
+                            <p:dialog header="Datos" widgetVar="wdlgDatosd" id="dlgDatosd">
+                                <h:form id="formularioD" enctype="multipart/form-data">
+
+                                    <p:outputLabel for="txtidconsd" value="IdConsulta" />
+                                    <p:inputText id="txtidconsd" value="#{docBean.docu.idcons}" required="true" />
+
+                                    <p:outputLabel for="datedocd" value="Fecha_documento" />
+                                    <p:inputText id="datedocd" value="#{docBean.docu.date_doc}" required="false" />
+
+                                    <p:outputLabel for="descripd" value="Descripcion" />
+                                    <p:inputText id="descripd" value="#{docBean.docu.description}" required="false" />
+
+                                    <p:outputLabel for="filed" value="Fichero adjunto" />
+                                    <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
+                                    <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
+
+                                    <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}"  />
+                                    <p:commandButton value="Cerrar Ventana" actionListener="#{docBean.listar}" oncomplete="PF('wdlgDatosd').hide()" update=":tablaD:ConsultasD"/>
+                                </h:form>
+                            </p:dialog>
                         </div>
                         <div class="col-md-10 text-center">
-                            <h:form id="tablaD" >
+                            <h:form id="tablaD">
                                 <p:dataTable id="ConsultasD" var="docs" value="#{docBean.listadoc}" editable="true" style="margin-bottom:20px">
                                     <f:facet name="header">Documentacion asociada</f:facet>
 
@@ -263,6 +242,7 @@
                                     <p:column headerText="Eliminar">
                                         <p:commandLink value="Eliminar"  actionListener="#{docBean.deleteDoc(docs.iddoc)}" update=":tablaD:ConsultasD"/>
                                     </p:column>
+
                                 </p:dataTable>
                             </h:form>
                         </div>
@@ -270,73 +250,43 @@
                 </div>
             </div>
 
-            <!-- Modal Consulta Histórico-->
-            <div class="modal fade" id="myModal2" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"></button>
-                            <h4 class="modal-title">Registrar nueva vacuna</h4>
-                        </div>
-                        <div class="modal-body">
-                            <h:form id="formularioD" enctype="multipart/form-data">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <p:outputLabel for="txtidconsd" value="IdConsulta" />
-                                                <p:inputText id="txtidconsd" value="#{docBean.docu.idcons}" required="true" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="datedocd" value="Fecha_documento" />
-                                                <p:inputText id="datedocd" value="#{docBean.docu.date_doc}" required="false" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p:outputLabel for="descripd" value="Descripcion" />
-                                                <p:inputText id="descripd" value="#{docBean.docu.description}" required="false" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="filed" value="Fichero adjunto" />
-                                                <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
-                                                <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- boton añadir -->
-                                <p:commandButton value="Añadir nuevo doc" actionListener="#{docBean.addDoc()}"  />
-
-                            </h:form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS VACUNAS  -->
-
             <div class="row">
                 <div class="skill-home">
                     <div class="skill-home-solid clearfix">
                         <div class="col-md-2 text-center">
                             <p:growl autoUpdate="true" id="regisV" showDetail="true" />
-                            <table>
-                                <tr>
-                                    <h:form>
-                                        <p:commandButton value="Listar" actionListener="#{vaccinesBean.listar()}"  update=":tablaV"/>
-                                    </h:form>
-                                </tr>
-                                <tr>
-                                    <div><br/><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Añadir nueva vacuna</button></div>
-                                </tr>
-                            </table>
+                            <h:form>
+                                <p:commandButton value="Añadir"  icon="ui-icon-plus" onclick="PF('wdlgDatosV').show();" />
+                            </h:form>
+                            <h:form>
+                                <p:commandButton value="Listar" actionListener="#{vaccinesBean.listar()}"  update=":tablaV"/>
+                            </h:form>
+
+                            <p:dialog header="DatosV" widgetVar="wdlgDatosV" id="dlgDatosV">
+                                <h:form id="formularioV">
+
+                                    <p:outputLabel for="txtidpet" value="idPet" />
+                                    <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
+
+                                    
+                                    
+                                    <!--
+                                    <p:outputLabel for="txtnamevaccine" value="Nombre vacuna" />
+                                    <p:inputText id="txtnamevaccine" value="#{vaccinesBean.vacuna.name_vaccine}" required="false" />
+                                    -->
+                                    
+                                    <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
+                                    <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
+
+                                    <p:outputLabel for="txtobserV" value="Observaciones" />
+                                    <p:inputText id="txtobserV" value="#{vaccinesBean.vacuna.observaciones}" required="false" />
+
+                                    <p:commandButton value="Añadir nueva consulta" actionListener="#{vaccinesBean.addVaccine()}" update=":tablaV:ConsultasV" />
+                                    <p:commandButton value="Cerrar Ventan" actionListener="#{vaccinesBean.listar()}" oncomplete="PF('wdlgDatosV').hide()" update=":tablaV:ConsultasV"/>
+                                </h:form>
+                            </p:dialog>
                         </div>
+
                         <div class="col-md-10 text-center">
                             <h:form id="tablaV">
                                 <p:dataTable id="ConsultasV" var="vacc" value="#{vaccinesBean.listvaccines}" editable="true" style="margin-bottom:20px">
@@ -391,56 +341,9 @@
                     </div>
                 </div>
             </div>
-
-
-            <!-- Modal Consulta Histórico-->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"></button>
-                            <h4 class="modal-title">Registrar nueva vacuna</h4>
-
-                        </div>
-                        <div class="modal-body">
-                            <h:form id="formularioV">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <p:outputLabel for="txtidpet" value="idPet" />
-                                                <p:inputText id="txtidpet" value="#{vaccinesBean.vacuna.idpet}" required="true" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="txtnamevaccine" value="Nombre Vacuna" />
-                                                <p:inputText id="txtnamevaccine" value="#{vaccinesBean.vacuna.name_vaccine}" required="true" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p:outputLabel for="txtdatevaccine" value="Fecha vacuna" />
-                                                <p:inputText id="txtdatevaccine" value="#{vaccinesBean.vacuna.date_vaccine}" required="true" />
-                                            </td>
-                                            <td>
-                                                <p:outputLabel for="txtobserV" value="Observaciones" />
-                                                <p:inputText id="txtobserV" value="#{vaccinesBean.vacuna.observaciones}" required="false" />
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <p:commandButton value="Añadir nueva consulta" actionListener="#{vaccinesBean.addVaccine()}" update=":tablaV:ConsultasV" />
-                            </h:form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
-        <div id="sub-footer">
+        <footer>
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -452,33 +355,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-        <!-- javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el-->
-        <script>
-            // Get the modal
-            var modal = document.getElementById('id01');
 
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            };
-        </script>
-        <script src="js/jquery.js"></script>
-        <script src="js/jquery.easing.1.3.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.fancybox.pack.js"></script>
-        <script src="js/jquery.fancybox-media.js"></script>
-        <script src="js/portfolio/jquery.quicksand.js"></script>
-        <script src="js/portfolio/setting.js"></script>
-        <script src="js/jquery.flexslider.js"></script>
-        <script src="js/animate.js"></script>
-        <script src="js/custom.js"></script>
-        <script src="js/owl-carousel/owl.carousel.js"></script>
+        </footer>
     </h:body>
 </html>
