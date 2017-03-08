@@ -7,6 +7,7 @@ package Beans;
 
 import Controller.LPerson;
 import Controller.LPets;
+import Model.Login;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 import pojo.Consultation;
 import pojo.Person;
@@ -101,6 +103,49 @@ public class PetsBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    public void getconsultationidPet(Integer idpet) throws SQLException {
+        List<Consultation> aux = new ArrayList<Consultation>();
+        aux = LPets.getHistorial(idpet);
+        this.listconsult = aux;
+    }
+
+    public void PasarVariable(int idpet) {
+        RequestContext context = RequestContext.getCurrentInstance();
+        FacesContext fcontext = FacesContext.getCurrentInstance();
+
+        FacesMessage message = null;
+        boolean loggedIn = false;
+        Pets pet = new Pets();
+        try {
+            pet = LPets.getPet(idpet);
+            if (pet == null) {
+                fcontext.getExternalContext().redirect("error.html");
+
+            } else {
+                fcontext.getExternalContext().getSessionMap().put("mascotaFactura", pet);
+                fcontext.getExternalContext().redirect("faces/bills.xhtml");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        context.addCallbackParam("Logeado", loggedIn);
+    }
+
+    public int recogeId() {
+        FacesContext fcontext = FacesContext.getCurrentInstance();
+        Pets aux = new Pets();
+        aux = (Pets) fcontext.getExternalContext().getSessionMap().get("mascotaFactura");
+        return aux.getIdpets();
+    }
+
+    public String recogeNombre() {
+        FacesContext fcontext = FacesContext.getCurrentInstance();
+        Pets aux = new Pets();
+        aux = (Pets) fcontext.getExternalContext().getSessionMap().get("mascotaFactura");
+        return aux.getName();
+    }
+
     /**
      * Metodo obtenido de internet para hacer que el filtrado no distinga entre
      * mayusculas o minusculas
@@ -122,8 +167,7 @@ public class PetsBean implements Serializable {
 
         String namePetC = value.toString().toUpperCase();
         filterText = filterText.toUpperCase();
-        
-        
+
         if (namePetC.contains(filterText)) {
             return true;
         } else {
@@ -239,12 +283,6 @@ public class PetsBean implements Serializable {
 
     public void setListconsult(List<Consultation> listconsult) {
         this.listconsult = listconsult;
-    }
-
-    public void getconsultationidPet(Integer idpet) throws SQLException {
-        List<Consultation> aux = new ArrayList<Consultation>();
-        aux = LPets.getHistorial(idpet);
-        this.listconsult = aux;
     }
 
 }

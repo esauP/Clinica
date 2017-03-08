@@ -5,7 +5,6 @@
  */
 package Controller;
 
-
 import Model.ConexionDB;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -227,4 +226,26 @@ public class LPets extends ConexionDB {
         return listPetConsult;
     }
 
+    public static Pets getPet(int idpet) {
+        Pets pet = new Pets();
+        ConexionDB conn = new ConexionDB();
+
+        try {
+            String sql = "Select * from pets where idpets = " + idpet;
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                pet.setIdpets(rs.getInt("idpets"));
+                pet.setName(rs.getString("name"));
+                pet.setAnimal(rs.getString("animal"));
+                pet.setGender(rs.getInt("gender"));
+                pet.setRace(rs.getString("race"));
+                pet.setColour(rs.getString("colour"));
+                pet.setBirthDate(rs.getString("birth_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pet;
+    }
 }

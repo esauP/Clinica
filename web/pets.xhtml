@@ -4,7 +4,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        
+
         <meta charset="utf-8"/>
         <title>Clínica Veterinaria</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,7 +34,7 @@
                         </div>
                         <div class="navbar-collapse collapse ">
                             <ul class="nav navbar-nav">
-                                 <li><a href="pets.xhtml">Mascotas</a></li>
+                                <li><a href="pets.xhtml">Mascotas</a></li>
                                 <li><a href="consultations.xhtml">Consulta | Historial</a></li>
                                 <li><a href="construction.html">Citas</a></li>
                                 <li><a href="bills.xhtml">Facturación</a></li>
@@ -170,61 +170,7 @@
                                                 <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Fecha Nacimiento"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
-                                        <p:column filterBy="#{pet.person.idperson}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}"
-                                                  headerText="Dni Responsable">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.idperson}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.idPerson}" style="width:100%" label="Dni Responsable"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column filterBy="#{pet.person.namePer}"  filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}"
-                                                  headerText="Nombre Responsable">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.namePer}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.namePer}" style="width:100%" label="Nombre Responsable"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column filterBy="#{pet.person.address}"  filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}"
-                                                  headerText="Dirección">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.address}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.address}" style="width:100%" label="Dirección"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column filterBy="#{pet.person.phone}"  filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}"
-                                                  headerText="Telefono">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.phone}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.phone}" style="width:100%" label="Telefono"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column filterBy="#{pet.person.email}" filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}"
-                                                  headerText="Email">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.email}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.email}" style="width:100%" label="Email"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column headerText="Contraseña">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.password}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.password}" style="width:100%" label="Contraseña"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-                                        <p:column filterBy="#{pet.person.role}"  filterMatchMode="contains"
-                                                  filterFunction="#{petsBean.filterCase}"
-                                                  headerText="Rol usuario">
-                                            <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.person.role}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{petsBean.role}" style="width:100%" label="Nombre"/></f:facet>
-                                            </p:cellEditor>
-                                        </p:column>
-
+                                        
                                         <p:column style="width:32px">
                                             <p:rowEditor />
                                         </p:column>
@@ -232,6 +178,11 @@
                                         <p:column headerText="Histórico">
                                             <p:commandLink value="Histórico"  actionListener="#{petsBean.getconsultationidPet(pet.idpets)}" onclick="PF('wdlgDatos').show();" />
                                         </p:column>
+                                        
+                                        <p:column headerText="Factura">
+                                            <p:commandLink value="Facturar"  actionListener="#{petsBean.PasarVariable(pet.idpets)}" />
+                                        </p:column>
+                                        
                                     </p:dataTable>
 
                                     <p:dialog header="DatosH" widgetVar="wdlgDatos" id="dlgDatos">
