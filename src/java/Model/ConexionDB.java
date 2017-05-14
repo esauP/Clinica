@@ -15,18 +15,15 @@ import java.sql.SQLException;
  */
 public class ConexionDB {
     
-//    private String user = "u620724491_esau"
-//    private String bd = "u620724491_clini"
-//    private String pass = "RHaeTV3F"    
-//    private String host = "mysql.hostinger.es"
+    
             
     private static Connection conexion;
-    private String user = "dam43";
-    private String bd = user + "_clinica";
-    private String pass = "salesianas";
+    private String user = "admin";
+    private String bd = user + "clinica";
+    private String pass = "admin";
     //192.168.28.3
     //79.148.236.236
-    private String host = "79.148.236.236";
+    private String host = "localhost";
     private String server = "jdbc:mysql://" + host + "/" + bd;
 
     public ConexionDB() {
