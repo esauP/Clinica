@@ -14,7 +14,12 @@ import java.sql.SQLException;
  * @author esaup
  */
 public class ConexionDB {
-
+    
+//    private String user = "u620724491_esau"
+//    private String bd = "u620724491_clini"
+//    private String pass = "RHaeTV3F"    
+//    private String host = "mysql.hostinger.es"
+            
     private static Connection conexion;
     private String user = "dam43";
     private String bd = user + "_clinica";
