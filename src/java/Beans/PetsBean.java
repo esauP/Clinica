@@ -7,7 +7,7 @@ package Beans;
 
 import Controller.LPerson;
 import Controller.LPets;
-import Model.Login;
+import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -45,6 +45,7 @@ public class PetsBean implements Serializable {
     private final List<Pets> listamascotas;
     private List<Person> listapersonas;
     private List<Consultation> listconsult;
+    private List<Pets> listamascotasPers;
 
     /**
      * Creates a new instance of PetsBean
@@ -57,14 +58,18 @@ public class PetsBean implements Serializable {
 
     }
 
+    public void BuscaMascotas(String IdPersona) throws SQLException {
+                listamascotasPers = LPets.getPets(IdPersona);
+    }
+
     /**
      * Metodo para insertar mascota
      *
      * @throws SQLException
      */
     public void addPet() throws SQLException {
-        LPets.addPet(petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), IdPerson);
-        FacesMessage msg = new FacesMessage("Mascota Insertada", petM.getName());
+        LPets.addPet(petM.getNamepet(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate(), IdPerson);
+        FacesMessage msg = new FacesMessage("Mascota Insertada", petM.getNamepet());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -74,8 +79,8 @@ public class PetsBean implements Serializable {
      * @throws SQLException
      */
     public void updatePet() throws SQLException {
-        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate());
-        FacesMessage msg = new FacesMessage("Mascota Actualizada", petM.getName());
+        LPets.updatePet(petM.getIdpets(), petM.getNamepet(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate());
+        FacesMessage msg = new FacesMessage("Mascota Actualizada", petM.getNamepet());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -86,20 +91,20 @@ public class PetsBean implements Serializable {
      */
     public void deletePet() throws SQLException {
         LPets.deletePet(petM.getIdpets());
-        FacesMessage msg = new FacesMessage("Mascota Eliminada", petM.getName());
+        FacesMessage msg = new FacesMessage("Mascota Eliminada", petM.getNamepet());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void onRowEdit(RowEditEvent event) throws SQLException {
         Pets petMo = (Pets) event.getObject();
-        FacesMessage msg = new FacesMessage("Persona Editada", petMo.getName());
-        LPets.updatePet(petM.getIdpets(), petM.getName(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate());
+        FacesMessage msg = new FacesMessage("Persona Editada", petMo.getNamepet());
+        LPets.updatePet(petM.getIdpets(), petM.getNamepet(), petM.getAnimal(), petM.getGender(), petM.getRace(), petM.getColour(), petM.getBirthDate());
         LPerson.updatePersonPets(IdPerson, namePer, address, phone, email, 4);
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edicion Cancellada", ((Pets) event.getObject()).getName());
+        FacesMessage msg = new FacesMessage("Edicion Cancellada", ((Pets) event.getObject()).getNamepet());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -133,17 +138,21 @@ public class PetsBean implements Serializable {
     }
 
     public int recogeId() {
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        Pets aux = new Pets();
-        aux = (Pets) fcontext.getExternalContext().getSessionMap().get("mascotaFactura");
-        return aux.getIdpets();
+//        FacesContext fcontext = FacesContext.getCurrentInstance();
+//        Pets aux = new Pets();
+//        aux = (Pets) fcontext.getExternalContext().getSessionMap().get("mascotaFactura");
+//        return aux.getIdpets();
+        int var = 0;
+        return var;
     }
 
     public String recogeNombre() {
-        FacesContext fcontext = FacesContext.getCurrentInstance();
-        Pets aux = new Pets();
-        aux = (Pets) fcontext.getExternalContext().getSessionMap().get("mascotaFactura");
-        return aux.getName();
+//        FacesContext fcontext = FacesContext.getCurrentInstance();
+//        Pets aux = new Pets();
+//        aux = (Pets) fcontext.getExternalContext().getSessionMap().get("mascotaFactura");
+//        return aux.getName();
+        String var = "hola";
+        return var;
     }
 
     /**
@@ -209,10 +218,6 @@ public class PetsBean implements Serializable {
         this.petM = pet;
     }
 
-    public List<Pets> getListamascotas() {
-        return listamascotas;
-    }
-
     public String getIdPerson() {
         return IdPerson;
     }
@@ -269,6 +274,10 @@ public class PetsBean implements Serializable {
         this.role = role;
     }
 
+    public List<Pets> getListamascotas() {
+        return listamascotas;
+    }
+
     public List<Person> getListapersonas() {
         return listapersonas;
     }
@@ -285,4 +294,11 @@ public class PetsBean implements Serializable {
         this.listconsult = listconsult;
     }
 
+    public List<Pets> getListamascotasPers() {
+        return listamascotasPers;
+    }
+
+    public void setListamascotasPers(List<Pets> listamascotasPers) {
+        this.listamascotasPers = listamascotasPers;
+    }
 }

@@ -29,7 +29,7 @@ public class LBillLine extends ConexionDB {
         ConexionDB conn = new ConexionDB();
 
         try {
-            String sql = "Select  from where ";
+            String sql = "select bl.idbill_lines, b.*, p.idpets, p.name, p.animal, p.gender, p.race, p.colour, p.birth_date, pr.* , bl.quantity, bl.taxes, bl.discount, bl.observations from bill b, bill_lines bl, pets p, products pr where b.idbill = bl.idbill_lines and bl.idbill_lines = p.idpets and bl.idbill_lines = pr.idproducts ";
             PreparedStatement ps = conn.getConexion().prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
@@ -46,7 +46,7 @@ public class LBillLine extends ConexionDB {
                     auxBill.setDate(rs.getString(4));
                     auxBill.setObservations(rs.getString(5));
                         auxPet.setIdpets(rs.getInt(6));
-                        auxPet.setName(rs.getString(7));
+                        auxPet.setNamepet(rs.getString(7));
                         auxPet.setAnimal(rs.getString(8));
                         auxPet.setGender(rs.getInt(9));
                         auxPet.setRace(rs.getString(10));

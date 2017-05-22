@@ -8,7 +8,7 @@ public class Pets implements java.io.Serializable {
 
     private Integer idpets;
     private Person person;
-    private String name;
+    private String namepet;
     private String animal;
     private int gender;
     private String race;
@@ -18,15 +18,15 @@ public class Pets implements java.io.Serializable {
     public Pets() {
     }
 
-    public Pets(Person person, String name, String animal) {
+    public Pets(Person person, String namepet, String animal) {
         this.person = person;
-        this.name = name;
+        this.namepet = namepet;
         this.animal = animal;
     }
 
-    public Pets(Person person, String name, String animal, int gender, String race, String colour, String birthDate) {
+    public Pets(Person person, String namepet, String animal, int gender, String race, String colour, String birthDate) {
         this.person = person;
-        this.name = name;
+        this.namepet = namepet;
         this.animal = animal;
         this.gender = gender;
         this.race = race;
@@ -50,12 +50,12 @@ public class Pets implements java.io.Serializable {
         this.person = person;
     }
 
-    public String getName() {
-        return this.name;
+    public String getNamepet() {
+        return this.namepet;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNamepet(String namepet) {
+        this.namepet = namepet;
     }
 
     public String getAnimal() {
@@ -100,6 +100,6 @@ public class Pets implements java.io.Serializable {
     
     @Override
     public String toString() {
-        return name;
+        return namepet;
     }
 }

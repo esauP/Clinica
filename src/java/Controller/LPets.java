@@ -48,7 +48,7 @@ public class LPets extends ConexionDB {
                 Person persona = new Person();
 
                 mascota.setIdpets(rs.getInt(1));
-                mascota.setName(rs.getString(2));
+                mascota.setNamepet(rs.getString(2));
                 mascota.setAnimal(rs.getString(3));
                 mascota.setGender(rs.getInt(4));
                 mascota.setRace(rs.getString(5));
@@ -62,6 +62,59 @@ public class LPets extends ConexionDB {
                 persona.setPassword(rs.getString(14));
                 persona.setRole(rs.getInt(15));
                 mascota.setPerson(persona);
+
+                listamascotas.add(mascota);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCause());
+            System.out.println(e.getSQLState());
+            e.printStackTrace();
+
+        } finally {
+            conn.desconectar();
+        }
+        return listamascotas;
+    }
+
+    /**
+     * Metodo que devuelve la lista de mascotas asociadas a un dueño
+     *
+     * @param idperson
+     * @return List <Pets>
+     * @throws SQLException
+     */
+    public static List<Pets> getPets(String idperson) throws SQLException {
+        List<Pets> listamascotas = new ArrayList<Pets>();
+        ConexionDB conn = new ConexionDB();
+
+        try {
+            String sql = "select * from pets where idper = '" + idperson + "'";
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String fecha = rs.getString(7);
+                String day = "", mon = "", year = "", birth_pet = "";//creamos las variables necesarias para el conversor de fechas
+                StringTokenizer g = new StringTokenizer(fecha, "-");//pasamos el stringTokenizer para separar los tres tokens 
+
+                year = g.nextToken();
+                mon = g.nextToken();
+                day = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+                birth_pet = day + "-" + mon + "-" + year;//asi cambiamos el formato de fecha      
+
+                Pets mascota = new Pets();
+
+                mascota.setIdpets(rs.getInt(1));
+                mascota.setNamepet(rs.getString(2));
+                mascota.setAnimal(rs.getString(3));
+                mascota.setGender(rs.getInt(4));
+                mascota.setRace(rs.getString(5));
+                mascota.setColour(rs.getString(6));
+                mascota.setBirthDate(birth_pet);
+                
 
                 listamascotas.add(mascota);
             }
@@ -236,7 +289,7 @@ public class LPets extends ConexionDB {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 pet.setIdpets(rs.getInt("idpets"));
-                pet.setName(rs.getString("name"));
+                pet.setNamepet(rs.getString("name"));
                 pet.setAnimal(rs.getString("animal"));
                 pet.setGender(rs.getInt("gender"));
                 pet.setRace(rs.getString("race"));

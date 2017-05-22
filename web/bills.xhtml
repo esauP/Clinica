@@ -41,7 +41,7 @@
                                 <li>
                                     <a>
                                         <h:form>
-                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" icon="fa-user-times" value="Desconectar" iconPos="left"/>
                                         </h:form>
                                     </a>
                                 </li>
@@ -61,9 +61,10 @@
                                 <h3>Lista de productos y servicios</h3>
                                 <!--Comienzo del list de búsqueda-->
                                 <h:form id="formularioV">
-                                    <p:selectOneMenu value="#{productBean.prod.getName()}">
+                                    <p:selectOneMenu value="#{productBean.name}">
                                         <f:selectItems value="#{productBean.listproducts}"/>
                                     </p:selectOneMenu>
+                                    <p:commandButton value="Añadir" icon="ui-icon-check" actionListener="#{billLineBeans.Addcart(productBean.prod)}" update=":tablaFacturas"/>
                                 </h:form>
                                 <p:spacer width="20"  height="0"/>
                                 <!--fin del list de búsqueda -->
@@ -76,8 +77,9 @@
                                         <p:panel>
                                             <h:panelGrid columns="10" cellpadding="5">
                                                 <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
-                                                <p:selectOneMenu value="#{petsBean.petM.getName()}">
-                                                    <f:selectItems value="#{petsBean.listamascotas}"/>
+                                                <p:commandButton value="Buscar" update="ComboMascotas" actionListener="#{petsBean.BuscaMascotas(billBean.idper)}" ajax="false"  icon="ui-icon-check" />
+                                                <p:selectOneMenu id="ComboMascotas" value="#{petsBean.petM.namepet}">
+                                                    <f:selectItems value="#{petsBean.listamascotasPers}"/>
                                                 </p:selectOneMenu>
                                                 <h:outputText value="#{petsBean.recogeId()}"/>
                                                 <h:outputText value="#{petsBean.recogeNombre()}"/>
@@ -89,7 +91,7 @@
                                                 <!-- fin de la fecha -->
                                             </h:panelGrid>
                                         </p:panel>
-                                        <p:commandButton value="Buscar" update="msgs"  icon="ui-icon-check" />
+
                                         <p:spacer width="20"  height="0"/>
                                         <!-- fin del combobox de mascotas-->
 
@@ -99,7 +101,9 @@
                                 <!-- tabla con las líneas de factura -->
                                 <div>
                                     <h:form id="tablaFacturas">
-                                        <p:dataTable id="Facturas" var="fact" value="#{billLineBeans.listalineasfac}" editable="true" style="margin-bottom:20px">
+                                        <p:dataTable id="Facturas" var="fact" value="#{billLineBeans.listalineasfac}" editable="true" style="margin-bottom:20px" paginator = "true"
+                                                 paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate = "5,10,15,20,25">
                                             <f:facet name="header">Factura</f:facet>
 
                                             <p:ajax event="rowEdit" listener="#{billLineBeans.onRowEdit}"  />
@@ -153,8 +157,8 @@
 
                                             <p:column headerText="Mascota">
                                                 <p:cellEditor>
-                                                    <f:facet name="output"><h:outputText value="#{fact.pets.name}" /></f:facet>
-                                                    <f:facet name="input"><p:inputText value="#{fact.pets.name}" style="width:100%" label="pet"/></f:facet>
+                                                    <f:facet name="output"><h:outputText value="#{fact.pets.namepet}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{fact.pets.namepet}" style="width:100%" label="pet"/></f:facet>
                                                 </p:cellEditor>
                                             </p:column>
 
@@ -164,7 +168,11 @@
                                                     <f:facet name="input"><p:inputText value="#{fact.observations}" style="width:100%" label="obs"/></f:facet>
                                                 </p:cellEditor>
                                             </p:column>
-
+                                            
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
+                                            
                                             <p:column headerText="Eliminar">
                                                 <p:commandLink value="Eliminar"  actionListener="#{BillLineBeans.DeleteLine(fact.idbill_lines)}" update=":tablaFacturas:Facturas"/>
                                             </p:column>
@@ -203,18 +211,5 @@
         <!-- javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el-->
-        <script>
-            // Get the modal
-            var modal = document.getElementById('id01');
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            };
-        </script>
-
     </h:body>
 </html>

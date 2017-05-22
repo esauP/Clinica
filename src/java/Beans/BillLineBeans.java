@@ -53,7 +53,7 @@ public class BillLineBeans {
         listalineasfac = LBillLine.getList();
     }
     
-     public void AddLine() throws SQLException {
+    public void AddLine() throws SQLException {
         LBillLine.addLinea(blines.getId(), bill.getIdbill(), products.getIdproducts(), 
                 blines.getQuantity(), blines.getPrice(), blines.getTaxes(), blines.getDiscount(), 
                 pets.getIdpets(), blines.getObservations());
@@ -65,6 +65,11 @@ public class BillLineBeans {
         LBillLine.deleteBillLine(blines.getId());
         FacesMessage msg = new FacesMessage("Línea Eliminada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void Addcart(Products pr){
+        BillLines fact = new BillLines(0, bill, pets, pr, 1, price, taxes, discount, observations);
+        listalineasfac.add(fact);
     }
 
     public int getId() {

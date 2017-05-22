@@ -42,7 +42,7 @@
                                 <li>
                                     <a>
                                         <h:form>
-                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" image="fa-user-times" value="Desconectar" iconPos="left"/>
+                                            <p:commandButton actionListener="#{loginBean.desloguear(event)}" icon="fa-user-times" value="Desconectar" iconPos="left"/>
                                         </h:form>
                                     </a>
                                 </li>
@@ -89,7 +89,7 @@
                                     <h:form id = "formPet">
                                         <h3>Datos de la Mascota</h3>
                                         <p>
-                                            <p:inputText id="namePet" value="#{petsBean.petM.name}" required="true" placeholder="* Nombre Mascota" />
+                                            <p:inputText id="namePet" value="#{petsBean.petM.namepet}" required="true" placeholder="* Nombre Mascota" />
                                             <p:spacer width="20"  height="0"/>
                                             <p:inputText id="especie" value="#{petsBean.petM.animal}" required="true" placeholder="* Especie"/>
                                             <p:spacer width="20"  height="0"/>
@@ -130,12 +130,12 @@
                                         <p:ajax event="rowEdit" listener="#{petsBean.onRowEdit}" />
                                         <p:ajax event="rowEditCancel" listener="#{petsBean.onRowCancel}" />
 
-                                        <p:column filterBy="#{pet.name}"  filterMatchMode="contains"
+                                        <p:column filterBy="#{pet.namepet}"  filterMatchMode="contains"
                                                   filterFunction="#{personBean.filterByName}"
                                                   headerText="Nombre Mascota">
                                             <p:cellEditor>
-                                                <f:facet name="output"><h:outputText value="#{pet.name}" /></f:facet>
-                                                <f:facet name="input"><p:inputText value="#{pet.name}" style="width:100%" label="Nombre"/></f:facet>
+                                                <f:facet name="output"><h:outputText value="#{pet.namepet}" /></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{pet.namepet}" style="width:100%" label="Nombre"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
                                         <p:column filterBy="#{pet.animal}"  filterMatchMode="contains"
@@ -170,7 +170,7 @@
                                                 <f:facet name="input"><p:inputText value="#{pet.birthDate}" style="width:100%" label="Fecha Nacimiento"/></f:facet>
                                             </p:cellEditor>
                                         </p:column>
-                                        
+
                                         <p:column style="width:32px">
                                             <p:rowEditor />
                                         </p:column>
@@ -178,11 +178,11 @@
                                         <p:column headerText="Histórico">
                                             <p:commandLink value="Histórico"  actionListener="#{petsBean.getconsultationidPet(pet.idpets)}" onclick="PF('wdlgDatos').show();" />
                                         </p:column>
-                                        
+
                                         <p:column headerText="Factura">
                                             <p:commandLink value="Facturar"  actionListener="#{petsBean.PasarVariable(pet.idpets)}" />
                                         </p:column>
-                                        
+
                                     </p:dataTable>
 
                                     <p:dialog header="DatosH" widgetVar="wdlgDatos" id="dlgDatos">
@@ -266,20 +266,20 @@
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- script que permite al usuario cerrar el dialogo cuando haga click fuera de el-->
-        <script>
-            // Get the modal
-            var modal = document.getElementById('id01');
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            };
-        </script>
-        <script src="js/jquery.js"></script>
-        <script src="js/jquery.easing.1.3.js"></script>
+        <!-- <script>
+             // Get the modal
+             var modal = document.getElementById('id01');
+ 
+             // When the user clicks anywhere outside of the modal, close it
+             window.onclick = function (event) {
+                 if (event.target === modal) {
+                     modal.style.display = "none";
+                 }
+             };
+         </script> -->
         <script src="js/bootstrap.min.js"></script>
+        <!--<script src="js/jquery.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
         <script src="js/jquery.fancybox.pack.js"></script>
         <script src="js/jquery.fancybox-media.js"></script>
         <script src="js/portfolio/jquery.quicksand.js"></script>
@@ -287,6 +287,6 @@
         <script src="js/jquery.flexslider.js"></script>
         <script src="js/animate.js"></script>
         <script src="js/custom.js"></script>
-        <script src="js/owl-carousel/owl.carousel.js"></script>
+        <script src="js/owl-carousel/owl.carousel.js"></script>-->
     </h:body>
 </html>
