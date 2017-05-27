@@ -304,7 +304,7 @@ header ul.nav li ul li ul {
   content:none;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-color: #EAFFB0;
+background-color: #EEFFC3;
 }
 
 
@@ -1739,6 +1739,4 @@ padding-top: 2px;
 		height:20px;
 		font-size:14px;
 	}
-
-
 }

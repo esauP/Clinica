@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Netbeans/Projects/Clinica/web/pets.xhtml</file>
-            <file>file:/E:/Netbeans/Projects/Clinica/src/java/Controller/LPets.java</file>
-            <file>file:/E:/Netbeans/Projects/Clinica/src/java/Beans/PetsBean.java</file>
-            <file>file:/E:/Netbeans/Projects/Clinica/web/bills.xhtml</file>
-            <file>file:/E:/Netbeans/Projects/Clinica/src/java/Beans/LoginBean.java</file>
+            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/src/java/Model/ConexionDB.java</file>
+            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/web/vaccines.xhtml</file>
+            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/web/consultations.xhtml</file>
+            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/web/pets.xhtml</file>
         </group>
     </open-files>
 </project-private>

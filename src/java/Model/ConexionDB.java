@@ -18,12 +18,12 @@ public class ConexionDB {
     
             
     private static Connection conexion;
-    private String user = "admin";
-    private String bd = user + "clinica";
-    private String pass = "admin";
+    private String user = "dam43";
+    private String bd = "dam43_clinica";
+    private String pass = "salesianas";
     //192.168.28.3
     //79.148.236.236
-    private String host = "localhost";
+    private String host = "79.148.236.236";
     private String server = "jdbc:mysql://" + host + "/" + bd;
 
     public ConexionDB() {
