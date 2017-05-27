@@ -28,46 +28,46 @@ public class LBillLine extends ConexionDB {
         
         ConexionDB conn = new ConexionDB();
 
-        try {
-            String sql = "select bl.idbill_lines, b.*, p.idpets, p.name, p.animal, p.gender, p.race, p.colour, p.birth_date, pr.* , bl.quantity, bl.taxes, bl.discount, bl.observations from bill b, bill_lines bl, pets p, products pr where b.idbill = bl.idbill_lines and bl.idbill_lines = p.idpets and bl.idbill_lines = pr.idproducts ";
-            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
-
-            ResultSet rs = ps.executeQuery();
-           
-            while (rs.next()) {
-                BillLines aux = new BillLines();
-                Bill auxBill = new Bill();
-                Pets auxPet = new Pets();
-                Products auxProd = new Products();
-                
-                aux.setId(rs.getInt(1));
-                    auxBill.setIdbill(rs.getInt(2));
-                    auxBill.setIdper(rs.getString(3));
-                    auxBill.setDate(rs.getString(4));
-                    auxBill.setObservations(rs.getString(5));
-                        auxPet.setIdpets(rs.getInt(6));
-                        auxPet.setNamepet(rs.getString(7));
-                        auxPet.setAnimal(rs.getString(8));
-                        auxPet.setGender(rs.getInt(9));
-                        auxPet.setRace(rs.getString(10));
-                        auxPet.setColour(rs.getString(11));
-                        auxPet.setBirthDate(rs.getString(12));
-                            auxProd.setIdproducts(rs.getInt(13));
-                            auxProd.setName(rs.getString(14));
-                            auxProd.setPrice(rs.getDouble(15));
-                            auxProd.setTaxes(rs.getInt(16));
-                aux.setQuantity(rs.getInt(17));
-                aux.setTaxes(rs.getInt(18));
-                aux.setDiscount(rs.getInt(19));
-                aux.setObservations(rs.getString(20));
-                listalineasfac.add(aux);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-
-        } finally {
-            conn.desconectar();
-        }
+//        try {
+//            String sql = "select bl.idbill_lines, b.*, p.idpets, p.name, p.animal, p.gender, p.race, p.colour, p.birth_date, pr.* , bl.quantity, bl.taxes, bl.discount, bl.observations from bill b, bill_lines bl, pets p, products pr where b.idbill = bl.idbill_lines and bl.idbill_lines = p.idpets and bl.idbill_lines = pr.idproducts ";
+//            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+//
+//            ResultSet rs = ps.executeQuery();
+//           
+//            while (rs.next()) {
+//                BillLines aux = new BillLines();
+//                Bill auxBill = new Bill();
+//                Pets auxPet = new Pets();
+//                Products auxProd = new Products();
+//                
+//                aux.setId(rs.getInt(1));
+//                    auxBill.setIdbill(rs.getInt(2));
+//                    auxBill.setIdper(rs.getString(3));
+//                    auxBill.setDate(rs.getString(4));
+//                    auxBill.setObservations(rs.getString(5));
+//                        auxPet.setIdpets(rs.getInt(6));
+//                        auxPet.setNamepet(rs.getString(7));
+//                        auxPet.setAnimal(rs.getString(8));
+//                        auxPet.setGender(rs.getInt(9));
+//                        auxPet.setRace(rs.getString(10));
+//                        auxPet.setColour(rs.getString(11));
+//                        auxPet.setBirthDate(rs.getString(12));
+//                            auxProd.setIdproducts(rs.getInt(13));
+//                            auxProd.setName(rs.getString(14));
+//                            auxProd.setPrice(rs.getDouble(15));
+//                            auxProd.setTaxes(rs.getInt(16));
+//                aux.setQuantity(rs.getInt(17));
+//                aux.setTaxes(rs.getInt(18));
+//                aux.setDiscount(rs.getInt(19));
+//                aux.setObservations(rs.getString(20));
+//                listalineasfac.add(aux);
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//
+//        } finally {
+//            conn.desconectar();
+//        }
         return listalineasfac;
     }
      

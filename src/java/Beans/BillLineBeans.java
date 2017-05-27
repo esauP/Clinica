@@ -67,8 +67,8 @@ public class BillLineBeans {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    public void Addcart(Products pr){
-        BillLines fact = new BillLines(0, bill, pets, pr, 1, price, taxes, discount, observations);
+    public void Addcart(){
+        BillLines fact = new BillLines(0, bill, pets, products, quantity, price, taxes, discount, observations);
         listalineasfac.add(fact);
     }
 
