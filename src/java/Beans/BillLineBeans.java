@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
-import pojo.Bill;
-import pojo.Pets;
 import pojo.Products;
 import pojo.BillLines;
 import Controller.LBillLine;
@@ -27,17 +25,21 @@ import org.primefaces.event.RowEditEvent;
 public class BillLineBeans {
 
     private int id;
-    private Bill bill = new Bill();
-    private Pets pets = new Pets();
-    private Products products = new Products();
-    private Integer quantity;
-    private Double price;
-    private Integer taxes;
-    private Integer discount;
+    private int idbill;
+    private int idpets;
+    private Products product = new Products();
+    private int quantity;
+    private double price;
+    private int taxes;
+    private int discount;
     private String observations;
     private List<BillLines> listalineasfac;
     private BillLines blines = new BillLines();
-    
+
+    public BillLineBeans() throws SQLException {
+        listalineasfac = LBillLine.getList();
+    }
+
     public void onRowEdit(RowEditEvent event) throws SQLException {
         BillLines billli = (BillLines) event.getObject();
         FacesMessage msg = new FacesMessage("Precio Editado", billli.getPrice().toString());
@@ -48,27 +50,23 @@ public class BillLineBeans {
         FacesMessage msg = new FacesMessage("Edicion Cancelada", ((Products) event.getObject()).getName());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-    public BillLineBeans() throws SQLException{
-        listalineasfac = LBillLine.getList();
-    }
-    
+
     public void AddLine() throws SQLException {
-        LBillLine.addLinea(blines.getId(), bill.getIdbill(), products.getIdproducts(), 
-                blines.getQuantity(), blines.getPrice(), blines.getTaxes(), blines.getDiscount(), 
-                pets.getIdpets(), blines.getObservations());
+        LBillLine.addLinea(blines.getId(), idbill ,this.product.getIdproducts() ,
+                blines.getQuantity(), blines.getPrice(), blines.getTaxes(), blines.getDiscount(),
+                idpets, blines.getObservations());
         FacesMessage msg = new FacesMessage("Línea Insertada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-     
+
     public void DeleteLine() throws SQLException {
         LBillLine.deleteBillLine(blines.getId());
         FacesMessage msg = new FacesMessage("Línea Eliminada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-    public void Addcart(){
-        BillLines fact = new BillLines(0, bill, pets, products, quantity, price, taxes, discount, observations);
+
+    public void Addcart() {
+        BillLines fact = new BillLines(0, this.idbill, this.idpets, this.product.getIdproducts(), this.quantity, this.price, this.taxes, this.discount, this.observations);
         listalineasfac.add(fact);
     }
 
@@ -80,39 +78,39 @@ public class BillLineBeans {
         this.id = id;
     }
 
-    public Bill getBill() {
-        return bill;
+    public int getBill() {
+        return idbill;
     }
 
-    public void setBill(Bill bill) {
-        this.bill = bill;
+    public void setBill(int idbill) {
+        this.idbill = idbill;
     }
 
-    public Pets getPets() {
-        return pets;
+    public int getPets() {
+        return idpets;
     }
 
-    public void setPets(Pets pets) {
-        this.pets = pets;
+    public void setPets(int pets) {
+        this.idpets = pets;
     }
 
     public Products getProducts() {
-        return products;
+        return product;
     }
 
-    public void setProducts(Products products) {
-        this.products = products;
+    public void setProducts(Products idproduct) {
+        this.product = idproduct;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -120,19 +118,19 @@ public class BillLineBeans {
         this.price = price;
     }
 
-    public Integer getTaxes() {
+    public int getTaxes() {
         return taxes;
     }
 
-    public void setTaxes(Integer taxes) {
+    public void setTaxes(int taxes) {
         this.taxes = taxes;
     }
 
-    public Integer getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
 
@@ -159,7 +157,5 @@ public class BillLineBeans {
     public void setBlines(BillLines blines) {
         this.blines = blines;
     }
-    
-    
-    
+
 }

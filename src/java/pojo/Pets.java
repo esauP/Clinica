@@ -6,7 +6,7 @@ package pojo;
  */
 public class Pets implements java.io.Serializable {
 
-    private Integer idpets;
+    private int idpets;
     private Person person;
     private String namepet;
     private String animal;
@@ -34,11 +34,11 @@ public class Pets implements java.io.Serializable {
         this.birthDate = birthDate;
     }
 
-    public Integer getIdpets() {
+    public int getIdpets() {
         return this.idpets;
     }
 
-    public void setIdpets(Integer idpets) {
+    public void setIdpets(int idpets) {
         this.idpets = idpets;
     }
 

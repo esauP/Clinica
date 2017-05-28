@@ -26,7 +26,7 @@ public class ProductBean {
 
     private List<Products> listproducts;
     private List<String> listamaestra;
-    private Integer idproducts;
+    private int idproducts;
     private String name;
     private double price;
     private int taxes;
@@ -78,11 +78,11 @@ public class ProductBean {
         this.prod = prod;
     }
 
-    public Integer getIdproducts() {
+    public int getIdproducts() {
         return idproducts;
     }
 
-    public void setIdproducts(Integer idproducts) {
+    public void setIdproducts(int idproducts) {
         this.idproducts = idproducts;
     }
 

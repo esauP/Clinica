@@ -10,29 +10,29 @@ public class BillLines  implements java.io.Serializable {
 
 
      private int id;
-     private Bill bill;
-     private Pets pets;
-     private Products products;
-     private Integer quantity;
-     private Double price;
-     private Integer taxes;
-     private Integer discount;
+     private int idbill;
+     private int idpet;
+     private int idproduct;
+     private int quantity;
+     private double price;
+     private int taxes;
+     private int discount;
      private String observations;
 
     public BillLines() {
     }
 
 	
-    public BillLines(int id, Bill bill, Products products) {
+    public BillLines(int id, int bill, int idproduct) {
         this.id = id;
-        this.bill = bill;
-        this.products = products;
+        this.idbill = bill;
+        this.idproduct = idproduct;
     }
-    public BillLines(int id, Bill bill, Pets pets, Products products, Integer quantity, Double price, Integer taxes, Integer discount, String observations) {
+    public BillLines(int id, int idbill, int idpet, int idproduct, int quantity, Double price, int taxes, int discount, String observations) {
        this.id = id;
-       this.bill = bill;
-       this.pets = pets;
-       this.products = products;
+       this.idbill = idbill;
+       this.idpet = idpet;
+       this.idproduct = idproduct;
        this.quantity = quantity;
        this.price = price;
        this.taxes = taxes;
@@ -47,32 +47,32 @@ public class BillLines  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public Bill getBill() {
-        return this.bill;
+    public int getBill() {
+        return this.idbill;
     }
     
-    public void setBill(Bill bill) {
-        this.bill = bill;
+    public void setBill(int idbill) {
+        this.idbill = idbill;
     }
-    public Pets getPets() {
-        return this.pets;
-    }
-    
-    public void setPets(Pets pets) {
-        this.pets = pets;
-    }
-    public Products getProducts() {
-        return this.products;
+    public int getPets() {
+        return this.idpet;
     }
     
-    public void setProducts(Products products) {
-        this.products = products;
+    public void setPets(int idpet) {
+        this.idpet = idpet;
     }
-    public Integer getQuantity() {
+    public int getProducts() {
+        return this.idproduct;
+    }
+    
+    public void setProducts(int idproducts) {
+        this.idproduct = idproducts;
+    }
+    public int getQuantity() {
         return this.quantity;
     }
     
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
     public Double getPrice() {
@@ -82,18 +82,18 @@ public class BillLines  implements java.io.Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public Integer getTaxes() {
+    public int getTaxes() {
         return this.taxes;
     }
     
-    public void setTaxes(Integer taxes) {
+    public void setTaxes(int taxes) {
         this.taxes = taxes;
     }
-    public Integer getDiscount() {
+    public int getDiscount() {
         return this.discount;
     }
     
-    public void setDiscount(Integer discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
     public String getObservations() {

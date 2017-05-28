@@ -11,7 +11,7 @@ import java.util.Set;
 public class Products  implements java.io.Serializable {
 
 
-     private Integer idproducts;
+     private int idproducts;
      private String name;
      private double price;
      private int taxes;
@@ -33,11 +33,11 @@ public class Products  implements java.io.Serializable {
        this.billlLineses = billlLineses;
     }
    
-    public Integer getIdproducts() {
+    public int getIdproducts() {
         return this.idproducts;
     }
     
-    public void setIdproducts(Integer idproducts) {
+    public void setIdproducts(int idproducts) {
         this.idproducts = idproducts;
     }
     public String getName() {

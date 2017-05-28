@@ -26,7 +26,7 @@ import pojo.Pets;
 @RequestScoped
 public class BillBean implements Serializable{
 
-    private Integer idbill;
+    private int idbill;
     private String idper;
     private String date;
     private String observations;
