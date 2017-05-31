@@ -8,31 +8,34 @@ package Beans;
 import java.sql.SQLException;
 import java.util.List;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import pojo.Products;
 import pojo.BillLines;
 import Controller.LBillLine;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
+import pojo.Pets;
 
 /**
  *
  * @author macarena jbenitez
  */
 @Named(value = "billLineBeans")
-@Dependent
+@ManagedBean
+@RequestScoped
 public class BillLineBeans {
 
     private int id;
     private int idbill;
-    private int idpets;
-    private Products product = new Products();
     private int quantity;
-    private double price;
     private int taxes;
     private int discount;
+    private double price;
     private String observations;
+    private Products prod;
+    private Pets pet;
     private List<BillLines> listalineasfac;
     private BillLines blines = new BillLines();
 
@@ -41,8 +44,7 @@ public class BillLineBeans {
     }
 
     public void onRowEdit(RowEditEvent event) throws SQLException {
-        BillLines billli = (BillLines) event.getObject();
-        FacesMessage msg = new FacesMessage("Precio Editado", billli.getPrice().toString());
+        FacesMessage msg = new FacesMessage("Precio Editado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -52,9 +54,11 @@ public class BillLineBeans {
     }
 
     public void AddLine() throws SQLException {
-        LBillLine.addLinea(blines.getId(), idbill ,this.product.getIdproducts() ,
-                blines.getQuantity(), blines.getPrice(), blines.getTaxes(), blines.getDiscount(),
-                idpets, blines.getObservations());
+
+        for (BillLines line : listalineasfac) {
+            LBillLine.addLinea(idbill, line.getProduct().getIdproducts(),
+                    line.getQuantity(), line.getPrice(), line.getTaxes(), line.getDiscount(), line.getIdpet(), line.getObservations());
+        }
         FacesMessage msg = new FacesMessage("Línea Insertada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -66,8 +70,8 @@ public class BillLineBeans {
     }
 
     public void Addcart() {
-        BillLines fact = new BillLines(0, this.idbill, this.idpets, this.product.getIdproducts(), this.quantity, this.price, this.taxes, this.discount, this.observations);
-        listalineasfac.add(fact);
+        BillLines fact = new BillLines(pet.getIdpets(), prod, quantity, price, taxes, discount);
+        this.listalineasfac.add(fact);
     }
 
     public int getId() {
@@ -78,28 +82,12 @@ public class BillLineBeans {
         this.id = id;
     }
 
-    public int getBill() {
+    public int getIdbill() {
         return idbill;
     }
 
-    public void setBill(int idbill) {
+    public void setIdbill(int idbill) {
         this.idbill = idbill;
-    }
-
-    public int getPets() {
-        return idpets;
-    }
-
-    public void setPets(int pets) {
-        this.idpets = pets;
-    }
-
-    public Products getProducts() {
-        return product;
-    }
-
-    public void setProducts(Products idproduct) {
-        this.product = idproduct;
     }
 
     public int getQuantity() {
@@ -108,14 +96,6 @@ public class BillLineBeans {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public int getTaxes() {
@@ -132,6 +112,14 @@ public class BillLineBeans {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getObservations() {
@@ -156,6 +144,22 @@ public class BillLineBeans {
 
     public void setBlines(BillLines blines) {
         this.blines = blines;
+    }
+
+    public Products getProd() {
+        return prod;
+    }
+
+    public void setProd(Products prod) {
+        this.prod = prod;
+    }
+
+    public Pets getPet() {
+        return pet;
+    }
+
+    public void setPet(Pets pet) {
+        this.pet = pet;
     }
 
 }

@@ -60,45 +60,42 @@
 
                             <div class="col-md-12 text-center">
                                 <div class="billInfo">
-                                    <h:form id="insertBill">
-                                        <!-- combobox de mascotas  -->
-                                        <p:growl id = "msgs" showDetail = "true" />
-                                        <h:panelGrid columns="12" cellpadding="5">
-                                            <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
-                                            <p:commandButton value="Buscar" update="ComboMascotas" actionListener="#{petsBean.BuscaMascotas(billBean.idper)}" ajax="false"  icon="ui-icon-check" />
-                                            <p:selectOneMenu id="ComboMascotas" value="#{billLineBeans.pets}">
-                                                <f:selectItems value="#{petsBean.listamascotasPers}"
-                                                               var="pets"
-                                                               itemLabel="#{pets.namepet}"
-                                                               itemValue="#{pets.idpets}"
-                                                               />
-                                            </p:selectOneMenu>
-                                            <h:outputText value="#{petsBean.recogeId()}"/>
-                                            <h:outputText value="#{petsBean.recogeNombre()}"/>
-                                            <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
-                                            <!-- fecha del día para la factura -->
-                                            <h:outputText value="#{now}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-                                            </h:outputText>
-                                            <!-- fin de la fecha -->
-                                        </h:panelGrid>
-
-                                        <p:spacer width="20"  height="0"/>
-                                        <!-- fin del combobox de mascotas-->
-
-                                        <h:outputText id = "description" value = "#{billBean.observations}" />
-                                    </h:form>
-                                </div>
-                                <!-- tabla con las líneas de factura -->
-                                <div>
                                     <h:form id="tablaFacturas">
                                         <p:panel>
+                                            <!-- combobox de mascotas  -->
+                                            <p:growl id = "msgs" showDetail = "true" />
+                                            <h:panelGrid columns="12" cellpadding="5">
+                                                <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
+                                                <p:commandButton value="Buscar" update="ComboMascotas" actionListener="#{petsBean.BuscaMascotas(billBean.idper)}" ajax="false"  icon="ui-icon-check" />
+                                                <p:selectOneMenu id="ComboMascotas" value="#{billLineBeans.pet}">
+                                                    <f:selectItems value="#{petsBean.listamascotasPers}"
+                                                                   var="pet"
+                                                                   itemLabel="#{pet.namepet}"
+                                                                   itemValue="#{pet}"
+                                                                   />
+                                                </p:selectOneMenu>
+                                                <h:outputText value="#{petsBean.recogeId()}"/>
+                                                <h:outputText value="#{petsBean.recogeNombre()}"/>
+                                                <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
+                                                <!-- fecha del día para la factura -->
+                                                <h:outputText value="#{now}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                                                </h:outputText>
+                                                <!-- fin de la fecha -->
+                                            </h:panelGrid>
+
+                                            <p:spacer width="20"  height="0"/>
+                                            <!-- fin del combobox de mascotas-->
+
+                                            <h:outputText id = "description" value = "#{billBean.observations}" />
+
+
+                                        </p:panel>
+                                        <p:panel>
                                             <p:panelGrid columns="5">
-                                                <p:selectOneMenu id="Producto" value="#{billLineBeans.products.idproducts}" filter="true" filterMatchMode="startsWith" >
+                                                <p:selectOneMenu id="Producto" value="#{billLineBeans.prod}" filter="true" filterMatchMode="startsWith" >
                                                     <f:selectItems value="#{productBean.listproducts}" 
-                                                                   var="prod"  
-                                                                   itemLabel="#{prod.name}"
-                                                                   itemValue="#{prod}"/>
+                                                                   />
                                                 </p:selectOneMenu>
                                                 <p:inputText id="Cantidad-Producto" value="#{billLineBeans.quantity}" placeholder="* Cantidad" required="true"/>
                                                 <p:inputText id="Precio-Producto" value="#{billLineBeans.price}" placeholder="* Precio" required="true"/>
@@ -107,7 +104,6 @@
                                                 <h:commandButton value="Añadir Linea" action="#{billLineBeans.Addcart()}" />
 
                                             </p:panelGrid>
-
 
                                             <p:dataTable id="Facturas" var="fact" value="#{billLineBeans.listalineasfac}" editable="true" style="margin-bottom:20px" paginator = "true"
                                                          paginatorTemplate = "{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -121,18 +117,8 @@
                                                     <h:outputText value="#{fact.id}" />
                                                 </p:column>
 
-                                                <p:column headerText="Factura">
-                                                    <p:cellEditor>
-                                                        <f:facet name="output"><h:outputText value="#{fact.bill}" /></f:facet>
-                                                        <f:facet name="input"><p:inputText value="#{fact.bill}" style="width:100%" label="idBill"/></f:facet>
-                                                    </p:cellEditor>
-                                                </p:column>
-
-                                                <p:column headerText="Producto">
-                                                    <p:cellEditor>
-                                                        <f:facet name="output"><h:outputText value="#{fact.products}" /></f:facet>
-                                                        <f:facet name="input"><p:inputText value="#{fact.products}" style="width:100%" label="idProd"/></f:facet>
-                                                    </p:cellEditor>
+                                                <p:column headerText="Producto">             
+                                                    <h:outputText value="#{fact.product.name}" />
                                                 </p:column>
 
                                                 <p:column headerText="Cantidad">
@@ -160,13 +146,6 @@
                                                     <p:cellEditor>
                                                         <f:facet name="output"><h:outputText value="#{fact.discount}" /></f:facet>
                                                         <f:facet name="input"><p:inputText value="#{fact.discount}" style="width:100%" label="descuento"/></f:facet>
-                                                    </p:cellEditor>
-                                                </p:column>
-
-                                                <p:column headerText="Mascota">
-                                                    <p:cellEditor>
-                                                        <f:facet name="output"><h:outputText value="#{fact.pets}" /></f:facet>
-                                                        <f:facet name="input"><p:inputText value="#{fact.pets}" style="width:100%" label="pet"/></f:facet>
                                                     </p:cellEditor>
                                                 </p:column>
 

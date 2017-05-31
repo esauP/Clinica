@@ -33,6 +33,11 @@ public class BillBean implements Serializable{
     private List<Bill> listafacturas;
     private Bill fac = new Bill();
 
+    public BillBean() throws SQLException {
+        this.idbill = LBill.GetNextIdBill();
+    }
+
+    
     
     /**
      * Metodo para insertar una nueva factura
@@ -55,24 +60,12 @@ public class BillBean implements Serializable{
         FacesMessage msg = new FacesMessage("Factura Eliminada", fac.getIdbill().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-    public void ListPets() throws SQLException{
-        LBill.listPets();
-    }
-    
-    public void ListProd() throws SQLException{
-        LBill.listProd();
-    }
-    
-    public BillBean() throws SQLException{
-        listafacturas = LBill.getList();
-    }
 
-    public Integer getIdbill() {
+    public int getIdbill() {
         return idbill;
     }
 
-    public void setIdbill(Integer idbill) {
+    public void setIdbill(int idbill) {
         this.idbill = idbill;
     }
 

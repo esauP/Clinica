@@ -163,4 +163,25 @@ public class LBill {
         }
         return success;
     }
+    
+    public static int GetNextIdBill() throws SQLException{
+        ConexionDB conn = new ConexionDB();
+        int id = 0;
+
+        try {
+            String sql = "SHOW TABLE STATUS WHERE `Name` = 'bill'";
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                      id = rs.getInt("Auto_increment");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return id;
+    }
 }

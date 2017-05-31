@@ -71,7 +71,7 @@ public class LBillLine extends ConexionDB {
         return listalineasfac;
     }
      
-     public static boolean addLinea(int idbillLine, int idBill, int idProd, int quantity, double price, int taxes, int discount, int idPet, String observations) throws SQLException {
+     public static boolean addLinea(int idBill, int idProd, int quantity, double price, int taxes, int discount, int idPet, String observations) throws SQLException {
        boolean success = false;
         ConexionDB conn = new ConexionDB();
         try {
