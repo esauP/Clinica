@@ -7,6 +7,7 @@ package Beans;
 
 import Controller.LConsultation;
 import Controller.LDocument;
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.scene.control.TableColumn;
@@ -16,6 +17,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.annotation.MultipartConfig;
+import javax.swing.JFileChooser;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
 import pojo.*;
@@ -46,13 +48,23 @@ public class DocBean {
         if (file != null) {
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            docu.setFileattached(file.getContents());
+            docu.setFileattached(String.valueOf(file.getFileName()));
+        }
+    }
+
+    public void viewDoc(String aux) throws Exception{
+        Runtime r = Runtime.getRuntime();
+        Process p = null;
+        try {
+            p = r.exec("explorer.exe C:\\Documents\\"+aux);
+        } catch (Exception e) {
+            System.out.println("Error al abrir el documento");
         }
     }
 
     public void addDoc() throws SQLException {
         LDocument ld = new LDocument();
-        ld.addDoc(docu.getIdcons(), docu.getDate_doc(), docu.getDescription(), docu.getFileattached2());
+        ld.addDoc(docu.getIdcons(), docu.getDate_doc(), docu.getDescription(), docu.getFileattached());
     }
 
     public void deleteDoc(int Iddoc) throws SQLException {
@@ -70,7 +82,7 @@ public class DocBean {
         LDocument ld = new LDocument();
         Doc docum = (Doc) event.getObject();
         FacesMessage msg = new FacesMessage("Documento Editado", String.valueOf(docum.getIddoc()));
-        ld.updateDoc(docum.getIddoc(), docum.getIdcons(), docum.getDate_doc(), docum.getDescription(), docum.getFileattached2());
+        ld.updateDoc(docum.getIddoc(), docum.getIdcons(), docum.getDate_doc(), docum.getDescription(), docum.getFileattached());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -122,5 +134,4 @@ public class DocBean {
         this.listaconsult = listaconsult;
     }
 
-    
 }

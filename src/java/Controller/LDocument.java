@@ -45,7 +45,7 @@ public class LDocument extends ConexionDB {
                 aux.setIdcons(rs.getInt("idcons"));
                 aux.setDate_doc(fecha_doc);
                 aux.setDescription(rs.getString("description"));
-                aux.setFileattached2(rs.getBlob("fileattached"));
+                aux.setFileattached(rs.getString("fileattached"));
                 listadoc.add(aux);
             }
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class LDocument extends ConexionDB {
         return listadoc;
     }
 
-    public boolean addDoc(int idcon, String date_doc, String description, Blob fileattached2) throws SQLException {
+    public boolean addDoc(int idcon, String date_doc, String description, String fileattached) throws SQLException {
         ConexionDB conn = new ConexionDB();
         boolean success = false;
         try {
@@ -76,7 +76,7 @@ public class LDocument extends ConexionDB {
             cStmt.setInt(2, idcon);
             cStmt.setString(3, fecha_doc);
             cStmt.setString(4, description);
-            cStmt.setBlob(5, fileattached2);
+            cStmt.setString(5, fileattached);
             //se ejecuta la funcion
             cStmt.execute();
             if (cStmt.getInt(1) == 0) {
@@ -90,7 +90,7 @@ public class LDocument extends ConexionDB {
         return success;
     }
 
-    public boolean updateDoc(int iddoc, int idcon, String date_doc, String description, Blob fileattached2) throws SQLException {
+    public boolean updateDoc(int iddoc, int idcon, String date_doc, String description, String fileattached) throws SQLException {
         ConexionDB conn = new ConexionDB();
         boolean success = false;
         try {
@@ -112,7 +112,7 @@ public class LDocument extends ConexionDB {
             cStmt.setInt(3, idcon);
             cStmt.setString(4, fecha_doc);
             cStmt.setString(5, description);
-            cStmt.setBlob(6, fileattached2);
+            cStmt.setString(6, fileattached);
             //se ejecuta la funcion
             cStmt.execute();
             if (cStmt.getInt(1) == 0) {

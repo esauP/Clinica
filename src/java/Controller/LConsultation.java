@@ -32,8 +32,8 @@ public class LConsultation {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                
-                  String fecha = rs.getString(3);
+
+                String fecha = rs.getString(3);
                 String day = "", mon = "", year = "", fecha_cons = "";//creamos las variables necesarias para el conversor de fechas
                 StringTokenizer g = new StringTokenizer(fecha, "-");//pasamos el stringTokenizer para separar los tres tokens 
 
@@ -41,7 +41,7 @@ public class LConsultation {
                 mon = g.nextToken();
                 day = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
                 fecha_cons = day + "-" + mon + "-" + year;//asi cambiamos el formato de fecha      
-                
+
                 Consultation aux = new Consultation();
                 aux.setIdcons(rs.getInt(1));
                 aux.setIdpets(rs.getInt(2));
@@ -170,6 +170,41 @@ public class LConsultation {
             conn.desconectar();
         }
         return listconsult;
+    }
+
+    public List<Consultation> getConsultationId(int idpet) throws SQLException {
+        List<Consultation> listaconsultas = new ArrayList<Consultation>();
+        ConexionDB conn = new ConexionDB();
+        try {
+            String sql = "Select idcons, idpet, date_consultation, reason, diagnosis, treatment, observation from consultation where idpet=" + idpet + ";";
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String fecha = rs.getString(3);
+                String day = "", mon = "", year = "", fecha_cons = "";//creamos las variables necesarias para el conversor de fechas
+                StringTokenizer g = new StringTokenizer(fecha, "-");//pasamos el stringTokenizer para separar los tres tokens 
+
+                year = g.nextToken();
+                mon = g.nextToken();
+                day = g.nextToken();// como sabemos que hay 3 tokens no necesitamos ninguna estructura reiterativa
+                fecha_cons = day + "-" + mon + "-" + year;//asi cambiamos el formato de fecha      
+
+                Consultation aux = new Consultation();
+                aux.setIdcons(rs.getInt(1));
+                aux.setIdpets(rs.getInt(2));
+                aux.setDate(fecha_cons);
+                aux.setReason(rs.getString(4));
+                aux.setDiagnosis(rs.getString(5));
+                aux.setTreatment(rs.getString(6));
+                aux.setObservation(rs.getString(7));
+                listaconsultas.add(aux);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            conn.desconectar();
+        }
+        return listaconsultas;
     }
 
 }

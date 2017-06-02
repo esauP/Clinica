@@ -41,12 +41,18 @@ public class ConsultationBean {
     private List<String> listapets;
 
     public ConsultationBean() throws SQLException {
+        //instanciamos una clase LConsultation que ataca a la base de datos
         LConsultation dao = new LConsultation();
+        //rellenamos nuestra List<> con el método de la clase anterior que devuelve todos los resultados
         listaconsultas = dao.getConsultation();
         LPets lp = new LPets();
         listapets = lp.getIdPets();
     }
 
+    /**
+     * Método para la editar el valor de una fila en el xhtml
+     * @param event 
+     */
     public void onRowEdit(RowEditEvent event) {
         LConsultation dao = new LConsultation();
         Consultation consulta = (Consultation) event.getObject();
@@ -101,7 +107,7 @@ public class ConsultationBean {
             System.out.println(e.getMessage());
         }
     }
-
+ 
     public List listar() throws SQLException {
         LConsultation dao = new LConsultation();
         return dao.getConsultation();

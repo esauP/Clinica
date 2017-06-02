@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/src/java/Model/ConexionDB.java</file>
-            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/web/vaccines.xhtml</file>
-            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/web/consultations.xhtml</file>
-            <file>file:/C:/Users/mjime/Documents/NetBeansProjects/Clinica2/Clinica/web/pets.xhtml</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/nbproject/private/private.properties</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/web/adminHome.xhtml</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/src/java/Beans/PersonBean.java</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/web/pets.xhtml</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/src/java/Beans/PetsBean.java</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/web/index.xhtml</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/src/java/Model/ConexionDB.java</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/web/consultations.xhtml</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/src/java/Controller/LPets.java</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/web/dates.xhtml</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/src/java/Beans/ConsultationBean.java</file>
+            <file>file:/C:/Users/neuhaus/Desktop/Clinica/web/bills.xhtml</file>
         </group>
     </open-files>
 </project-private>

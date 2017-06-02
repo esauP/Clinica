@@ -223,7 +223,6 @@
                                             <td>
                                                 <p:outputLabel for="filed" value="Fichero adjunto" />
                                                 <p:fileUpload id="filed" value="#{docBean.file}" mode="simple" required="true"/>
-                                                <p:commandButton value="Submit" ajax="false" actionListener="#{docBean.upload}" disabled="true" />
                                             </td>
                                         </tr>
                                     </table>
@@ -264,13 +263,16 @@
                                             <f:facet name="input"><p:inputText value="#{docs.description}" style="width:100%" label="descripcion"/></f:facet>
                                         </p:cellEditor>
                                     </p:column>
-
-                                    <p:column headerText="DocAdjunto">
-                                        <p:cellEditor>
-                                            <f:facet name="output"><h:outputText value="#{docs.fileattached}" /></f:facet>
-                                            <f:facet name="input"><p:inputText value="#{docs.fileattached}" style="width:100%" label="Doc_adjunto"/></f:facet>
-                                        </p:cellEditor>
+                                    <p:column headerText="File">
+                                        <p:commandLink value="Abrir" actionListener="#{docBean.viewDoc(docs.fileattached)}"/>                                        
                                     </p:column>
+                                    <!-- <p:column>
+                                        <p:cellEditor>
+                                            <f:facet name="input">
+                                                <p:inputText value="#{docs.fileattached}" style="width:100%" label="descripcion"/>
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column> -->
                                     <p:column style="width:50px">
                                         <p:rowEditor />
                                     </p:column>
@@ -285,7 +287,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- VACUNAS -->
             <div class="row">
                 <div class="skill-home">
                     <div class="skill-home-solid clearfix">
