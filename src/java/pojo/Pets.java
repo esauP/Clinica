@@ -97,9 +97,9 @@ public class Pets implements java.io.Serializable {
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
-    
+
     @Override
     public String toString() {
-        return namepet;
+        return idpets + "-" + namepet;
     }
 }

@@ -65,20 +65,15 @@
                                             <!-- combobox de mascotas  -->
                                             <p:growl id = "msgs" showDetail = "true" />
                                             <h:panelGrid columns="12" cellpadding="5">
-                                                <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"/>
-                                                <p:commandButton value="Buscar" update="ComboMascotas" actionListener="#{petsBean.BuscaMascotas(billBean.idper)}" ajax="false"  icon="ui-icon-check" />
-                                                <p:selectOneMenu id="ComboMascotas" value="#{billLineBeans.pet}">
-                                                    <f:selectItems value="#{petsBean.listamascotasPers}"
-                                                                   var="pet"
-                                                                   itemLabel="#{pet.namepet}"
-                                                                   itemValue="#{pet}"
-                                                                   />
+                                                <p:autoComplete value="#{billBean.idper}" completeMethod="#{personBean.AutocompletarID}" placeholder="* Nombre Apellidos"  onclick="#{petsBean.BuscaMascotas(billBean.idper)}"/>
+                                                <p:commandButton value="Buscar" actionListener="#{petsBean.BuscaMascotas(billBean.idper)}" icon="ui-icon-check" update="ComboMascotas"/>
+                                                <p:selectOneMenu id="ComboMascotas" value="#{billLineBeans.pet}" >
+                                                    <f:selectItems value="#{petsBean.listamascotasPers}" />
                                                 </p:selectOneMenu>
-                                                <h:outputText value="#{petsBean.recogeId()}"/>
-                                                <h:outputText value="#{petsBean.recogeNombre()}"/>
-                                                <h:outputText id = "idBill" value = "#{billBean.idbill}"/>
+                                                <h:outputText value="Factura:" />
+                                                <h:outputText id = "idBill" value = "#{billBean.idbill}" />
                                                 <!-- fecha del día para la factura -->
-                                                <h:outputText value="#{now}">
+                                                <h:outputText value="#{now}" >
                                                     <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
                                                 </h:outputText>
                                                 <!-- fin de la fecha -->
@@ -93,15 +88,14 @@
                                         </p:panel>
                                         <p:panel>
                                             <p:panelGrid columns="5">
-                                                <p:selectOneMenu id="Producto" value="#{billLineBeans.prod}" filter="true" filterMatchMode="startsWith" >
-                                                    <f:selectItems value="#{productBean.listproducts}" 
-                                                                   />
+                                                <p:selectOneMenu id="Producto" value="#{billLineBeans.prod}" filter="true" filterMatchMode="startsWith">
+                                                    <f:selectItems value="#{productBean.listproducts}" />
                                                 </p:selectOneMenu>
-                                                <p:inputText id="Cantidad-Producto" value="#{billLineBeans.quantity}" placeholder="* Cantidad" required="true"/>
-                                                <p:inputText id="Precio-Producto" value="#{billLineBeans.price}" placeholder="* Precio" required="true"/>
-                                                <p:inputText id="Impuestos-Producto" value="#{billLineBeans.taxes}" placeholder="* IVA" required="true"/>
-                                                <p:inputText id="Descuento-Producto" value="#{billLineBeans.discount}" placeholder="* Descuento" required="true"/>
-                                                <h:commandButton value="Añadir Linea" action="#{billLineBeans.Addcart()}" />
+                                                <p:inputText id="Cantidad-Producto" value="#{billLineBeans.quantity}" placeholder="* Cantidad" required="true" maxlength="3" />
+                                                <p:inputText id="Precio-Producto" value="#{billLineBeans.price}" placeholder="* Precio" required="true" />
+                                                <p:inputText id="Impuestos-Producto" value="#{billLineBeans.taxes}" placeholder="* IVA" required="true" />
+                                                <p:inputText id="Descuento-Producto" value="#{billLineBeans.discount}" placeholder="* Descuento" required="true" />
+                                                <p:commandButton value="Añadir Linea" action="#{billLineBeans.Addcart()}"  />
 
                                             </p:panelGrid>
 
@@ -113,12 +107,12 @@
                                                 <p:ajax event="rowEdit" listener="#{billLineBeans.onRowEdit}"  update=":tablaFacturas:Facturas" />
                                                 <p:ajax event="rowEditCancel" listener="#{billLineBeans.onRowCancel}" update=":tablaFacturas:Facturas" />
 
-                                                <p:column headerText="Linea">
-                                                    <h:outputText value="#{fact.id}" />
-                                                </p:column>
-
                                                 <p:column headerText="Producto">             
-                                                    <h:outputText value="#{fact.product.name}" />
+                                                    <h:outputText value="#{fact.nameprod}" />
+                                                </p:column>  
+
+                                                <p:column headerText="Mascota">             
+                                                    <h:outputText value="#{fact.namepet}" />
                                                 </p:column>
 
                                                 <p:column headerText="Cantidad">
@@ -161,7 +155,7 @@
                                                 </p:column>
 
                                                 <p:column headerText="Eliminar">
-                                                    <p:commandLink value="Eliminar"  actionListener="#{BillLineBeans.DeleteLine(fact.idbill_lines)}" update=":tablaFacturas:Facturas"/>
+                                                    <p:commandLink value="Eliminar"  actionListener="#{billLineBeans.DeleteLine(fact.idprod, fact.idpet)}" update=":tablaFacturas:Facturas"/>
                                                 </p:column>
 
                                             </p:dataTable>

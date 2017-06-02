@@ -301,4 +301,27 @@ public class LPets extends ConexionDB {
         }
         return pet;
     }
+     public static Pets getPet(String name) {
+        Pets pet = new Pets();
+        ConexionDB conn = new ConexionDB();
+
+        try {
+            String sql = "Select * from pets where name = " + name;
+            PreparedStatement ps = conn.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                pet.setIdpets(rs.getInt("idpets"));
+                pet.setNamepet(rs.getString("name"));
+                pet.setAnimal(rs.getString("animal"));
+                pet.setGender(rs.getInt("gender"));
+                pet.setRace(rs.getString("race"));
+                pet.setColour(rs.getString("colour"));
+                pet.setBirthDate(rs.getString("birth_date"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pet;
+    }
+
 }

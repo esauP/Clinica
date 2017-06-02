@@ -135,4 +135,25 @@ public class LProducts extends ConexionDB{
         return listamaestra;
     }
     
+    public Products getProduct(int id) throws SQLException{
+        Products prod = new Products();
+        
+        try {
+            String sql = "Select * from products where idproducts = "+id;
+            PreparedStatement ps = this.getConexion().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                prod.setIdproducts(rs.getInt("idproducts"));
+                prod.setName(rs.getString("name"));
+                prod.setPrice(rs.getDouble("price"));
+                prod.setTaxes(rs.getInt("taxes"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            this.desconectar();
+        }
+        return prod;
+    }
+    
 }

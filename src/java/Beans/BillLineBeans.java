@@ -11,6 +11,7 @@ import javax.inject.Named;
 import pojo.Products;
 import pojo.BillLines;
 import Controller.LBillLine;
+import java.util.StringTokenizer;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -34,8 +35,12 @@ public class BillLineBeans {
     private int discount;
     private double price;
     private String observations;
-    private Products prod;
-    private Pets pet;
+    private String prod;
+    private int idprod;
+    private String nameprod;
+    private String pet;
+    private int idpet;
+    private String namepet;
     private List<BillLines> listalineasfac;
     private BillLines blines = new BillLines();
 
@@ -56,21 +61,34 @@ public class BillLineBeans {
     public void AddLine() throws SQLException {
 
         for (BillLines line : listalineasfac) {
-            LBillLine.addLinea(idbill, line.getProduct().getIdproducts(),
+            LBillLine.addLinea(idbill, line.getIdprod(),
                     line.getQuantity(), line.getPrice(), line.getTaxes(), line.getDiscount(), line.getIdpet(), line.getObservations());
         }
         FacesMessage msg = new FacesMessage("Línea Insertada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public void DeleteLine() throws SQLException {
-        LBillLine.deleteBillLine(blines.getId());
+    public void DeleteLine(int idprod, int idpet) throws SQLException {
+        
+        for (BillLines line : listalineasfac) {
+            if(line.getIdpet() == idpet && line.getIdprod() == idprod){
+                listalineasfac.remove(line);
+            }
+        }
         FacesMessage msg = new FacesMessage("Línea Eliminada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void Addcart() {
-        BillLines fact = new BillLines(pet.getIdpets(), prod, quantity, price, taxes, discount);
+        StringTokenizer st = new StringTokenizer(prod, "-");
+        this.idprod = Integer.parseInt(st.nextToken());
+        this.nameprod = st.nextToken();
+        
+        StringTokenizer ft = new StringTokenizer(pet, "-");
+        this.idpet = Integer.parseInt(ft.nextToken());
+        this.namepet = ft.nextToken();
+              
+        BillLines fact = new BillLines(this.idpet, this.namepet, this.idprod, this.nameprod, this.quantity, this.price, this.taxes, this.discount);
         this.listalineasfac.add(fact);
     }
 
@@ -130,6 +148,54 @@ public class BillLineBeans {
         this.observations = observations;
     }
 
+    public String getProd() {
+        return prod;
+    }
+
+    public void setProd(String prod) {
+        this.prod = prod;
+    }
+
+    public int getIdprod() {
+        return idprod;
+    }
+
+    public void setIdprod(int idprod) {
+        this.idprod = idprod;
+    }
+
+    public String getNameprod() {
+        return nameprod;
+    }
+
+    public void setNameprod(String nameprod) {
+        this.nameprod = nameprod;
+    }
+
+    public String getPet() {
+        return pet;
+    }
+
+    public void setPet(String pet) {
+        this.pet = pet;
+    }
+
+    public int getIdpet() {
+        return idpet;
+    }
+
+    public void setIdpet(int idpet) {
+        this.idpet = idpet;
+    }
+
+    public String getNamepet() {
+        return namepet;
+    }
+
+    public void setNamepet(String namepet) {
+        this.namepet = namepet;
+    }
+
     public List<BillLines> getListalineasfac() {
         return listalineasfac;
     }
@@ -146,20 +212,5 @@ public class BillLineBeans {
         this.blines = blines;
     }
 
-    public Products getProd() {
-        return prod;
-    }
-
-    public void setProd(Products prod) {
-        this.prod = prod;
-    }
-
-    public Pets getPet() {
-        return pet;
-    }
-
-    public void setPet(Pets pet) {
-        this.pet = pet;
-    }
-
+    
 }

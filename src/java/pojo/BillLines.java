@@ -15,7 +15,8 @@ public class BillLines implements java.io.Serializable {
     private double price;
     private String namepet;
     private String observations;
-    private Products prod;
+    private String nameprod;
+    private int idprod;
 
     public BillLines() {
     }
@@ -23,23 +24,23 @@ public class BillLines implements java.io.Serializable {
     public BillLines(int id, int bill, Products prod) {
         this.id = id;
         this.idbill = bill;
-        this.prod = prod;
     }
 
-    public BillLines(int idpet, Products prod, int quantity, double price, int taxes, int discount){
+    public BillLines(int idpet, String namepet, int idprod, String nameprod, int quantity, double price, int taxes, int discount) {
         this.id = 0;
         this.idbill = 0;
         this.idpet = idpet;
-        this.prod = prod;
+        this.idprod = idprod;
+        this.nameprod = nameprod;
         this.quantity = quantity;
         this.taxes = taxes;
         this.discount = discount;
         this.price = price;
-        this.namepet = "";
+        this.namepet = namepet;
         this.observations = "";
-        
+
     }
-       
+
     public int getId() {
         return id;
     }
@@ -62,14 +63,6 @@ public class BillLines implements java.io.Serializable {
 
     public void setIdpet(int idpet) {
         this.idpet = idpet;
-    }
-
-    public Products getProduct() {
-        return prod;
-    }
-
-    public void setProduct(Products prod) {
-        this.prod = prod;
     }
 
     public int getQuantity() {
@@ -104,6 +97,14 @@ public class BillLines implements java.io.Serializable {
         this.price = price;
     }
 
+    public String getNamepet() {
+        return namepet;
+    }
+
+    public void setNamepet(String namepet) {
+        this.namepet = namepet;
+    }
+
     public String getObservations() {
         return observations;
     }
@@ -112,12 +113,22 @@ public class BillLines implements java.io.Serializable {
         this.observations = observations;
     }
 
-    public String getNamepet() {
-        return namepet;
+    public String getNameprod() {
+        return nameprod;
     }
 
-    public void setNamepet(String namepet) {
-        this.namepet = namepet;
+    public void setNameprod(String nameprod) {
+        this.nameprod = nameprod;
     }
+
+    public int getIdprod() {
+        return idprod;
+    }
+
+    public void setIdprod(int idprod) {
+        this.idprod = idprod;
+    }
+
+    
 
 }
